@@ -1,5 +1,7 @@
+import MonacoEditor from "../../components/MonacoEditor"
+
 export default function exercice(){
     return(
-        <div>cc</div>
+        <MonacoEditor />
     )
 }
