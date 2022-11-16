@@ -6,7 +6,6 @@ import AlertError from "./AlertError";
 
 const CopyToClipBoard = (props: any) => {
     const [copySuccess, setCopySuccess] = useState("");
-
     const [open, setOpen] = useState(false);
     const [openError, setOpenError] = useState(false);
 
@@ -19,7 +18,7 @@ const CopyToClipBoard = (props: any) => {
             setOpen(true);
         } catch (err) {
             setCopySuccess("La copie a échoué: " + err);
-            setOpenError(true)
+            setOpenError(true);
         }
     };
 
@@ -30,7 +29,11 @@ const CopyToClipBoard = (props: any) => {
             sx={{ color: "white" }}
         >
             <AlertSuccess message={copySuccess} open={open} setOpen={setOpen} />
-            <AlertError message={copySuccess} open={openError} setOpen={setOpenError} />
+            <AlertError
+                message={copySuccess}
+                open={openError}
+                setOpen={setOpenError}
+            />
             <ContentCopyIcon />
         </IconButton>
     );

@@ -2,8 +2,8 @@ import Editor, { Monaco } from "@monaco-editor/react";
 import { Divider, Button, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
 import { useRef, useState } from "react";
-import CopyToClipBoard from "./CopyToClipboard"
-import Language from "../services/LanguageService";
+import CopyToClipBoard from "./CopyToClipboard";
+import Language from "../models/LanguageModel";
 import { styled } from "@mui/material/styles";
 
 import CachedIcon from "@mui/icons-material/Cached";
@@ -24,7 +24,6 @@ const EditorButton = styled(Button)({
         borderColor: "#db1144",
     },
 }) as typeof Button;
-
 
 //////////////////////////////////////////////////////////////////
 
@@ -49,21 +48,19 @@ export default function MonacoEditor(/*language: Language*/) {
     const [fileName, setFileName] = useState<string>("script.js");
     const file: any = files[fileName];
 
-// attach ref to newly created editor
+    // attach ref to newly created editor
     function handleEditorDidMount(editor: any, monaco: Monaco): void {
         editorRef.current = editor;
     }
 
-    // save referenced editor content 
+    // save referenced editor content
     function saveValue() {
         return editorRef.current.getValue();
     }
 
-
-
     //double width of the editor towards right side(hiding the display)
     function expandEditor() {
-        console.log(editorRef.style)
+        console.log(editorRef.style);
     }
 
     //read the function name :/
@@ -72,13 +69,14 @@ export default function MonacoEditor(/*language: Language*/) {
     };
 
     return (
-        <Box ref={editorBox}
-            style={{width: "33vw"}}
+        <Box
+            ref={editorBox}
+            style={{ width: "33vw" }}
             sx={{
                 color: "#ffffff",
                 borderRadius: 0,
                 mt: 10,
-                
+
                 height: "80vh",
                 ml: 20,
             }}
@@ -126,13 +124,12 @@ export default function MonacoEditor(/*language: Language*/) {
             </Box>
             <Editor
                 height="70vh"
-               // width="33vw"
+                // width="33vw"
                 onMount={handleEditorDidMount}
                 theme="vs-dark"
                 path={file.name}
                 defaultLanguage={file.language}
                 defaultValue={file.value}
-                
             />
             <Box
                 display="flex"
@@ -160,12 +157,12 @@ export default function MonacoEditor(/*language: Language*/) {
                         Exécuter
                     </Button>
 
-                    <CopyToClipBoard toCopy={editorRef}/>
+                    <CopyToClipBoard toCopy={editorRef} />
 
                     <IconButton
                         onClick={returnToDefaultValue}
                         size="small"
-                        sx={{ color: "white" , height: "100%"}}
+                        sx={{ color: "white", height: "100%" }}
                     >
                         <CachedIcon />
                     </IconButton>
