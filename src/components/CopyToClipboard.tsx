@@ -2,22 +2,24 @@ import { IconButton } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import AlertSuccess from "./AlertSuccess";
 import { useState } from "react";
+import AlertError from "./AlertError";
 
 const CopyToClipBoard = (props: any) => {
     const [copySuccess, setCopySuccess] = useState("");
 
     const [open, setOpen] = useState(false);
-
+    const [openError, setOpenError] = useState(false);
 
     const copyToClipBoard = async () => {
         try {
             await navigator.clipboard.writeText(
                 props.toCopy.current.getValue()
             );
-            setCopySuccess("Copied!");
+            setCopySuccess("Copié!");
             setOpen(true);
         } catch (err) {
-            setCopySuccess("Failed to copy!");
+            setCopySuccess("La copie a échoué: " + err);
+            setOpenError(true)
         }
     };
 
@@ -28,6 +30,7 @@ const CopyToClipBoard = (props: any) => {
             sx={{ color: "white" }}
         >
             <AlertSuccess message={copySuccess} open={open} setOpen={setOpen} />
+            <AlertError message={copySuccess} open={openError} setOpen={setOpenError} />
             <ContentCopyIcon />
         </IconButton>
     );

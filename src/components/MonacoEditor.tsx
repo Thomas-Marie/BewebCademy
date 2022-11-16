@@ -1,7 +1,7 @@
 import Editor, { Monaco } from "@monaco-editor/react";
 import { Divider, Button, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import CopyToClipBoard from "./CopyToClipboard"
 import Language from "../services/LanguageService";
 import { styled } from "@mui/material/styles";
@@ -16,7 +16,6 @@ const EditorButton = styled(Button)({
     color: "#ffffff",
     borderRadius: 0,
     height: "100%",
-
     border: "0 solid #1d1d1b",
     "&:disabled": {
         color: "#db1144",
@@ -47,25 +46,27 @@ const files: any = {
 export default function MonacoEditor(/*language: Language*/) {
     const editorRef: any = useRef(null);
     const editorBox: any = useRef(0);
+    const [fileName, setFileName] = useState<string>("script.js");
+    const file: any = files[fileName];
 
-
+// attach ref to newly created editor
     function handleEditorDidMount(editor: any, monaco: Monaco): void {
         editorRef.current = editor;
     }
 
-    const [fileName, setFileName] = useState<string>("script.js");
-
+    // save referenced editor content 
     function saveValue() {
         return editorRef.current.getValue();
     }
 
-    const file: any = files[fileName];
 
+
+    //double width of the editor towards right side(hiding the display)
     function expandEditor() {
         console.log(editorRef.style)
     }
 
-
+    //read the function name :/
     const returnToDefaultValue = () => {
         editorRef.current.setValue(file.value);
     };
