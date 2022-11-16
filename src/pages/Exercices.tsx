@@ -1,6 +1,10 @@
+import ListTable from '../components/layout/ListTable';
+
 const Exercice = () => {
     return (
-      <h1>Exercice</h1>
+      <div>
+        <ListTable></ListTable>
+      </div>
     )
   }
   
