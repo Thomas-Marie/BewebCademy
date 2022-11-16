@@ -5,7 +5,7 @@ import Exercice from "./pages/user/exercice"
 
 
 
-function App() {
+const App: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Home/>}/>

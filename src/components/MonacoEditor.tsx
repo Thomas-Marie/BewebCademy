@@ -3,7 +3,7 @@ import { Divider, Button, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
 import { useRef, useState } from "react";
 import CopyToClipBoard from "./CopyToClipboard";
-import Language from "../models/LanguageModel";
+import {getLanguages} from "../services/language.service";
 import { styled } from "@mui/material/styles";
 
 import CachedIcon from "@mui/icons-material/Cached";
@@ -26,7 +26,9 @@ const EditorButton = styled(Button)({
 }) as typeof Button;
 
 //////////////////////////////////////////////////////////////////
-
+        // const languages = await getLanguages().then(result => {return result} )
+        // console.log(languages)
+        //getAll apres axios 
 /////////////////FakeData/////////////////////////
 const files: any = {
     "script.js": {
@@ -45,6 +47,7 @@ const files: any = {
 export default function MonacoEditor(/*language: Language*/) {
     const editorRef: any = useRef(null);
     const editorBox: any = useRef(0);
+    const [boxWidth, setBoxWidth] = useState<string>("33vw")
     const [fileName, setFileName] = useState<string>("script.js");
     const file: any = files[fileName];
 
@@ -59,8 +62,10 @@ export default function MonacoEditor(/*language: Language*/) {
     }
 
     //double width of the editor towards right side(hiding the display)
-    function expandEditor() {
-        console.log(editorRef.style);
+    async function expandEditor() {
+        boxWidth === "33vw" ? setBoxWidth("67vw") : setBoxWidth("33vw")
+        console.log(boxWidth)
+
     }
 
     //read the function name :/
@@ -71,7 +76,7 @@ export default function MonacoEditor(/*language: Language*/) {
     return (
         <Box
             ref={editorBox}
-            style={{ width: "33vw" }}
+            style={{ width: boxWidth }}
             sx={{
                 color: "#ffffff",
                 borderRadius: 0,
