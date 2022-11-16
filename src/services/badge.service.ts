@@ -11,6 +11,6 @@ export const getBadge = (id: string) => {
 
 export const getBadges = async() => {
     const badges = await badge.get("/")
-    
+    console.log(badges)
     return badges.data
 }
