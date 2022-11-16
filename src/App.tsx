@@ -4,8 +4,8 @@ import './app.css';
 
 import Button from "@mui/material/Button"
 
-import Header from "./components/Header"
-import Footer from "./components/Footer"
+import Header from "./components/layout/Header"
+import Footer from "./components/layout/Footer"
 
 
 

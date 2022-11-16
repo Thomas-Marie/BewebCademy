@@ -1,15 +1,16 @@
-import "./style/header.css"
+import "../header.css";
 
-import React from "react"
-import logo from "../assets/logo_bewebcademy_whitetext.svg"
-import { ThemeProvider, createTheme } from "@mui/material/styles"
+import React from "react";
+
+import logo from "../../assets/logo_bewebcademy_whitetext.svg";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
-import { AppBar, Drawer, Toolbar, Card, CardMedia } from "@mui/material"
-import { Divider, List, ListItem, ListItemButton, ListItemText, IconButton, Typography, Button } from "@mui/material"
+import { AppBar, Drawer, Toolbar, Card, CardMedia } from "@mui/material";
+import { Divider, List, ListItem, ListItemButton, ListItemText, IconButton, Typography, Button } from "@mui/material";
 
 const navItems = ['Dashboard', 'Exercices', 'Profil'];
 
@@ -37,11 +38,11 @@ export default function Header() {
           </>
         ))}
         <Divider />
-        
+
         <ListItem key="deconnexion" disablePadding>
           <ListItemButton sx={{ textAlign: 'center', maxHeight: '100%' }}>
-          <ListItemText primary="Deconnexion" sx={{ ml: 3 }}/>
-            <ListItemText primary={<LogoutIcon sx={{ mt: 0.6, ml: -5}}></LogoutIcon>} />
+            <ListItemText primary="Deconnexion" sx={{ ml: 3 }} />
+            <ListItemText primary={<LogoutIcon sx={{ mt: 0.6, ml: -5 }}></LogoutIcon>} />
           </ListItemButton>
         </ListItem>
         <Divider />
@@ -50,7 +51,9 @@ export default function Header() {
   );
 
   const container = window !== undefined ? () => document.body : undefined;
-
+  function deco() {
+    console.log('1')
+  }
   return (
     <ThemeProvider theme={theme}>
       <AppBar>
@@ -64,7 +67,7 @@ export default function Header() {
             <img src={logo} alt="beweb-academy" />
           </Box>
 
-          {/* insert menu burger with condition */}
+          {/* insert icon menu burger with condition */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -82,7 +85,9 @@ export default function Header() {
                 {item}
               </Button>
             ))}
-            <LogoutIcon sx={{ mt: 0.6, ml: 5 }}></LogoutIcon>
+            <IconButton key="deconnexion" onClick={deco}>
+              <LogoutIcon className="icone" color="secondary"></LogoutIcon>
+            </IconButton>
           </Box>
 
         </Toolbar>
@@ -103,8 +108,7 @@ export default function Header() {
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: 240,
-            backgroundColor: '#2E3134',
-            color: '#FFFFFF'
+            color: '#FFF',
           },
         }}
       >
@@ -121,10 +125,35 @@ const theme = createTheme({
 
   palette: {
     primary: {
-      main: '#2E3134',
+      main: '#1D1D1D',
     },
     secondary: {
       main: '#DB1144',
+    },
+    neutral: {
+      main: '#FFFFFF'
+    },
+    background: {
+      paper: '#1D1D1D',
+    },
+    text: {
+      primary: '#1D1D1D',
+      secondary: '#DB1144',
+    },
+    action: {
+      active: '#001E3C',
     }
-  },
+  }
 })
+
+declare module '@mui/material/styles' {
+  interface Palette {
+    neutral: Palette['primary'];
+  }
+
+  // allow configuration using `createTheme`
+  interface PaletteOptions {
+    neutral?: PaletteOptions['primary'];
+  }
+}
+
