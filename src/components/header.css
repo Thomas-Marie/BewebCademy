@@ -3,9 +3,6 @@ img {
     height: 50px;
 }
 
-.icone .thumb {
-    border-radius: 1px;
-    background-color: aliceblue;
-    color: aliceblue;
+.buttonHeader:hover {
+    color: #DB1144;
 }
-

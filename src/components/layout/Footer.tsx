@@ -1,4 +1,4 @@
-import { Link } from "@mui/material"
+import { Link, Typography } from "@mui/material"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
 
 
@@ -9,12 +9,22 @@ export default function Footer() {
 
   return (
     <ThemeProvider theme={theme}>
-
       <footer>
-
-        <Link href="https://fondespierre.com/nos-poles-de-competences/beweb-ecole-numerique/developpeur-web/" underline="hover">
-          fondespierre.com
-        </Link>
+        <Typography 
+        variant="h6"
+        bgcolor={'#1D1D1D'}
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        >
+          <Link
+            href="https://fondespierre.com/nos-poles-de-competences/beweb-ecole-numerique/developpeur-web/"
+            underline="hover"
+            color="#FFF"
+            variant="inherit"
+            sx={{ p: 0.5 }}
+          >
+            fondespierre.com
+          </Link>
+        </Typography>
 
 
       </footer>
@@ -25,7 +35,7 @@ export default function Footer() {
 
 const theme = createTheme({
   typography: {
-    fontSize: 15,
+    fontSize: 10,
   },
 
   palette: {

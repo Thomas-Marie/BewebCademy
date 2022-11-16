@@ -1,22 +1,22 @@
 import React from 'react';
+import { Routes, Route } from "react-router-dom";
+
 import './app.css';
 
 
 import Button from "@mui/material/Button"
 
-import Header from "./components/layout/Header"
-import Footer from "./components/layout/Footer"
+import Exercices from "./pages/Exercices";
+import Home from "./pages/Home";
 
 
 
 function App() {
   return (
-
-    <div className="app">
-      <Header></Header>
-      <Footer></Footer>
-    </div>
-
+    <Routes>
+      <Route path='/dashboard' element={<Home />}></Route>
+      <Route path='/exercices' element={<Exercices />}></Route>
+    </Routes>
   );
 }
 

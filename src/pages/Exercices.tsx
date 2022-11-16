@@ -1,7 +1,7 @@
-const Exercice = () => {
+const Exercices = () => {
     return (
       <h1>Exercice</h1>
     )
   }
   
-  export default Exercice;
+  export default Exercices;

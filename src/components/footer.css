@@ -1,7 +1,6 @@
 footer {
     height: 20px;
+    width: 100%;
     position: absolute;
     bottom: 0;
-    color: aliceblue;
-    width: 100%;
 }
