@@ -2,10 +2,10 @@ import Editor, { Monaco } from "@monaco-editor/react";
 import { Divider, Button, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useRef, useState } from "react";
-
+import CopyToClipBoard from "./CopyToClipboard"
 import Language from "../services/LanguageService";
 import { styled } from "@mui/material/styles";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+
 import CachedIcon from "@mui/icons-material/Cached";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -26,9 +26,7 @@ const EditorButton = styled(Button)({
     },
 }) as typeof Button;
 
-const EditorIcon = styled(IconButton)({
-    height: "100%",
-}) as typeof IconButton;
+
 //////////////////////////////////////////////////////////////////
 
 /////////////////FakeData/////////////////////////
@@ -48,6 +46,8 @@ const files: any = {
 
 export default function MonacoEditor(/*language: Language*/) {
     const editorRef: any = useRef(null);
+    const editorBox: any = useRef(0);
+
 
     function handleEditorDidMount(editor: any, monaco: Monaco): void {
         editorRef.current = editor;
@@ -55,23 +55,29 @@ export default function MonacoEditor(/*language: Language*/) {
 
     const [fileName, setFileName] = useState<string>("script.js");
 
-    function showValue() {
+    function saveValue() {
         return editorRef.current.getValue();
     }
 
     const file: any = files[fileName];
 
     function expandEditor() {
-        console.log(" a venir bientot peut etre")
+        console.log(editorRef.style)
     }
 
+
+    const returnToDefaultValue = () => {
+        editorRef.current.setValue(file.value);
+    };
+
     return (
-        <Box
+        <Box ref={editorBox}
+            style={{width: "33vw"}}
             sx={{
                 color: "#ffffff",
                 borderRadius: 0,
                 mt: 10,
-                width: "33vw",
+                
                 height: "80vh",
                 ml: 20,
             }}
@@ -104,7 +110,8 @@ export default function MonacoEditor(/*language: Language*/) {
                         sx={{ backgroundColor: "white" }}
                     />
 
-                    <EditorIcon onClick={expandEditor}
+                    <IconButton
+                        onClick={expandEditor}
                         sx={{
                             color: "white",
                             border: "2 solid white",
@@ -112,19 +119,19 @@ export default function MonacoEditor(/*language: Language*/) {
                             height: "100%",
                         }}
                     >
-                        <OpenInFullIcon  />
-                    </EditorIcon>
+                        <OpenInFullIcon />
+                    </IconButton>
                 </Box>
             </Box>
             <Editor
                 height="70vh"
-                width="33vw"
+               // width="33vw"
                 onMount={handleEditorDidMount}
                 theme="vs-dark"
                 path={file.name}
                 defaultLanguage={file.language}
                 defaultValue={file.value}
-                onChange={showValue}
+                
             />
             <Box
                 display="flex"
@@ -134,6 +141,7 @@ export default function MonacoEditor(/*language: Language*/) {
             >
                 <Box height={"100%"}>
                     <Button
+                        onClick={saveValue}
                         variant="contained"
                         size="small"
                         sx={{
@@ -151,17 +159,20 @@ export default function MonacoEditor(/*language: Language*/) {
                         Exécuter
                     </Button>
 
-                    <EditorIcon size="small" sx={{ color: "white" }}>
-                        <ContentCopyIcon />
-                    </EditorIcon>
-                    <EditorIcon size="small" sx={{ color: "white" }}>
+                    <CopyToClipBoard toCopy={editorRef}/>
+
+                    <IconButton
+                        onClick={returnToDefaultValue}
+                        size="small"
+                        sx={{ color: "white" , height: "100%"}}
+                    >
                         <CachedIcon />
-                    </EditorIcon>
+                    </IconButton>
                 </Box>
                 <Box>
-                    <EditorIcon sx={{ color: "white" }}>
+                    <IconButton sx={{ color: "white", height: "100%" }}>
                         <VisibilityIcon />
-                    </EditorIcon>
+                    </IconButton>
                 </Box>
             </Box>
         </Box>
