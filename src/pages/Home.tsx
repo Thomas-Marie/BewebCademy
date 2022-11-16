@@ -1,6 +1,8 @@
+import BadgeList from "../components/layout/BadgeList"
+
 const Home = () => {
     return (
-      <h1>HOME</h1>
+      <BadgeList/>
     )
   }
   
