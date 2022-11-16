@@ -1,11 +1,14 @@
 import Editor, { Monaco } from "@monaco-editor/react";
+import { useEffect, useRef, useState } from "react";
+
+import CopyToClipBoard from "./CopyToClipboard";
+
+import { getLanguages } from "../services/language.service";
+import { getExercices } from "../services/exercice.service";
+
 import { Divider, Button, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
-import { useRef, useState } from "react";
-import CopyToClipBoard from "./CopyToClipboard";
-import {getLanguages} from "../services/language.service";
 import { styled } from "@mui/material/styles";
-
 import CachedIcon from "@mui/icons-material/Cached";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -26,9 +29,9 @@ const EditorButton = styled(Button)({
 }) as typeof Button;
 
 //////////////////////////////////////////////////////////////////
-        // const languages = await getLanguages().then(result => {return result} )
-        // console.log(languages)
-        //getAll apres axios 
+// const languages = await getLanguages().then(result => {return result} )
+// console.log(languages)
+//getAll apres axios
 /////////////////FakeData/////////////////////////
 const files: any = {
     "script.js": {
@@ -46,11 +49,24 @@ const files: any = {
 
 export default function MonacoEditor(/*language: Language*/) {
     const editorRef: any = useRef(null);
-    const editorBox: any = useRef(0);
-    const [boxWidth, setBoxWidth] = useState<string>("33vw")
+    const [boxWidth, setBoxWidth] = useState<string>("33vw");
     const [fileName, setFileName] = useState<string>("script.js");
     const file: any = files[fileName];
+    const [exercice, setExercice] = useState(null);
 
+    // Load Data before mounting component?
+    useEffect(() => {
+        const fetchData = async () => {
+            await getExercices().then((result) => {
+                setExercice(result);
+                
+            });
+            
+            
+        };
+        fetchData().catch(console.error)
+    }, []);
+    console.log(exercice)
     // attach ref to newly created editor
     function handleEditorDidMount(editor: any, monaco: Monaco): void {
         editorRef.current = editor;
@@ -63,9 +79,8 @@ export default function MonacoEditor(/*language: Language*/) {
 
     //double width of the editor towards right side(hiding the display)
     async function expandEditor() {
-        boxWidth === "33vw" ? setBoxWidth("67vw") : setBoxWidth("33vw")
-        console.log(boxWidth)
-
+        boxWidth === "33vw" ? setBoxWidth("67vw") : setBoxWidth("33vw");
+        console.log(boxWidth);
     }
 
     //read the function name :/
@@ -75,14 +90,13 @@ export default function MonacoEditor(/*language: Language*/) {
 
     return (
         <Box
-            ref={editorBox}
             style={{ width: boxWidth }}
             sx={{
                 color: "#ffffff",
                 borderRadius: 0,
                 mt: 10,
 
-                height: "80vh",
+                height: "85vh",
                 ml: 20,
             }}
         >
@@ -128,7 +142,7 @@ export default function MonacoEditor(/*language: Language*/) {
                 </Box>
             </Box>
             <Editor
-                height="70vh"
+                height="75.5vh"
                 // width="33vw"
                 onMount={handleEditorDidMount}
                 theme="vs-dark"
