@@ -3,14 +3,15 @@ import Badge from "../models/Badge";
 
 const badge = axios.create({
     baseURL: "http://localhost:2000/"
-}) 
-
-export const getBadge = (id: string) => {
+  }) 
+  
+  export const getBadge = (id: string) => {
     return badge.get("/" + id)
-}
-
-export const getBadges = async() => {
+  }
+  
+  export const getBadges = async() => {
     const badges = await badge.get("/")
-    console.log(badges)
     return badges.data
-}
+  }
+  
+  getBadges()
