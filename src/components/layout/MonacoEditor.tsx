@@ -1,10 +1,10 @@
 import Editor, { Monaco } from "@monaco-editor/react";
 import { useEffect, useRef, useState } from "react";
 
-import CopyToClipBoard from "./CopyToClipboard";
+import CopyToClipBoard from "../CopyToClipboard";
 
-import { getLanguages } from "../services/language.service";
-import { getExercices } from "../services/exercice.service";
+import { getLanguages } from "../../services/language.service";
+import { getExercices } from "../../services/exercice.service";
 
 import { Divider, Button, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
