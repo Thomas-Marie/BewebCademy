@@ -6,32 +6,24 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import {useState, useEffect} from 'react';
+import {getBadges} from '../../services/badge.service';
 
 
+export default function ListTable() {
 
+  const [badges, setBadges] = useState<any>([])
 
-function createData(
-  titrebadge: string,
-  language: string,
-  obtenu: string,
-  date: string,
-) {
-  return {titrebadge, language, obtenu, date };
-}
+  useEffect(() => {
+    const fetchBadges = async () => {
+      const ResulGetBadges = await getBadges().then((result:any) => { return result})
+      setBadges(ResulGetBadges)
+    }
+    fetchBadges().catch(console.error)
+  }, [])
+  console.log(badges)
 
-const rows = [
-  createData('Les bases', 'javascript', 'oui', '08/08/2022'),
-  createData('Fonction','javascript', 'non', '08/08/2022'),
-  createData('Array','javascript','oui', '08/08/2022'),
-
-];
-
-
-export default function listTable() {
-
-  
   return (
-
     <TableContainer sx={{width:'80%', margin: 'auto'}} component={Paper}>
       <Table sx={{ minWidth: 650, 
     alignItems : 'center',
@@ -39,22 +31,23 @@ export default function listTable() {
         <TableHead >
           <TableRow>
             <TableCell sx={{color: '#DB1144'}}>Titre Badge</TableCell>
-            <TableCell style={{color: '#DB1144'}}align="center">Language</TableCell>
-            <TableCell style={{color: '#DB1144'}}align="center">Obtenu</TableCell>
-            <TableCell style={{color: '#DB1144'}}align="center">Date</TableCell>
+            <TableCell sx={{color: '#DB1144'}}align="center">Language</TableCell>
+            <TableCell sx={{color: '#DB1144'}}align="center">Obtenu</TableCell>
+            <TableCell sx={{color: '#DB1144'}}align="center">Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+
+          {badges.map((elementbadges: any) => (
             <TableRow
-              key={row.titrebadge}
+              key={elementbadges.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>              
               <TableCell component="th" scope="row">
-                {row.titrebadge}
+                {elementbadges.image}{elementbadges.name}
               </TableCell>
-              <TableCell align="center">{row.language}</TableCell>
-              <TableCell align="center">{row.obtenu}</TableCell>
-              <TableCell align="center">{row.date}</TableCell>
+              <TableCell align="center">{elementbadges.language.name}</TableCell>
+              <TableCell align="center">{elementbadges.all_done}</TableCell>
+              <TableCell align="center">{elementbadges.acquisition_date}</TableCell>
 
             </TableRow>
           ))}
