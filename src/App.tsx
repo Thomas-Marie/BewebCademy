@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home"
 import Dashboard from "./pages/user/dashboard"
-import Exercice from "./pages/user/exercice"
+import Exercice from "./pages/user/Exercices"
 
 
 

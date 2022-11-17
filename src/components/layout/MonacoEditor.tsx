@@ -47,7 +47,7 @@ const files: any = {
     },
 };
 
-export default function MonacoEditor(/*language: Language*/) {
+export default function MonacoEditor(props: any) {
     const editorRef: any = useRef(null);
     const [boxWidth, setBoxWidth] = useState<string>("33vw");
     const [fileName, setFileName] = useState<string>("script.js");
@@ -55,18 +55,18 @@ export default function MonacoEditor(/*language: Language*/) {
     const [exercice, setExercice] = useState(null);
 
     // Load Data before mounting component?
-    useEffect(() => {
-        const fetchData = async () => {
-            await getExercices().then((result) => {
-                setExercice(result);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         await getExercices().then((result) => {
+    //             setExercice(result);
                 
-            });
+    //         });
             
             
-        };
-        fetchData().catch(console.error)
-    }, []);
-    console.log(exercice)
+    //     };
+    //     fetchData().catch(console.error)
+    // }, []);
+    // console.log(exercice)
     // attach ref to newly created editor
     function handleEditorDidMount(editor: any, monaco: Monaco): void {
         editorRef.current = editor;
@@ -94,10 +94,8 @@ export default function MonacoEditor(/*language: Language*/) {
             sx={{
                 color: "#ffffff",
                 borderRadius: 0,
-                mt: 10,
-
-                height: "85vh",
-                ml: 20,
+                
+                border: "5px solid #1d1d1b"              
             }}
         >
             <Box
@@ -142,8 +140,8 @@ export default function MonacoEditor(/*language: Language*/) {
                 </Box>
             </Box>
             <Editor
-                height="75.5vh"
-                // width="33vw"
+                height="74vh"
+               
                 onMount={handleEditorDidMount}
                 theme="vs-dark"
                 path={file.name}
@@ -156,7 +154,7 @@ export default function MonacoEditor(/*language: Language*/) {
                 alignItems="center"
                 sx={{ backgroundColor: "#db1144" }}
             >
-                <Box height={"100%"}>
+                <Box height={"100%"} >
                     <Button
                         onClick={saveValue}
                         variant="contained"
