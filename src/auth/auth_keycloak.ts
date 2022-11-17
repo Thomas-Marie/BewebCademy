@@ -1,2 +1,3 @@
 import Keycloak from "keycloak-js";
-export const keycloak = new Keycloak("/keycloak.json");
+const keycloak = new Keycloak("/keycloak.json");
+export default keycloak;
