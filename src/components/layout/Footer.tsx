@@ -13,7 +13,7 @@ export default function Footer() {
         <Typography 
         variant="h6"
         bgcolor={'#1D1D1D'}
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '4vh' }}
         >
           <Link
             href="https://fondespierre.com/nos-poles-de-competences/beweb-ecole-numerique/developpeur-web/"

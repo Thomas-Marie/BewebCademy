@@ -3,20 +3,27 @@ import { Routes, Route } from "react-router-dom";
 
 import './app.css';
 
-
-import Button from "@mui/material/Button"
-
-import Exercices from "./pages/Exercices";
+import Header from "./components/layout/Header"
+import Footer from "./components/layout/Footer"
+import Exercices from "./pages/ExercicesList";
 import Home from "./pages/Home";
 
 
 
 function App() {
   return (
-    <Routes>
-      <Route path='/dashboard' element={<Home />}></Route>
-      <Route path='/exercices' element={<Exercices />}></Route>
-    </Routes>
+    <div className='app'>
+      {/* <Header></Header> */}
+
+      <Routes>
+
+        <Route path='/dashboard' element={<Home />}></Route>
+        <Route path='/exercices' element={<Exercices />}></Route>
+
+      </Routes>
+      {/* <Footer></Footer> */}
+
+    </div>
   );
 }
 

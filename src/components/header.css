@@ -6,3 +6,11 @@ img {
 .buttonHeader:hover {
     color: #DB1144;
 }
+
+.buttonHeader:active {
+    /* color: #FFF; */
+}
+
+.appBar {
+    height: 60px;
+}

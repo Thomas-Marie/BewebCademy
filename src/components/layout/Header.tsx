@@ -7,18 +7,14 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Drawer, Toolbar, Box, ListItemIcon } from "@mui/material";
+import { AppBar, Drawer, Toolbar, Box } from "@mui/material";
 import { Divider, List, ListItem, ListItemButton, ListItemText, IconButton, Typography, Button, ButtonBase } from "@mui/material";
 
-import { NavLink as ReactNav } from 'react-router-dom'
-import { RenderErrorBoundary } from "react-router/dist/lib/hooks";
-import { error } from "console";
-import { useLocation } from 'react-router-dom';
-import { color } from "@mui/system";
 
-
-const navItems = ['dashboard', 'exercices', 'profil'];
-const url = "http://localhost:3000/"
+let role = "user"
+const userHeaderItems = ['dashboard', 'exercices', 'profil'];
+const adminHeaderItems = ['utilisateurs', 'badges', 'archives']
+// const url = "http://localhost:3000/"
 
 export default function Header() {
 
@@ -39,11 +35,11 @@ export default function Header() {
         <img src={logo} alt="beweb-academy" />
       </Typography>
       <List component="nav">
-        {navItems.map((item, i) => (
+        {userHeaderItems.map((item, i) => (
           <><Divider />
             <ListItem disablePadding key={i}>
-              <ListItemButton href={"/" + item} sx={{ textAlign: 'center', maxHeight: '100%' }}>
-                <ListItemText primary={item} />
+              <ListItemButton href={"/" + item} sx={{ textAlign: 'center', maxHeight: '100%' }} key={i}>
+                <ListItemText primary={item} key={i}/>
               </ListItemButton>
             </ListItem>
           </>
@@ -51,7 +47,7 @@ export default function Header() {
         <Divider />
 
         <ListItem disablePadding >
-          <ListItemButton href="/logout" sx={{ textAlign: 'center', maxHeight: '100%' }} key="10">
+          <ListItemButton href="/logout" sx={{ textAlign: 'center', maxHeight: '100%' }}>
             <ListItemText primary="Deconnexion" sx={{ ml: 3 }} />
             <ListItemText primary={<LogoutIcon sx={{ mt: 0.6, ml: -5 }}></LogoutIcon>} />
           </ListItemButton>
@@ -61,29 +57,146 @@ export default function Header() {
     </Box>
   );
 
-  // switch (window.location.href) {
-  //   case url+"dashboard":
-  //     console.log("YES")
-  //     let color = "pro"
-  //     return color
-  //   case url+"exercices":
-  //     console.log("NO")
-  //     break;
-  //   case url+"profil":
-  //     console.log("YESNO")
-  //     break;
-  //   default:
-  //     console.log('big problem')
-  // }
+  if (role == "user") {
+    return (
+      <ThemeProvider theme={theme}>
+        <AppBar className="appBar">
+          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+
+            {/* insert logo with condition window size */}
+            <Box
+              component="div"
+              sx={{ mt: 0.5 }}
+            >
+              <img src={logo} alt="beweb-academy" />
+            </Box>
+
+            {/* insert icon menu burger with condition window size */}
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: 'block', md: 'none' } }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <ThemeProvider theme={theme2}>
+              {/* display buttons with conditions window size */}
+              <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
+                {userHeaderItems.map((item, i) => (
+                  <Button className="buttonHeader" name={item} href={"/" + item} key={i}>
+                    {item}
+                  </Button>
+
+                ))}
+                <ButtonBase href="/deconnexion">
+                  <IconButton name="deconnexion">
+                    <LogoutIcon color="secondary" sx={{ mb: 0.4 }}></LogoutIcon>
+                  </IconButton>
+                </ButtonBase>
+              </Box>
+            </ThemeProvider>
+          </Toolbar>
+        </AppBar>
+
+        {/* contenu du menu burger deroulé */}
+        <Drawer
+          anchor="right"
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true
+          }}
+          sx={{
+            display: { xs: 'flex', sm: 'flex', md: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: 240,
+              color: '#FFF',
+            },
+          }}
+        >
+          {drawerBurger}
+        </Drawer>
+      </ThemeProvider>
+    );
 
 
+  } else if (role == "admin") {
+    return (
+      <ThemeProvider theme={theme}>
+        <AppBar className="appBar">
+          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
 
-  return (
+            {/* insert logo with condition window size */}
+            <Box
+              component="div"
+              sx={{ mt: 0.5 }}
+            >
+              <img src={logo} alt="beweb-academy" />
+            </Box>
+
+            {/* insert icon menu burger with condition window size */}
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: 'block', md: 'none' } }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <ThemeProvider theme={theme2}>
+              {/* display buttons with conditions window size */}
+              <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
+                {adminHeaderItems.map((item, i) => (
+                  <Button className="buttonHeader" name={item} href={"/" + item} key={i}>
+                    {item}
+                  </Button>
+
+                ))}
+                <ButtonBase href="/deconnexion">
+                  <IconButton name="deconnexion">
+                    <LogoutIcon color="secondary" sx={{ mb: 0.4 }}></LogoutIcon>
+                  </IconButton>
+                </ButtonBase>
+              </Box>
+            </ThemeProvider>
+          </Toolbar>
+        </AppBar>
+
+        {/* contenu du menu burger deroulé */}
+        <Drawer
+          anchor="right"
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true
+          }}
+          sx={{
+            display: { xs: 'flex', sm: 'flex', md: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: 240,
+              color: '#FFF',
+            },
+          }}
+        >
+          {drawerBurger}
+        </Drawer>
+      </ThemeProvider>
+    );
+
+  } else return (
     <ThemeProvider theme={theme}>
-      <AppBar>
+      <AppBar className="appBar">
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
 
-          {/* insert logo with condition window size */}
           <Box
             component="div"
             sx={{ mt: 0.5 }}
@@ -91,61 +204,12 @@ export default function Header() {
             <img src={logo} alt="beweb-academy" />
           </Box>
 
-          {/* insert icon menu burger with condition window size */}
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'block', md: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <ThemeProvider theme={theme2}>
-            {/* display buttons with conditions window size */}
-            <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-              {navItems.map((item) => (
-                <Button className="buttonHeader" name={item} href={"/" + item}>
-                  {item}
-                </Button>
-
-              ))}
-
-
-              <ButtonBase href="/deconnexion">
-                <IconButton name="deconnexion">
-                  <LogoutIcon color="secondary"></LogoutIcon>
-                </IconButton>
-              </ButtonBase>
-            </Box>
-          </ThemeProvider>
         </Toolbar>
       </AppBar>
-
-      {/* contenu du menu burger deroulé */}
-      <Drawer
-        anchor="right"
-        container={container}
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true
-        }}
-        sx={{
-          display: { xs: 'flex', sm: 'flex', md: 'none' },
-          '& .MuiDrawer-paper': {
-            boxSizing: 'border-box',
-            width: 240,
-            color: '#FFF',
-          },
-        }}
-      >
-        {drawerBurger}
-      </Drawer>
     </ThemeProvider>
-  );
+  )
 }
+
 
 const theme = createTheme({
   typography: {

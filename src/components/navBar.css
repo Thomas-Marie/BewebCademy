@@ -1,0 +1,16 @@
+.leftNavBar {
+    background-color: #1D1D1D;
+    height: 96vh;
+    width: 20%;
+    color: white;
+    box-shadow: 0px 0px 5px 0px black;
+}
+
+.boxItems {
+    position: relative;
+    top: 60px;
+}
+
+.languageButton:hover {
+    padding-left: 10px;
+}
