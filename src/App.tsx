@@ -3,9 +3,8 @@ import { Routes, Route } from "react-router-dom";
 
 import './app.css';
 
-import Header from "./components/layout/Header"
-import Footer from "./components/layout/Footer"
-import Exercices from "./pages/ExercicesList";
+import Exercice from "./pages/Exercice";
+import ExerciceList from "./pages/ExerciceList";
 import Home from "./pages/Home";
 
 
@@ -18,7 +17,11 @@ function App() {
       <Routes>
 
         <Route path='/dashboard' element={<Home />}></Route>
-        <Route path='/exercices' element={<Exercices />}></Route>
+        <Route path='/exercice' element={<ExerciceList />}></Route>
+        <Route path='/exercice/html' element={<Exercice />}></Route>
+        <Route path='/exercice/php' element={<Exercice />}></Route>
+        <Route path='/exercice/sql' element={<Exercice />}></Route>
+
 
       </Routes>
       {/* <Footer></Footer> */}

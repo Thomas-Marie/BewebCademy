@@ -20,7 +20,7 @@ const host = window.location.protocol + "//" + window.location.host
 
 export default function NavBar() {
 
-    if (window.location.href == host + "/exercices") {
+    if (window.location.pathname === "/exercice") {
         return (
             <nav className="leftNavBar">
                 <Box className="boxItems" sx={{ textAlign: 'center' }}>
@@ -30,7 +30,8 @@ export default function NavBar() {
                             <Button
                                 name={language}
                                 href={window.location.href + "/" + language}
-                                sx={{ width: '100%', textAlign: 'left' }}
+                                fullWidth={true}
+                                sx={{ textAlign: 'left' }}
                             >
                                 <Box className="languageButton"
                                     sx={{ width: '80%', textAlign: 'left' }}
@@ -55,7 +56,8 @@ export default function NavBar() {
                             <Button
                                 name={language}
                                 href={window.location.href + "/" + language}
-                                sx={{ width: '100%', textAlign: 'left' }}
+                                fullWidth={true}
+                                sx={{ textAlign: 'left' }}
                             >
                                 <Box className="languageButton"
                                     sx={{ width: '80%', textAlign: 'left' }}

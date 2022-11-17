@@ -2,7 +2,7 @@ import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import NavBar from "../components/layout/NavBar";
 
-const ExercicesList: React.FC = () => {
+const ExerciceList: React.FC = () => {
   return (
     <div className="exercices">
       <Header></Header>
@@ -12,4 +12,4 @@ const ExercicesList: React.FC = () => {
   )
 }
 
-export default ExercicesList;
+export default ExerciceList;
