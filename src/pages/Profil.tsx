@@ -1,3 +1,4 @@
+import BadgeList from "../components/BadgeList";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import NavBar from "../components/layout/NavBar";
@@ -12,6 +13,9 @@ const Profil: React.FC = () => {
         <div className="profil">
             <Header />
             <NavBar />
+            <br/>
+            <br/>
+            <BadgeList/>
             <Footer />
         </div>
     )
