@@ -8,7 +8,7 @@ function LinkTab(props: any) {
   return (
     <Tab
       component="a"
-      onClick={(event) => {
+      onClick={(event: any) => {
         event.preventDefault();
       }}
       {...props}
