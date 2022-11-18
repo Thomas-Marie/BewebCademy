@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useState, useEffect} from 'react';
 import {getBadges} from '../../services/badge.service';
+import Grid from '@mui/material/Unstable_Grid2';
 
 
 export default function ListTable() {
@@ -24,10 +25,12 @@ export default function ListTable() {
   console.log(badges)
 
   return (
-    <TableContainer sx={{width:'80%', margin: 'auto'}} component={Paper}>
+    <TableContainer sx={{width:'100%', margin: 'auto'}} component={Paper}>
+      
       <Table sx={{ minWidth: 650, 
     alignItems : 'center',
     border : 1}} aria-label="simple table">
+            
         <TableHead >
           <TableRow>
             <TableCell sx={{color: '#DB1144'}}>Titre Badge</TableCell>
@@ -36,23 +39,28 @@ export default function ListTable() {
             <TableCell sx={{color: '#DB1144'}}align="center">Date</TableCell>
           </TableRow>
         </TableHead>
+           
         <TableBody>
 
-          {badges.map((elementbadges: any) => (
+          {badges.map((elementbadges: any, index: any) => (
+            // <Grid xs={1} sm={2} md={4} key={index}>
             <TableRow
               key={elementbadges.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>              
               <TableCell component="th" scope="row">
-                {elementbadges.image}{elementbadges.name}
+                <img src={elementbadges.image}  width="30px"/>
+                {elementbadges.name}
               </TableCell>
               <TableCell align="center">{elementbadges.language.name}</TableCell>
               <TableCell align="center">{elementbadges.all_done}</TableCell>
               <TableCell align="center">{elementbadges.acquisition_date}</TableCell>
 
             </TableRow>
+            // </Grid>
           ))}
         </TableBody>
       </Table>
+    {/* </Grid> */}
     </TableContainer>
   );
 }
