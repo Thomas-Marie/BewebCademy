@@ -37,7 +37,7 @@ export default function Header() {
       <List component="nav">
         {userHeaderItems.map((item, i) => (
           <><Divider />
-            <ListItem disablePadding key={i}>
+            <ListItem key={i}>
               <ListItemButton href={"/" + item} sx={{ textAlign: 'center', maxHeight: '100%' }} key={i}>
                 <ListItemText primary={item} key={i} />
               </ListItemButton>
@@ -46,7 +46,7 @@ export default function Header() {
         ))}
         <Divider />
 
-        <ListItem disablePadding >
+        <ListItem >
           <ListItemButton href="/logout" sx={{ textAlign: 'center', maxHeight: '100%' }}>
             <ListItemText primary="Deconnexion" sx={{ ml: 3 }} />
             <ListItemText primary={<LogoutIcon sx={{ mt: 0.6, ml: -5 }}></LogoutIcon>} />
@@ -60,7 +60,7 @@ export default function Header() {
   if (role == "user") {
     return (
       <ThemeProvider theme={theme}>
-        <AppBar className="appBar">
+        <AppBar className="appBar" position="sticky">
           <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
 
             {/* insert logo with condition window size */}

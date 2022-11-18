@@ -21,9 +21,9 @@ function App() {
         <Route path='/home' element={<Home />}></Route>
         <Route path='/exercice' element={<ExerciceList />}></Route>
         <Route path='/profil' element={<Profil />}></Route>
-        <Route path='/exercice/html' element={<Exercice />}></Route>
-        <Route path='/exercice/php' element={<Exercice />}></Route>
-        <Route path='/exercice/sql' element={<Exercice />}></Route>
+        <Route path='/html' element={<Exercice />}></Route>
+        <Route path='/php' element={<Exercice />}></Route>
+        <Route path='/sql' element={<Exercice />}></Route>
         <Route path='/deconnexion' element={<Logout />}></Route>
 
         <Route path='/test' element={<Test />}></Route>

@@ -53,7 +53,7 @@ export default function VerticalTabs() {
         orientation="vertical"
         value={value}
         onChange={handleChange}
-        aria-label="Vertical tabs example"
+        aria-label="Vertical tabs"
         sx={{ borderRight: 1, borderColor: 'divider' }}
       >
         <Tab label="Item One" {...a11yProps(0)} />

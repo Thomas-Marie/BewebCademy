@@ -15,9 +15,6 @@ const menuProfilList = {
     "list": ["mes badges", "gestion du compte"]
 }
 
-const host = window.location.protocol + "//" + window.location.host
-// console.log(window.location.protocol)
-
 export default function NavBar() {
 
     if (window.location.pathname === "/exercice") {
