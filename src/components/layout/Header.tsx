@@ -12,7 +12,7 @@ import { Divider, List, ListItem, ListItemButton, ListItemText, IconButton, Typo
 
 
 let role = "user"
-const userHeaderItems = ['dashboard', 'exercices', 'profil'];
+const userHeaderItems = ['home', 'exercice', 'profil'];
 const adminHeaderItems = ['utilisateurs', 'badges', 'archives']
 // const url = "http://localhost:3000/"
 
@@ -39,7 +39,7 @@ export default function Header() {
           <><Divider />
             <ListItem disablePadding key={i}>
               <ListItemButton href={"/" + item} sx={{ textAlign: 'center', maxHeight: '100%' }} key={i}>
-                <ListItemText primary={item} key={i}/>
+                <ListItemText primary={item} key={i} />
               </ListItemButton>
             </ListItem>
           </>
@@ -83,13 +83,14 @@ export default function Header() {
             </IconButton>
             <ThemeProvider theme={theme2}>
               {/* display buttons with conditions window size */}
-              <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-                {userHeaderItems.map((item, i) => (
-                  <Button className="buttonHeader" name={item} href={"/" + item} key={i}>
-                    {item}
-                  </Button>
-
-                ))}
+              <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex' }, justifyContent: 'flex-end', width: '30vw' }}>
+                <Box component='div' sx={{ width: '100%', display: 'flex', justifyContent: 'space-around'}}>
+                  {userHeaderItems.map((item, i) => (
+                    <Button className="buttonHeader" name={item} href={"/" + item} key={i}>
+                      {item}
+                    </Button>
+                  ))}
+                </Box>
                 <ButtonBase href="/deconnexion">
                   <IconButton name="deconnexion">
                     <LogoutIcon color="secondary" sx={{ mb: 0.4 }}></LogoutIcon>

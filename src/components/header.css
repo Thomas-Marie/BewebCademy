@@ -7,8 +7,12 @@ img {
     color: #DB1144;
 }
 
+.buttonHeader{
+}
+
 .buttonHeader:active {
     /* color: #FFF; */
+    padding-top: 1px;
 }
 
 .appBar {

@@ -4,7 +4,7 @@ import NavBar from "../components/layout/NavBar";
 
 const ExerciceList: React.FC = () => {
   return (
-    <div className="exercices">
+    <div className="exerciceList">
       <Header></Header>
       <NavBar></NavBar>
       <Footer></Footer>

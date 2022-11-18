@@ -1,4 +1,4 @@
-import { Button, ButtonBase, Divider, IconButton } from "@mui/material"
+import { Button, ButtonBase, Divider, IconButton, Typography } from "@mui/material"
 import { Box } from "@mui/system"
 import "../navBar.css"
 
@@ -12,7 +12,7 @@ const menuExerciceList = {
 
 const menuProfilList = {
     "title": "Profil",
-    "list": ["mon profil", "gestion du compte"]
+    "list": ["mes badges", "gestion du compte"]
 }
 
 const host = window.location.protocol + "//" + window.location.host
@@ -31,7 +31,7 @@ export default function NavBar() {
                                 name={language}
                                 href={window.location.href + "/" + language}
                                 fullWidth={true}
-                                sx={{ textAlign: 'left' }}
+                                sx={{ textAlign: 'left', color: '#FFFFFF' }}
                             >
                                 <Box className="languageButton"
                                     sx={{ width: '80%', textAlign: 'left' }}
@@ -57,7 +57,7 @@ export default function NavBar() {
                                 name={language}
                                 href={window.location.href + "/" + language}
                                 fullWidth={true}
-                                sx={{ textAlign: 'left' }}
+                                sx={{ textAlign: 'left', color: '#FFF'}}
                             >
                                 <Box className="languageButton"
                                     sx={{ width: '80%', textAlign: 'left' }}

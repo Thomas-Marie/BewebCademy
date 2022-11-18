@@ -11,6 +11,16 @@
     top: 60px;
 }
 
+.languageButton {
+    transition: 0.5s;
+}
+
 .languageButton:hover {
-    padding-left: 10px;
+    padding-left: 15px;
+    color: #DB1144;
+    transition: 0.5s;
+}
+
+h1 {
+    color:#DB1144
 }
