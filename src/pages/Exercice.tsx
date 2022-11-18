@@ -1,4 +1,4 @@
-import ListTable from "../components/layout/ListTable";
+import ListTable from "../components/ListTable";
 
 const Exercice = () => {
     return (

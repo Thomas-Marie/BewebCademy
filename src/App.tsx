@@ -2,14 +2,14 @@ import React from 'react';
 import {Route, Routes} from 'react-router-dom';
 import './theme/bewebcademy.scss';
 import Home from './pages/Home';
-import Exercices from './pages/Exercices';
+import Exercice from './pages/Exercice';
 
 
 const App: React.FC = () => {
   return(
     <Routes>
       <Route path='/' element={<Home />}></Route>
-      <Route path='/exercices' element={<Exercices />}></Route>
+      <Route path='/exercice' element={<Exercice />}></Route>
     </Routes>
   )
 }

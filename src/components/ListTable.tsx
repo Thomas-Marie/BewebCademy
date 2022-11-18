@@ -6,9 +6,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+// import { Typography } from '@mui/material';
 import {useState, useEffect} from 'react';
-import {getBadges} from '../../services/badge.service';
-import Grid from '@mui/material/Unstable_Grid2';
+import {getBadges} from '../services/badge.service';
 
 
 export default function ListTable() {
@@ -26,7 +26,7 @@ export default function ListTable() {
 
   return (
     <TableContainer sx={{width:'100%', margin: 'auto'}} component={Paper}>
-      
+      {/* <Typography variant="h3">Badges({badges.language.name})</Typography> */}
       <Table sx={{ minWidth: 650, 
     alignItems : 'center',
     border : 1}} aria-label="simple table">
@@ -43,7 +43,6 @@ export default function ListTable() {
         <TableBody>
 
           {badges.map((elementbadges: any, index: any) => (
-            // <Grid xs={1} sm={2} md={4} key={index}>
             <TableRow
               key={elementbadges.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>              
@@ -56,11 +55,9 @@ export default function ListTable() {
               <TableCell align="center">{elementbadges.acquisition_date}</TableCell>
 
             </TableRow>
-            // </Grid>
           ))}
         </TableBody>
       </Table>
-    {/* </Grid> */}
     </TableContainer>
   );
 }
