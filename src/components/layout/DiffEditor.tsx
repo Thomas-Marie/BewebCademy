@@ -12,15 +12,15 @@ const DiffEditor = (props: any) => {
         setDiffEditor(<MonacoDiffEditor
             height="75vh"
             width="75vw"
-            original={props.exercice.result}
+            original={decodeURI(props.result)}
             modified={props.editorValue}
-            language={props.exercice.language}
+            language={props.language}
             theme="vs-dark"
             
         />
         )
 
-    }, [props.exercice.result, props.editorValue])
+    }, [props.result, props.editorValue, props.language])
 
     return (
         <Box >
