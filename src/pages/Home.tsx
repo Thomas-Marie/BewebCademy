@@ -1,6 +1,9 @@
+import Modification from '../components/forms/Modification';
+
 const Home = () => {
     return (
-      <h1>HOME</h1>
+      <Modification />
+
     )
   }
   
