@@ -6,6 +6,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import BadgeList from "../BadgeList";
+import ListTable from "../ListTable";
 
 
 const menuExerciceList = {
@@ -54,46 +56,44 @@ export default function NavBar(props: any) {
                         textColor="secondary"
                     >
 
-                        <Tab label="Item One" onClick={event => handleClick(
-                            <TabPanel value={value} index={0}>
-                                Item One
-                            </TabPanel>
-                        )}
-                            icon={<ArrowForwardIosIcon
-                                sx={{ height: "10px" }} />
-                            } />
-                        <Tab label="Item Two" onClick={event => handleClick(100)} icon={<ArrowForwardIosIcon sx={{ height: "10px" }} />} />
-                        <Tab label="Item Three" onClick={event => handleClick(100)} icon={<ArrowForwardIosIcon sx={{ height: "10px" }} />} />
-                    </Tabs>
+
+                        {menuExerciceList.list.map((language) => (
+                            <><Divider />
+                                <Tab sx={{ color: '#FFF' }} label={language} iconPosition="start" onClick={event => handleClick(
+                                    <TabPanel value={value} index={0}>
+                                        Badge {language} <ListTable /> 
+                                    </TabPanel>
+                                )}
+                                    icon={<ArrowForwardIosIcon
+                                        sx={{ height: "10px" }} />
+                                    } />
+
+                                </>))}
+                            </Tabs>
+
+                        <Divider />
 
 
-                    <TabPanel value={value} index={1}>
-                        Item Two
-                    </TabPanel>
-                    <TabPanel value={value} index={2}>
-                        Item Three
-                    </TabPanel>
-
-                    {menuExerciceList.list.map((language) => (
-                        <><Divider />
-                            <Button
-                                name={language}
-                                href={window.location.href + "/" + language}
-                                fullWidth={true}
-                                sx={{ textAlign: 'left', color: '#FFFFFF' }}
-                            >
-                                <Box className="languageButton"
-                                    sx={{ width: '80%', textAlign: 'left' }}
+                        {menuExerciceList.list.map((language) => (
+                            <><Divider />
+                                <Button
+                                    name={language}
+                                    href={window.location.href + "/" + language}
+                                    fullWidth={true}
+                                    sx={{ textAlign: 'left', color: '#FFFFFF' }}
                                 >
-                                    <ArrowForwardIosIcon sx={{ height: "10px" }} />
-                                    {language}
-                                </Box>
-                            </Button>
+                                    <Box className="languageButton"
+                                        sx={{ width: '80%', textAlign: 'left' }}
+                                    >
+                                        <ArrowForwardIosIcon sx={{ height: "10px" }} />
+                                        {language}
+                                    </Box>
+                                </Button>
 
 
-                        </>
-                    ))}
-                    <Divider />
+                            </>
+                        ))}
+                        <Divider />
                 </Box>
             </nav >
         )
