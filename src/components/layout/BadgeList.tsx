@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import {useEffect, useState} from 'react';
-import {getBadges} from '../../services/badge.service'
+import { useEffect, useState } from 'react';
+import { getBadges } from '../../services/badge.service'
 import { Typography } from '@mui/material';
 
 export default function BadgeList() {
@@ -11,30 +11,32 @@ const [badges, setBadges] = useState<any>([])
 
   useEffect(() => {
     const fetchBadges = async () => {
-      const data = await getBadges().then((result: any) => {return result})
+      const data = await getBadges()
+      .then((result: any) => {
+        return result
+      })
+
       setBadges(data)
     }
-    fetchBadges().catch(console.error)
+    fetchBadges()
+    .catch(console.error)
   }, [])
-
-  console.log(badges)
 
   return (
     <Box sx={{ flexGrow: 1, ml:6 }}>
       <Typography variant="h3">Badges({badges.length}) </Typography>
-      <Grid container columns={{ xs: 4, sm: 6, md: 8 }}>
+      <Grid container columns={{ xs: 2, sm: 6, md: 8 }}>
         {badges.map((badge: any, index: any) => (
           <Grid xs={2} sm={2} md={2} key={index}>
                 <Box>
                   <Box display="flex" justifyContent="center" alignItems="center">
-                    
                     <img src={badge.image} width="100px"/>
                   </Box>
                   <Box display="flex" justifyContent="center" alignItems="center">
                     <Typography>{badge.name}</Typography>
                   </Box>
                   <Box display="flex" justifyContent="center" alignItems="center">
-                    <Typography>{badge.language.name}</Typography>
+                    <Typography>{badge.acquisition_date}</Typography>
                   </Box>
                 </Box>
           </Grid>
