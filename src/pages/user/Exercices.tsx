@@ -27,15 +27,15 @@ const Exercice = () => {
     console.log(exercices)
 
     return (
-        <Box width="100%" height="85vh">
+        <Box width="100%" maxHeight="85vh" sx={{m:0, left:0, position:"relative"}}>
             <Header />
-            <Box display="flex" flexDirection="row" mt="9vh">
+            <Box display="flex" flexDirection="row" ml={0}>
                 <Statement exercice={exercices} />
                 <MonacoEditor exercice={exercices} />
                 
             </Box>
             
-            
+            <Footer />
 
         </Box>
     );

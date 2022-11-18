@@ -1,17 +1,17 @@
 import Editor, { Monaco } from "@monaco-editor/react";
+
 import { useEffect, useRef, useState } from "react";
 
 import CopyToClipBoard from "../CopyToClipboard";
+import DiffEditor from "./DiffEditor"
 
-import { getLanguages } from "../../services/language.service";
-import { getExercices } from "../../services/exercice.service";
-
-import { Divider, Button, IconButton } from "@mui/material";
+import { Divider, Button, IconButton, Modal } from "@mui/material";
 import { Box } from "@mui/system";
 import { styled } from "@mui/material/styles";
 import CachedIcon from "@mui/icons-material/Cached";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+
 
 //////////////Styled components//////////////////////////////////////
 const EditorButton = styled(Button)({
@@ -28,6 +28,20 @@ const EditorButton = styled(Button)({
     },
 }) as typeof Button;
 
+
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '10%',
+    left: '10%',
+    width: "75vw",
+    height:"75vh",
+   
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+   
+  };
+  
 //////////////////////////////////////////////////////////////////
 // const languages = await getLanguages().then(result => {return result} )
 // console.log(languages)
@@ -51,30 +65,24 @@ export default function MonacoEditor(props: any) {
     const editorRef: any = useRef(null);
     const [boxWidth, setBoxWidth] = useState<string>("33vw");
     const [fileName, setFileName] = useState<string>("script.js");
+    const [editorValue, setEditorValue] = useState<string>("")
     const file: any = files[fileName];
-    const [exercice, setExercice] = useState(null);
 
-    // Load Data before mounting component?
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         await getExercices().then((result) => {
-    //             setExercice(result);
-                
-    //         });
-            
-            
-    //     };
-    //     fetchData().catch(console.error)
-    // }, []);
-    // console.log(exercice)
+    const [open, setOpen] = useState<boolean>(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    useEffect(() => {}, [props.exercice])
     // attach ref to newly created editor
-    function handleEditorDidMount(editor: any, monaco: Monaco): void {
-        editorRef.current = editor;
+    async function handleEditorDidMount(editor: any, monaco: Monaco) {
+        editorRef.current = await editor;
+        saveValue()
     }
 
     // save referenced editor content
     function saveValue() {
-        return editorRef.current.getValue();
+        setEditorValue(editorRef.current.getValue());
+        console.log(editorValue)
     }
 
     //double width of the editor towards right side(hiding the display)
@@ -88,16 +96,21 @@ export default function MonacoEditor(props: any) {
         editorRef.current.setValue(file.value);
     };
 
+    const handleOpenDiffEditor = () => {
+        saveValue()
+        handleOpen()
+    }
     return (
         <Box
             style={{ width: boxWidth }}
             sx={{
                 color: "#ffffff",
                 borderRadius: 0,
-                
-                border: "5px solid #1d1d1b"              
+
+                border: "5px solid #1d1d1b"
             }}
         >
+
             <Box
                 display="flex"
                 justifyContent={"space-between"}
@@ -140,8 +153,8 @@ export default function MonacoEditor(props: any) {
                 </Box>
             </Box>
             <Editor
-                height="74vh"
-               
+                height="79.5vh"
+
                 onMount={handleEditorDidMount}
                 theme="vs-dark"
                 path={file.name}
@@ -186,8 +199,16 @@ export default function MonacoEditor(props: any) {
                 </Box>
                 <Box>
                     <IconButton sx={{ color: "white", height: "100%" }}>
-                        <VisibilityIcon />
+                        <VisibilityIcon onClick={handleOpenDiffEditor} />
                     </IconButton>
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        sx={style}
+
+                    >
+                       <DiffEditor exercice={props.exercice} editorValue={editorValue} />
+                    </Modal>
                 </Box>
             </Box>
         </Box>

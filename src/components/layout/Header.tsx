@@ -60,7 +60,7 @@ export default function Header() {
   if (role == "user") {
     return (
       <ThemeProvider theme={theme}>
-        <AppBar className="appBar">
+        <AppBar className="appBar" position="sticky">
           <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
 
             {/* insert logo with condition window size */}
@@ -128,7 +128,7 @@ export default function Header() {
   } else if (role == "admin") {
     return (
       <ThemeProvider theme={theme}>
-        <AppBar className="appBar">
+        <AppBar className="appBar" position="static">
           <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
 
             {/* insert logo with condition window size */}
