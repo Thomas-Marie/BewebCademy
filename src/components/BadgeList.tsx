@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useEffect, useState } from 'react';
-import { getBadges } from '../../services/badge.service'
+import { getBadges } from '../services/badge.service'
 import { Typography } from '@mui/material';
 
 export default function BadgeList() {
