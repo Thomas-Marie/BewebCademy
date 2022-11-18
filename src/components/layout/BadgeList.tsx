@@ -27,7 +27,8 @@ const [badges, setBadges] = useState<any>([])
           <Grid xs={2} sm={2} md={2} key={index}>
                 <Box>
                   <Box display="flex" justifyContent="center" alignItems="center">
-                    <img src="https://logospng.org/download/javascript/logo-javascript-icon-1024.png" width="100px"/>
+                    
+                    <img src={badge.image} width="100px"/>
                   </Box>
                   <Box display="flex" justifyContent="center" alignItems="center">
                     <Typography>{badge.name}</Typography>
