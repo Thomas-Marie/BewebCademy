@@ -2,6 +2,7 @@ import { Box, Tabs, Tab } from "@mui/material";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import React from "react";
+import Modification from '../components/forms/Modification';
 
 function LinkTab(props: any) {
   return (
@@ -36,6 +37,7 @@ const Home: React.FC = () => {
           <LinkTab label="Page Three" href="/spam" />
         </Tabs>
       </Box>
+      <Modification />
       <Footer></Footer>
     </div>
   )
