@@ -53,7 +53,6 @@ const Exercice = () => {
       result:
         "<html><body><h1>HelloWorld</h1></body><style></style><script></script></html>",
       help: "https://www.w3schools.com/html/",
-      saved: null,
     },
     {
       badges: {
@@ -81,7 +80,6 @@ const Exercice = () => {
       result:
         "<html><body><h1>HelloWorld</h1></body><style>h1{background-color:red}</style><script></script></html>",
       help: "https://www.w3schools.com/css/default.asp",
-      saved: null,
     },
     {
       badges: {
@@ -113,7 +111,6 @@ const Exercice = () => {
       result:
         "<html><body><h1>HelloWorld</h1></body><style>h1{background-color:red}</style><script>console.log('HelloWorld')</script></html>",
       help: "https://www.w3schools.com/jsref/met_console_log.asp",
-      saved: null,
     },
   ];
 

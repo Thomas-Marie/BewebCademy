@@ -7,6 +7,5 @@ export default interface Exercice{
     "done_date": Date,
     "statement": string,
     "result": String,
-    "help": String,
-    "saved": any
+    "help": String
 }
