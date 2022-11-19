@@ -13,8 +13,6 @@ const Profil: React.FC = () => {
         <div className="profil">
             <Header />
             <NavBar />
-            <br/>
-            <br/>
             <BadgeList/>
             <Footer />
         </div>

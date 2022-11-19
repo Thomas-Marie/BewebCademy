@@ -32,7 +32,7 @@ export default function Header() {
   const drawerBurger = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        <img src={logo} alt="beweb-academy" />
+        <img className="img-logo" src={logo} alt="beweb-academy" />
       </Typography>
       <List component="nav">
         {userHeaderItems.map((item, i) => (
