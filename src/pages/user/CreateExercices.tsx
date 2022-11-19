@@ -7,8 +7,11 @@ import "../../theme/_variables_bewebcademy.scss";
 import ex from "../../models/exercice";
 import { Button, Grid, Popover, TextareaAutosize, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import ReactSelect from "react-select";
-import { Form } from "react-router-dom";
+
+import { createExercice } from "../../services/exercice.service"
+import { getBadgeById, getBadges } from "../../services/badge.service"
+import Badge from "../../models/badge";
+import Exercice from "../../models/exercice"
 
 const CreateExercice = () => {
   const [exercices, setExercices] = useState<ex[]>([]);
@@ -21,6 +24,16 @@ const CreateExercice = () => {
   const [message, setMessage] = useState("");
   const open = Boolean(anchorEl);
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const [badgeSelect, setBadgeSelect]= useState<any>([])
+
+  useEffect(()=> {
+    const fetchBadges = async() => {
+      const badges:any = await getBadges().then(result =>{return result})
+      setBadgeSelect(badges)
+      
+    }
+    fetchBadges()
+  },[])
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -56,10 +69,13 @@ const CreateExercice = () => {
   };
 
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async(data: any) => {
     let result = replaceCode(srcDoc);
     data.result = result;
     console.log(data);
+    const badge =await getBadgeById(data.badges)
+    data.badges= badge
+    await createExercice(data)
   };
 
   const style = {
@@ -94,9 +110,12 @@ const CreateExercice = () => {
             <Grid item xs={12}>
               <select {...register("badges", { required: true })} style={style}>
                 <option value=""></option>
-                <option value="html">HTML</option>
-                <option value="css">CSS</option>
-                <option value="javascript">Javascript</option>
+                {badgeSelect.map((badge:Badge,index:number)=> (
+                
+                <option value={badge._id} key={index}>{badge.name}</option>
+                ))}
+                
+
               </select>
             </Grid>
             <Grid item xs={12}>

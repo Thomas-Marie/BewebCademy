@@ -9,7 +9,7 @@ import ExerciceList from "./pages/ExerciceList";
 import Profil from "./pages/Profil";
 import Logout from './pages/Logout';
 import Test from './pages/Tests';
-import Home from './pages/home';
+import Home from './pages/Home';
 
 
 
