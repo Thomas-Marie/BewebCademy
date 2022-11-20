@@ -9,6 +9,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, Drawer, Toolbar, Box } from "@mui/material";
 import { Divider, List, ListItem, ListItemButton, ListItemText, IconButton, Typography, Button, ButtonBase } from "@mui/material";
+import { useKeycloak } from "@react-keycloak/web";
 
 
 let role = "user"
@@ -18,6 +19,7 @@ const adminHeaderItems = ['utilisateurs', 'badges', 'archives']
 
 export default function Header() {
 
+  const { keycloak, initialized } = useKeycloak();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const container = window !== undefined ? () => document.body : undefined;
 
@@ -93,7 +95,7 @@ export default function Header() {
                 </Box>
                 <ButtonBase href="/deconnexion">
                   <IconButton name="deconnexion">
-                    <LogoutIcon color="secondary" sx={{ mb: 0.4 }}></LogoutIcon>
+                    <LogoutIcon color="secondary" sx={{ mb: 0.4 }}  onClick={() => keycloak.logout()} ></LogoutIcon>
                   </IconButton>
                 </ButtonBase>
               </Box>
