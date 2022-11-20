@@ -8,7 +8,7 @@ const beforeDraft = axios.create({
 export const getBeforeDrafts = async () => {
   try {
     const data = await beforeDraft.get("/");
-    console.log("got the data captain!");
+
     await data.data.map((data: BeforeDraft) =>{
         data._id = data._id.toString()
       } )
@@ -21,7 +21,6 @@ export const getBeforeDrafts = async () => {
 export const getBeforeDraftById = async (id: string) => {
   try {
     const data = await beforeDraft.get(`/${id}`);
-    console.log("data du [beforeDraft] retrouvé");
     return data.data;
   } catch (error: any) {
     console.log(error.message);
@@ -31,7 +30,7 @@ export const getBeforeDraftById = async (id: string) => {
 export const createBeforeDraft = async (formData: BeforeDraft) => {
   try {
     await beforeDraft.post("/", { formData });
-    console.log("beforeDraft Créé");
+
   } catch (error: any) {
     console.log(error.message);
   }
@@ -40,7 +39,7 @@ export const createBeforeDraft = async (formData: BeforeDraft) => {
 export const deleteBeforeDraftById = async (id: string) => {
   try {
     await beforeDraft.delete(`/${id}`);
-    console.log("deletage pas de fromage");
+
   } catch (error: any) {
     console.log(error.message);
   }

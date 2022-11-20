@@ -23,7 +23,7 @@ const CreateExercice = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [message, setMessage] = useState("");
   const open = Boolean(anchorEl);
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
   const [badgeSelect, setBadgeSelect]= useState<any>([])
 
   useEffect(()=> {
@@ -55,7 +55,7 @@ const CreateExercice = () => {
           </html>
         `);
     }, 250);
-
+    
     return () => clearTimeout(timeout);
   }, [html, css, javascript]);
 
@@ -76,6 +76,10 @@ const CreateExercice = () => {
     const badge =await getBadgeById(data.badges)
     data.badges= badge
     await createExercice(data)
+    sethtml("")
+    setcss("")
+    setjavascript("")
+    reset()
   };
 
   const style = {
