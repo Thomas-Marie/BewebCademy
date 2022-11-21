@@ -43,10 +43,20 @@ export const deleteExerciceById = async (id: string) => {
   }
 };
 
-export const UpdateExercice = async (id: string, formData: Exercice) => {
+export const updateExercice = async (id: string, formData: Exercice) => {
   try {
     await exercice.put(`/${id}`, { formData });
   } catch (error: any) {
     console.log(error.message);
   }
 };
+
+
+export const getExerciceByBadgeId = async(id: string) => {
+  try {
+    const data = await exercice.get(`/badge/${id}`)
+    return data.data
+  }catch(error: any) {
+    console.log(error.message)
+  }
+}

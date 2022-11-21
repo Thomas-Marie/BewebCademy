@@ -4,8 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-
-
+import Footer from './components/layout/Footer'
+import './theme/bewebcademy.scss'
 import App from './App';
 
 const root = ReactDOM.createRoot(
@@ -15,6 +15,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
+      <Footer></Footer>
     </BrowserRouter>
   </React.StrictMode>
 );

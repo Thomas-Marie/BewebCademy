@@ -25,7 +25,7 @@ export default function Footer() {
 
   if (window.location.pathname.match(regex)) {
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme} >
         <footer>
           <Typography
             variant="h6"

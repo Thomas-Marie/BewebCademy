@@ -9,19 +9,20 @@ import Paper from '@mui/material/Paper';
 // import { Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { getBadges } from '../services/badge.service';
-import Badge from '../models/Badge';
-
+import Badge from '../models/badge';
+import Language from '../models/language';
+import { Link } from 'react-router-dom';
 
 export default function ListTable() {
 
 
 
-  const [badges, setBadges] = useState<any>([])
+  const [badges, setBadges] = useState<Badge[]>([])
 
   useEffect(() => {
     const fetchBadges = async () => {
-      const ResulGetBadges = await getBadges().then((result: any) => { return result })
-      setBadges(ResulGetBadges)
+      const resulGetBadges = await getBadges().then((result: any) => { return result })
+      setBadges(resulGetBadges)
       // console.log(badges[0].language[0])
 
     }
@@ -77,17 +78,22 @@ export default function ListTable() {
 
         <TableBody>
 
-          {badges.map((elementbadges: any, index: any) => (
+          {badges.map((elementBadges: Badge, index: any) => (
             <TableRow
-              key={elementbadges.name}
+              key={elementBadges.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row" sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                <img src={elementbadges.image} />
-                <span>{elementbadges.name}</span>
+                <img src={elementBadges.image} />
+                <span>{elementBadges.name}</span>
+                <Link to={`/exercices/${elementBadges._id}`} style={{marginLeft:"25px"}}> Aller aux exercices</Link>
               </TableCell>
-              <TableCell align="center">{elementbadges.language.name}</TableCell>
-              <TableCell align="center">{elementbadges.all_done}</TableCell>
-              <TableCell align="center">{elementbadges.acquisition_date}</TableCell>
+              <TableCell align="center"><ul>
+              {elementBadges.language.map((language: Language) => (
+                <li>{language.name}</li>
+              ))}
+             </ul> </TableCell>
+              <TableCell align="center">{elementBadges.all_done ? "oui" : ""}</TableCell>
+              <TableCell align="center">{elementBadges.acquisition_date ? elementBadges.acquisition_date.toString(): "" }</TableCell>
 
             </TableRow>
           ))}

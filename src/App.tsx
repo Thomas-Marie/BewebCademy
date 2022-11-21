@@ -19,13 +19,16 @@ function App() {
 
       <Routes>
         <Route index element={<Home />} />
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/home' element={<Home />}></Route>
-        <Route path='/exercice' element={<ExerciceList />}></Route>
-        <Route path='/create-exercice' element={<CreateExercice />}></Route>
-        <Route path='/profil' element={<Profil />}></Route>
-        <Route path='/exercice/html' element={<Exercice />}></Route>
-        <Route path='/deconnexion' element={<Logout />}></Route>
+        <Route path='/' element={<Home />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/exercices' element={<ExerciceList />}>
+          
+        </Route>
+        <Route path='/exercices/:badge' element={<Exercice />} />
+        <Route path='/create-exercice' element={<CreateExercice />} />
+        <Route path='/profil' element={<Profil />}/>
+
+        <Route path='/deconnexion' element={<Logout />}/>
       </Routes>
 
     </div>

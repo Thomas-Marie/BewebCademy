@@ -2,12 +2,9 @@ import { Box, Tabs, Tab } from "@mui/material";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import React from "react";
-<<<<<<< HEAD
 import Modification from '../components/forms/Modification';
 import {useEffect, useState} from 'react'
 import {getSessions} from '../services/session.service'
-=======
->>>>>>> dbb767782d93aa7b4111a6490459f575d22b461f
 
 function LinkTab(props: any) {
   return (
@@ -50,7 +47,7 @@ const Home: React.FC = () => {
       <Box sx={{ width: '100%' }}>
         
       </Box>
-      <Footer></Footer>
+      
     </div>
   )
 }

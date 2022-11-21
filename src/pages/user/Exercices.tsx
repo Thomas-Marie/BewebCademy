@@ -29,12 +29,12 @@ const Exercice = () => {
 
  
   useEffect(() => {
-    const fetchExercices = async () => {
+    const fetchExercices = async (id:string) => {
       const data = await getExercices().then((result: any) => {return result});
       setExercices(data);
     };
     console.log(exercices)
-    fetchExercices().catch(console.error);
+    fetchExercices((window.location.href.substring(window.location.href.lastIndexOf('/') + 1))).catch(console.error);
   }, []);
 
   useEffect(() => {
