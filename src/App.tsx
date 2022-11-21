@@ -9,7 +9,7 @@ import Profil from "./pages/Profil";
 import Logout from './pages/Logout';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
 import keycloak from './auth/auth_keycloak';
-import Home from './pages/Home';
+import Home from './pages/home';
 import Accueil from './pages/Accueil';
 
 

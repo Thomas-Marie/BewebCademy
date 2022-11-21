@@ -1,5 +1,5 @@
 import Badge from "./badge"
-import Exercice from "./Exercice"
+import Exercice from "./exercice"
 import User from "./user"
 
 
