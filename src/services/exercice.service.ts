@@ -5,21 +5,22 @@ const exercice = axios.create({
   baseURL: "http://localhost:4000",
 });
 
-export const getExercices = async () => {
+
+export const getExerciceById = async (id: string) => {
   try {
-    const data = await exercice.get("/");
-    await data.data.map((data: Exercice) =>{
-        data._id = data._id.toString()
-      } )
+    const data = await exercice.get(`/${id}`);
     return data.data;
   } catch (error: any) {
     console.log(error.message);
   }
 };
 
-export const getExerciceById = async (id: string) => {
+export const getExercices = async () => {
   try {
-    const data = await exercice.get(`/${id}`);
+    const data = await exercice.get("/");
+    await data.data.map((data: Exercice) =>{
+        data._id = data._id.toString()
+      } )
     return data.data;
   } catch (error: any) {
     console.log(error.message);
