@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, redirect as Redirect} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import './app.css';
 
@@ -8,7 +8,7 @@ import ExerciceList from "./pages/ExerciceList";
 import Profil from "./pages/Profil";
 import Logout from './pages/Logout';
 import Test from './pages/Tests';
-import Home from './pages/home';
+import Home from './pages/Home';
 
 
 
