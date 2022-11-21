@@ -1,5 +1,4 @@
 import axios from "axios";
-import Badge from "../models/badge";
 
 const badge = axios.create({
     baseURL: "http://localhost:2000/"
