@@ -8,7 +8,6 @@ import ExerciceList from "./pages/ExerciceList";
 import Home from "./pages/Home";
 import Profil from "./pages/Profil";
 import Logout from './pages/Logout';
-import Test from './pages/Tests';
 
 
 
@@ -19,16 +18,12 @@ function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path='/home' element={<Home />}></Route>
-        <Route path='/exercice' element={<ExerciceList />}></Route>
+        <Route path='/exercices' element={<ExerciceList />}></Route>
         <Route path='/profil' element={<Profil />}></Route>
         <Route path='/html' element={<Exercice />}></Route>
         <Route path='/php' element={<Exercice />}></Route>
         <Route path='/sql' element={<Exercice />}></Route>
         <Route path='/deconnexion' element={<Logout />}></Route>
-
-        <Route path='/test' element={<Test />}></Route>
-
-
       </Routes>
 
     </div>

@@ -10,9 +10,6 @@ const Logout = (props: any) => {
     return (
         <div className="logout">
             <Header />
-            <br /> 
-            <br />
-            <br />
             T DECO
             <Footer />
         </div>

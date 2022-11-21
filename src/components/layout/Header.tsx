@@ -12,7 +12,7 @@ import { Divider, List, ListItem, ListItemButton, ListItemText, IconButton, Typo
 
 
 let role = "user"
-const userHeaderItems = ['home', 'exercice', 'profil'];
+const userHeaderItems = ['home', 'exercices', 'profil'];
 const adminHeaderItems = ['utilisateurs', 'badges', 'archives']
 // const url = "http://localhost:3000/"
 
