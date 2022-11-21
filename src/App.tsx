@@ -9,7 +9,7 @@ import Profil from "./pages/Profil";
 import Logout from './pages/Logout';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
 import keycloak from './auth/auth_keycloak';
-import Home from './pages/Home';
+import Accueil from './pages/Accueil';
 
 
 
@@ -19,8 +19,8 @@ function App() {
       <ReactKeycloakProvider authClient={keycloak} initOptions={{checkLoginIframe: false, onLoad: 'check-sso',  }}>
      <React.StrictMode>
       <Routes>
-        <Route index element={<Home />} />
-        <Route path='/home' element={<Home />}></Route>
+        <Route index element={<Accueil />} />
+        <Route path='/home' element={<Accueil />}></Route>
         <Route path='/exercices' element={<ExerciceList />}></Route>
         <Route path='/profil' element={<Profil />}></Route>
         <Route path='/html' element={<Exercice />}></Route>
