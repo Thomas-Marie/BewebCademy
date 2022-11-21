@@ -2,7 +2,6 @@ import { Box, Tabs, Tab } from "@mui/material";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import React from "react";
-import Modification from '../components/forms/Modification';
 
 function LinkTab(props: any) {
   return (
@@ -29,15 +28,10 @@ const Home: React.FC = () => {
   return (
     <div className="home">
       <Header></Header>
-      <h1>HOME</h1>
+      <h1>Welcome</h1>
       <Box sx={{ width: '100%' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="nav tabs example">
-          <LinkTab label="Page One" href="/exercice" />
-          <LinkTab label="Page Two" href="/trash" />
-          <LinkTab label="Page Three" href="/spam" />
-        </Tabs>
+        
       </Box>
-      <Modification />
       <Footer></Footer>
     </div>
   )

@@ -16,12 +16,11 @@ const ExerciceList: React.FC = () => {
   return (
     <div className="exerciceList">
       <Header></Header>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+      <Box sx={{ display: 'flex' }}>
         <NavBar handleClick={handleClick} />
-        <Box width='20vw'></Box>
-
-        <Box height='100vh' width='78vw' sx={{ p: 2 }}>
-          <h2>mon composant: {myComponent}</h2>
+        <Box sx={{ width: '20vw', float: 'left' }}></Box>
+        <Box height='100vh' width='80vw' sx={{ p: 2 }}>
+          <h2>{myComponent}</h2>
 
         </Box>
       </Box>
