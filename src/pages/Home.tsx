@@ -2,9 +2,12 @@ import { Box, Tabs, Tab } from "@mui/material";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import React from "react";
+<<<<<<< HEAD
 import Modification from '../components/forms/Modification';
 import {useEffect, useState} from 'react'
 import {getSessions} from '../services/session.service'
+=======
+>>>>>>> dbb767782d93aa7b4111a6490459f575d22b461f
 
 function LinkTab(props: any) {
   return (
@@ -43,15 +46,10 @@ const Home: React.FC = () => {
   return (
     <div className="home">
       <Header></Header>
-      <h1>HOME</h1>
+      <h1>Welcome</h1>
       <Box sx={{ width: '100%' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="nav tabs example">
-          <LinkTab label="Page One" href="/exercice" />
-          <LinkTab label="Page Two" href="/trash" />
-          <LinkTab label="Page Three" href="/spam" />
-        </Tabs>
+        
       </Box>
-      <Modification />
       <Footer></Footer>
     </div>
   )

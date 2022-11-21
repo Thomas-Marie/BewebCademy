@@ -8,7 +8,7 @@ import CreateExercice from './pages/user/CreateExercices';
 import ExerciceList from "./pages/ExerciceList";
 import Profil from "./pages/Profil";
 import Logout from './pages/Logout';
-import Test from './pages/Tests';
+
 import Home from './pages/Home';
 
 
@@ -26,10 +26,6 @@ function App() {
         <Route path='/profil' element={<Profil />}></Route>
         <Route path='/exercice/html' element={<Exercice />}></Route>
         <Route path='/deconnexion' element={<Logout />}></Route>
-
-        <Route path='/test' element={<Test />}></Route>
-
-
       </Routes>
 
     </div>

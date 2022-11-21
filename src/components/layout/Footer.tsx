@@ -42,12 +42,9 @@ export default function Footer() {
               alignItems: 'center'
             }}
           >
-            {/* <ThemeProvider theme={theme2}> */}
-
             <Button variant='outlined' color="secondary" onClick={handleButton} sx={{ p: 0.7, fontSize: '1vh', color: 'text.primary', height: '3vh', width: '40%' }}>Precedent</Button>
             3/11  {/* INTEGRER LES VARIABLES DU NOMBRES DE PAGES ICI */}
             <Button variant={enabledButton} ref={refButtonNextExercice} color='secondary' sx={{ p: 0.7, fontSize: '1vh', color: 'text.primary', height: '3vh',  width: '40%', '&:disabled': { bgColor: theme.palette.secondary.main, color: 'white' } }}>Suivant</Button>
-            {/* </ThemeProvider> */}
           </Typography>
         </footer>
       </ThemeProvider>

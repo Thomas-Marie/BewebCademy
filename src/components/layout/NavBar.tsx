@@ -1,13 +1,16 @@
-import { Button, ButtonBase, Divider, IconButton, Typography } from "@mui/material";
+import { Button, ButtonBase, Divider, IconButton, ListItemIcon, ListItemText, MenuItem, MenuList, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import "./navBar.css";
 import React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Modification from '../forms/Modification';
+
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import BadgeList from "../BadgeList";
 import ListTable from "../ListTable";
+import BadgeList from "../BadgeList";
 
 
 const menuExerciceList = {
@@ -16,105 +19,108 @@ const menuExerciceList = {
 }
 
 const menuProfilList = {
-    "title": "Profil",
-    "list": ["mes badges", "gestion du compte"]
+    "title": ["Mes badges", "Gestion du compte"],
+    "listComponents": [
+        <BadgeList />,
+        <Modification />
+    ]
 }
 
 function TabPanel(props: any) {
-    const { children, value, index } = props;
-
+    const { children, value, index, ...other } = props;
     return (
-        <div hidden={value !== index}>
+        <div role="tabpanel"
+            hidden={value !== index}
+            id={`vertical-tabpanel-${index}`}
+            aria-labelledby={`vertical-tab-${index}`}
+            {...other}
+        >
             {value === index && (
-                <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                <Box sx={{ p: 3 }}
+                >
+                    <Typography textAlign={'center'}>{children}</Typography>
                 </Box>
             )}
         </div>
     );
 }
 
-export default function NavBar(props: any) {
+function tabProps(index: number) {
+    return {
+        id: `vertical-tab-${index}`,
+        'aria-controls': `vertical-tabpanel-${index}`,
 
-    const [value, setValue] = React.useState(0);
-    const handleChange = (event: any, newValue: any) => {
-        setValue(newValue);
     };
+}
 
+export default function NavBar(props: any) {
+  
+    const [value, setValue] = React.useState(0);
+
+    const handleClickProfil = props.handleClickProfil
     const handleClick = props.handleClick
 
-    if (window.location.pathname === "/exercice") {
+    if (window.location.pathname === "/exercices") {
         return (
-            <nav className="leftNavBar">
-                <Box className="boxItems" sx={{ textAlign: 'center' }}>
-                    <h1>{menuExerciceList.title}</h1>
-
-                    <Tabs
-                        orientation="vertical"
-                        value={value}
-                        onChange={handleChange}
-                        textColor="secondary"
-                    >
-
-
-                        {menuExerciceList.list.map((language) => (
-                            <><Divider />
-                                <Tab sx={{ color: '#FFF' }} label={language} iconPosition="start" onClick={event => handleClick(
-                                    <TabPanel value={value} index={0}>
-                                        Badge {language} <ListTable /> 
-                                    </TabPanel>
-                                )}
-                                    icon={<ArrowForwardIosIcon
-                                        sx={{ height: "10px" }} />
-                                    } />
-
-                                </>))}
-                            </Tabs>
-
-                        <Divider />
-
+            <ThemeProvider theme={theme}>
+                <nav className="leftNavBar">
+                    <Box className="boxItems" sx={{ textAlign: 'center', width: '100%' }}>
+                        <h1>{menuExerciceList.title}</h1>
 
                         {menuExerciceList.list.map((language) => (
                             <><Divider />
                                 <Button
                                     name={language}
-                                    href={window.location.href + "/" + language}
+                                    onClick={event => handleClick(
+                                        <TabPanel value={value} index={0}>
+                                            <p className="badgeTitle">Badges {language}</p>
+                                            <ListTable />
+                                        </TabPanel>
+                                    )}
                                     fullWidth={true}
-                                    sx={{ textAlign: 'left', color: '#FFFFFF' }}
+                                    sx={{
+                                        color: '#FFF',
+                                        height: '60px',
+                                        transition: '0.5s',
+                                        '&:hover': {
+                                            pl: '25px',
+                                            color: '#db1144'
+                                        }
+                                    }}
                                 >
-                                    <Box className="languageButton"
-                                        sx={{ width: '80%', textAlign: 'left' }}
-                                    >
+                                    <Box className="languageButton">
                                         <ArrowForwardIosIcon sx={{ height: "10px" }} />
                                         {language}
                                     </Box>
                                 </Button>
-
-
                             </>
                         ))}
                         <Divider />
-                </Box>
-            </nav >
+                    </Box>
+                </nav >
+            </ThemeProvider>
         )
     } else {
         return (
             <nav className="leftNavBar">
                 <Box className="boxItems" sx={{ textAlign: 'center' }}>
-                    <h1>{menuProfilList.title}</h1>
-                    {menuProfilList.list.map((language) => (
-                        <><Divider />
+                    <h1>Profil</h1>
+                    {menuProfilList.listComponents.map((tabs: any, i) => (
+                        <>
+                            <Divider />
                             <Button
-                                name={language}
-                                href={window.location.href + "/" + language}
+                                name={menuProfilList.title[i]}
+                                onClick={event => handleClickProfil(
+                                    <TabPanel value={value} index={0}>
+                                        {tabs}
+                                    </TabPanel>
+                                )}
                                 fullWidth={true}
-                                sx={{ textAlign: 'left', color: '#FFF' }}
+                                sx={{ color: '#FFF', height: '60px', transition: '0.5s', '&:hover': { pl: '25px', color: '#db1144' } }}
                             >
-                                <Box className="languageButton"
-                                    sx={{ width: '80%', textAlign: 'left' }}
-                                >
+                                <Box className="languageButton">
                                     <ArrowForwardIosIcon sx={{ height: "10px" }} />
-                                    {language}
+                                    {menuProfilList.title[i]}
                                 </Box>
                             </Button>
                         </>
@@ -126,3 +132,37 @@ export default function NavBar(props: any) {
     }
 }
 
+const theme = createTheme({
+    typography: {
+        fontSize: 15,
+    },
+    components: {
+        MuiTabs: {
+            styleOverrides: {
+                indicator: {
+                    backgroundColor: 'orange',
+                    height: 3,
+                    color: '#db1144'
+                },
+            },
+        },
+    },
+    palette: {
+        primary: {
+            main: '#1D1D1D',
+        },
+        secondary: {
+            main: '#DB1144',
+        },
+        background: {
+            paper: '#1D1D1D',
+        },
+        text: {
+            primary: '#1D1D1D',
+            secondary: '#DB1144',
+        },
+        action: {
+            active: '#001E3C',
+        }
+    }
+})
