@@ -2,18 +2,40 @@ import * as React from 'react';
 
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
+import { useEffect, useState } from 'react';
+import User from '../../models/user';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { getUser } from "../../services/keycloak.service"
 
 
 
 const theme = createTheme();
 
 export default function SignUp() {
+
+  const [user, setUser] = useState<any>([])
+  const id = user.id
+
+  useEffect(() => {
+    const fetchUser = async (id: string) => {
+      const data = await getUser(id)
+      .then((result: any) => {
+        return result
+      })
+
+      setUser(data)
+    } 
+    fetchUser(id)
+    .catch(console.error)
+  }, [])
+
+ // vérifier si le getUser est fonctionnel + implanter une méthode onclick ou on update l'utilisateur sur le bouton submit du formulaire
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
