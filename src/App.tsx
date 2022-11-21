@@ -10,7 +10,6 @@ import Logout from './pages/Logout';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
 import keycloak from './auth/auth_keycloak';
 import Home from './pages/Home';
-import Accueil from './pages/Accueil';
 
 
 
@@ -22,7 +21,6 @@ function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path='/home' element={<Home />}></Route>
-        <Route path='/accueil' element={<Accueil />}></Route>
         <Route path='/exercices' element={<ExerciceList />}></Route>
         <Route path='/profil' element={<Profil />}></Route>
         <Route path='/html' element={<Exercice />}></Route>
