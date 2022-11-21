@@ -1,9 +1,10 @@
 import Language from './language'
 
 export default interface Badge{
-    "name": String,
-    "language": Language,
-    "image": String,
+    "_id": string,
+    "name": string,
+    "language": Language[],
+    "image": string,
     "acquisition_date": Date,
-    "all_done": Boolean
+    "all_done": boolean
 }
