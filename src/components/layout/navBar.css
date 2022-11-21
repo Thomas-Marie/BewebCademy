@@ -8,15 +8,14 @@
 }
 
 .languageButton {
-    transition: 0.5s;
+    text-align: left;
+    width: 80%;
 }
 
-.languageButton:hover {
-    padding-left: 15px;
-    color: #DB1144;
-    transition: 0.5s;
-}
-
-h1 {
-    color:#DB1144;
+.badgeTitle {
+    color: #db1144;
+    width: 97%;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.5em;
 }
