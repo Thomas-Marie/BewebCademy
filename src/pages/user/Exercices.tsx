@@ -6,10 +6,10 @@ import { getExercices } from "../../services/exercice.service";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import "../../theme/_variables_bewebcademy.scss";
-import ex from "../../models/exercice";
+import ex from "../../models/Exercice";
 import { escape } from "querystring";
 import { Button, Grid, Popover, Typography } from "@mui/material";
-import Exercices from "../../models/exercice";
+import Exercices from "../../models/Exercice";
 
 const Exercice = () => {
   const [exercices, setExercices] = useState<ex[]>([]);
@@ -27,7 +27,8 @@ const Exercice = () => {
     setAnchorEl(null);
   };
 
- 
+  let exo: ex[];
+
   useEffect(() => {
     const fetchExercices = async () => {
       const data = await getExercices().then((result: any) => {return result});

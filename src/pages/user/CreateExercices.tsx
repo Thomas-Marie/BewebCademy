@@ -1,17 +1,17 @@
 import { Box } from "@mui/system";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Editor from "../../components/layout/MonacoEditor";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import "../../theme/_variables_bewebcademy.scss";
-import ex from "../../models/exercice";
-import { Button, Grid, Popover, TextareaAutosize, Typography } from "@mui/material";
+import ex from "../../models/Exercice";
+import { Button, Grid, TextareaAutosize } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 
 import { createExercice } from "../../services/exercice.service"
 import { getBadgeById, getBadges } from "../../services/badge.service"
 import Badge from "../../models/badge";
-import Exercice from "../../models/exercice"
+import Exercice from "../../models/Exercice"
 
 const CreateExercice = () => {
   const [exercices, setExercices] = useState<ex[]>([]);

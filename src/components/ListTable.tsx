@@ -21,7 +21,6 @@ export default function ListTable(props: any): any {
     const fetchBadges = async () => {
       const ResulGetBadges = await getBadges().then((result: any) => { return result })
       setBadges(ResulGetBadges)
-      // console.log(badges[0].language[0])
     }
     fetchBadges().catch(console.error)
   }, [])
