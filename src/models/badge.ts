@@ -1,4 +1,4 @@
-import Language from './language';
+import Language from './language'
 
 export default interface Badge{
     "_id": string,
@@ -6,5 +6,5 @@ export default interface Badge{
     "language": Language[],
     "image": string,
     "acquisition_date": Date,
-    "all_done": Boolean
+    "all_done": boolean
 }

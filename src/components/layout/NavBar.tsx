@@ -7,6 +7,7 @@ import Tab from '@mui/material/Tab';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Modification from '../forms/Modification';
 
+import { useNavigate } from "react-router-dom";
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ListTable from "../ListTable";
@@ -58,25 +59,28 @@ export default function NavBar(props: any) {
     const [value, setValue] = React.useState(0);
 
     const handleClickProfil = props.handleClickProfil
-    const handleClick = props.handleClick
 
-    if (window.location.pathname === "/exercices") {
+    const regex = new RegExp('\/exercices\/[a-z]')
+
+    let navigate = useNavigate();
+
+    const routeChange = (language: any) => {
+        let path = '/exercices/'+language;
+        navigate(path);
+      }
+
+    if (window.location.pathname === "/exercices" || window.location.pathname === "/exercices/" || window.location.pathname.match(regex)) {
         return (
             <ThemeProvider theme={theme}>
                 <nav className="leftNavBar">
                     <Box className="boxItems" sx={{ textAlign: 'center', width: '100%' }}>
-                        <h1>{menuExerciceList.title}</h1>
+                        <h1 style={{ color: '#db1144' }}>{menuExerciceList.title}</h1>
 
                         {menuExerciceList.list.map((language) => (
                             <><Divider />
                                 <Button
                                     name={language}
-                                    onClick={event => handleClick(
-                                        <TabPanel value={value} index={0}>
-                                            <p className="badgeTitle">Badges {language}</p>
-                                            <ListTable />
-                                        </TabPanel>
-                                    )}
+                                    onClick={event => routeChange(language)}
                                     fullWidth={true}
                                     sx={{
                                         color: '#FFF',
