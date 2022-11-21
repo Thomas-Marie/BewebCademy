@@ -2,7 +2,7 @@ import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import Editor from "../../components/layout/MonacoEditor";
 import Statement from "../../components/layout/Statement";
-import { getExercices } from "../../services/exercice.service";
+import { getExerciceByBadgeId, getExercices } from "../../services/exercice.service";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import "../../theme/_variables_bewebcademy.scss";
@@ -27,13 +27,14 @@ const Exercice = () => {
     setAnchorEl(null);
   };
 
- 
+ console.log(window.location.href.substring(window.location.href.lastIndexOf('/') + 1))
   useEffect(() => {
     const fetchExercices = async (id:string) => {
-      const data = await getExercices().then((result: any) => {return result});
+      const data = await getExerciceByBadgeId(id).then((result: any) => {return result});
       setExercices(data);
     };
-    console.log(exercices)
+   
+
     fetchExercices((window.location.href.substring(window.location.href.lastIndexOf('/') + 1))).catch(console.error);
   }, []);
 
