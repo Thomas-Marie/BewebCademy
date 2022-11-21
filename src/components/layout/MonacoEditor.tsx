@@ -35,7 +35,7 @@ export default function EditorMo(props: any) {
       </Box>
       <Box bgcolor={"#1d1d1b"}>
         <Editor
-          height="43vh"
+          height="37.9vh"
           theme="vs-dark"
           path={displayName}
           defaultLanguage={language}

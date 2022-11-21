@@ -1,17 +1,19 @@
 import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Editor from "../../components/layout/MonacoEditor";
-import Statement from "../../components/layout/Statement";
-import { getExercices } from "../../services/exercice.service";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import "../../theme/_variables_bewebcademy.scss";
 import ex from "../../models/exercice";
-import { escape } from "querystring";
-import { Button, Grid, Popover, Typography } from "@mui/material";
-import Exercices from "../../models/exercice";
+import { Button, Grid, Popover, TextareaAutosize, Typography } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 
-const Exercice = () => {
+import { createExercice } from "../../services/exercice.service"
+import { getBadgeById, getBadges } from "../../services/badge.service"
+import Badge from "../../models/badge";
+import Exercice from "../../models/exercice"
+
+const CreateExercice = () => {
   const [exercices, setExercices] = useState<ex[]>([]);
   const [srcDoc, setSrcDoc] = useState("");
   const [html, sethtml] = useState("");
@@ -21,21 +23,21 @@ const Exercice = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [message, setMessage] = useState("");
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
+  const [badgeSelect, setBadgeSelect]= useState<any>([])
+
+  useEffect(()=> {
+    const fetchBadges = async() => {
+      const badges:any = await getBadges().then(result =>{return result})
+      setBadgeSelect(badges)
+      
+    }
+    fetchBadges()
+  },[])
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-
- 
-  useEffect(() => {
-    const fetchExercices = async () => {
-      const data = await getExercices().then((result: any) => {return result});
-      setExercices(data);
-    };
-    console.log(exercices)
-    fetchExercices().catch(console.error);
-  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -53,7 +55,7 @@ const Exercice = () => {
           </html>
         `);
     }, 250);
-
+    
     return () => clearTimeout(timeout);
   }, [html, css, javascript]);
 
@@ -66,29 +68,31 @@ const Exercice = () => {
       .replace(/"/g, "'");
   };
 
-  const valider = (event: React.MouseEvent<HTMLButtonElement>) => {
-    let test = encodeURI(srcDoc);
-    console.log(test);
-    console.log(decodeURI(test));
-    setAnchorEl(event.currentTarget);
 
-    if (replaceCode(srcDoc) === exercices[index]?.result) {
-      if (index === exercices.length - 1) {
-        setMessage("Bravo vous avez fini le badge");
-      } else {
-        setMessage("Bravo vous avez fini l'exercice");
-        setIndex(index + 1);
-      }
-    } else {
-        setMessage("Dommage vous n'avez pas fini l'exercice");
-    }
-    setTimeout(() => {
-        handleClose();
-        }
-    , 2000);
+  const onSubmit = async(data: any) => {
+    let result = replaceCode(srcDoc);
+    data.result = result;
+    console.log(data);
+    const badge =await getBadgeById(data.badges)
+    data.badges= badge
+    await createExercice(data)
+    sethtml("")
+    setcss("")
+    setjavascript("")
+    reset()
+  };
+
+  const style = {
+    width: "14vw",
+    height: "4vh",
+    border: "2px solid #1d1d1b",
+    borderRadius: "5px",
+    outline: "none",
+    fontSize: "1rem",
   };
 
   return (
+    <form onSubmit={handleSubmit(onSubmit)} >
     <Grid container spacing={0}>
       <Grid item xs={12}>
         <Header />
@@ -96,36 +100,51 @@ const Exercice = () => {
       <Grid item xs={2}>
       <Grid container spacing={2} m={"0.1vh"}>
             <Grid item xs={12}>
-                <p>Exercice : {exercices[index] === undefined ? '' : exercices[index].name}</p>
+              <label>Nom de l'exercice</label>
             </Grid>
             <Grid item xs={12}>
-                <p>Badge : {exercices[index] === undefined ? '' : exercices[index].badges.name}</p>
+              <input {...register("name", { required: true })} style={style}/>
             </Grid>
             <Grid item xs={12}>
-                <p>Exercice {exercices[index] === undefined ? '' : index + 1} / {exercices.length}</p>
+              {errors.name && <span style={{color: 'red'}}>Nom requis</span>}
+            </Grid>  
+            <Grid item xs={12}>
+              <label>Badge</label>              
             </Grid>
             <Grid item xs={12}>
-                <p>Statement : {exercices[index] === undefined ? '' : exercices[index].statement}</p>
-            </Grid>
-            <Grid item xs={12}> 
-                <Button aria-describedby={id} variant="contained" onClick={valider} sx={{bgcolor: '#db1144', '&:hover': {bgcolor: '#1d1d1b'}, alignSelf: "end"}}>  Valider </Button> 
-                <Popover 
-                    id={id}
-                    open={open}
-                    anchorEl={anchorEl}
-                    onClose={handleClose}
-                    anchorOrigin={{
-                        vertical: 'center',
-                        horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                        vertical: 'center',
-                        horizontal: 'left',
-                    }}
-                    >
-                    <Typography sx={{ p: 2, backgroundColor: '#1d1d1b', color:"#ffffff"}}>{message}</Typography>
-                </Popover>
+              <select {...register("badges", { required: true })} style={style}>
+                <option value=""></option>
+                {badgeSelect.map((badge:Badge,index:number)=> (
+                
+                <option value={badge._id} key={index}>{badge.name}</option>
+                ))}
+                
 
+              </select>
+            </Grid>
+            <Grid item xs={12}>
+              {errors.badges && <span style={{color: 'red'}}>Badge requis</span>}
+            </Grid>
+            <Grid item xs={12}>
+                <label>Énoncé de l'exercice</label>
+            </Grid>
+            <Grid item xs={12}>
+              <TextareaAutosize {...register("statement", { required: true })} style={style}/>
+            </Grid>
+            <Grid item xs={12}>
+              {errors.statement && <span style={{color: 'red'}}>Énoncé requis</span>}
+            </Grid>
+            <Grid item xs={12}>
+              <label>Lien d'une documentation</label>
+            </Grid>
+            <Grid item xs={12}>
+              <input {...register("help", { required: true })} style={style}/>
+            </Grid>
+            <Grid item xs={12}>
+              {errors.help && <span style={{color: 'red'}}>Lien requis</span>}
+            </Grid> 
+            <Grid item xs={12}> 
+              <Button type="submit" variant="contained" sx={{bgcolor: '#db1144', '&:hover': {bgcolor: '#1d1d1b'}, alignSelf: "end"}}>  Valider </Button>
             </Grid>        
         </Grid>                
       </Grid>
@@ -174,7 +193,8 @@ const Exercice = () => {
         <Footer />
       </Grid>
     </Grid>
+    </form>
   );
 };
 
-export default Exercice;
+export default CreateExercice;

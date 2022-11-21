@@ -10,13 +10,12 @@ import Paper from '@mui/material/Paper';
 import { useState, useEffect } from 'react';
 import { getBadges } from '../services/badge.service';
 import Badge from '../models/badge';
+import Languages from '../models/language';
+import { Link } from 'react-router-dom';
 
+export default function ListTable(props: any): any {
 
-export default function ListTable() {
-
-
-
-  const [badges, setBadges] = useState<any>([])
+  const [badges, setBadges] = useState<Badge[]>([])
 
   useEffect(() => {
     const fetchBadges = async () => {
@@ -28,73 +27,103 @@ export default function ListTable() {
   }, [])
 
 
-  let htmlBadges = Array()
-  let cssBadges = Array()
-  let jsBadges = Array()
-  let phpBadges = Array()
-  let sqlBadges = Array()
+  let htmlBadges: Badge[] = Array()
+  let cssBadges: Badge[] = Array()
+  let jsBadges: Badge[] = Array()
+  let phpBadges: Badge[] = Array()
+  let sqlBadges: Badge[] = Array()
 
-  badges.map((badge: Badge, i: number) => {
-    switch (badge.language[0].name) {
-      case 'php':
-        phpBadges.push(badge)
-        break
-      case 'javascript':
-        jsBadges.push(badge)
-        break
-      case 'html':
-        htmlBadges.push(badge)
-        break
-      case 'css':
-        cssBadges.push(badge)
-        break
-      case 'sql':
-        sqlBadges.push(badge)
-        break
-      default:
-        console.log("Il ne se passe rien")
-    }
+  badges.map((badge: Badge) => {
+    badge.language.map((language: Languages) => {
+      switch (language.name) {
+        case 'php':
+          phpBadges.push(badge)
+          break
+        case 'JavaScript':
+          jsBadges.push(badge)
+          break
+        case 'HTML':
+          htmlBadges.push(badge)
+          break
+        case 'CSS':
+          cssBadges.push(badge)
+          break
+        case 'SQL':
+          sqlBadges.push(badge)
+          break
+        default:
+          console.log("Il ne se passe rien (enfin si peut etre...)")
+      }
+    })
   })
 
-  return (
-    <TableContainer sx={{ width: '100%', margin: 'auto' }} component={Paper}>
-      {/* <Typography variant="h3">Badges({badges.language.name})</Typography> */}
-      <Table sx={{
-        minWidth: 650,
-        alignItems: 'center',
-        border: 1
-      }} aria-label="simple table">
+  let languageToDisplay = props.language
 
-        <TableHead >
-          <TableRow>
-            <TableCell sx={{ color: '#DB1144' }}>Titre Badge</TableCell>
-            <TableCell sx={{ color: '#DB1144' }} align="center">Language</TableCell>
-            <TableCell sx={{ color: '#DB1144' }} align="center">Obtenu</TableCell>
-            <TableCell sx={{ color: '#DB1144' }} align="center">Date</TableCell>
-          </TableRow>
-        </TableHead>
+  function tableBadges(badgeName: Badge[]) {
+    return (
+      <TableContainer sx={{ width: '100%', margin: 'auto' }} component={Paper}>
+        {/* <Typography variant="h3">Badges({badges.language.name})</Typography> */}
+        <Table sx={{
+          minWidth: 650,
+          alignItems: 'center',
+          border: 1
+        }} aria-label="simple table">
 
-        <TableBody>
-
-          {badges.map((elementbadges: any, index: any) => (
-            <TableRow
-              key={elementbadges.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell component="th" scope="row" sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                <img src={elementbadges.image} />
-                <span>{elementbadges.name}</span>
-              </TableCell>
-              <TableCell align="center">{elementbadges.language.name}</TableCell>
-              <TableCell align="center">{elementbadges.all_done}</TableCell>
-              <TableCell align="center">{elementbadges.acquisition_date}</TableCell>
-
+          <TableHead >
+            <TableRow>
+              <TableCell sx={{ color: '#DB1144' }}>Titre Badge</TableCell>
+              <TableCell sx={{ color: '#DB1144' }} align="center">Languages</TableCell>
+              <TableCell sx={{ color: '#DB1144' }} align="center">Obtenu</TableCell>
+              <TableCell sx={{ color: '#DB1144' }} align="center">Date</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+          </TableHead>
+
+          <TableBody>
+
+            {badgeName.map((elementBadges: any, index: any) => (
+              <TableRow
+                key={elementBadges.name}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableCell component="th" scope="row" sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+                  <img src={elementBadges.image} />
+                  <span>{elementBadges.name}</span>
+                  <Link to={`/exercices/${elementBadges._id}`} style={{ marginLeft: "25px" }}> Aller aux exercices</Link>
+                </TableCell>
+                <TableCell align="center" sx={{ p:0 }}>
+                  <ul style={{ padding: 0, height: '50px'}}>
+                    {elementBadges.language.map((language: Languages) => (
+                      <li style={{ listStyleType: 'none' }}>{language.name}</li>
+                    ))}
+                  </ul>
+                </TableCell>
+
+                <TableCell align="center">{elementBadges.all_done ? "oui" : "-"}</TableCell>
+                <TableCell align="center">{elementBadges.acquisition_date ? elementBadges.acquisition_date.split('T', 1) : "-"}</TableCell>
+
+              </TableRow>
+
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  }
+
+  if (languageToDisplay === "HTML") {
+    return tableBadges(htmlBadges)
+  } else if (languageToDisplay === "CSS") {
+    return tableBadges(cssBadges)
+  } else if (languageToDisplay === "JavaScript") {
+    return tableBadges(jsBadges)
+  } else if (languageToDisplay === "PHP") {
+    return tableBadges(phpBadges)
+  } else if (languageToDisplay === "SQL") {
+    return tableBadges(sqlBadges)
+  } else {
+    return tableBadges(htmlBadges)
+  }
 }
+
 
 
 

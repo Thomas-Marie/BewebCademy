@@ -129,7 +129,7 @@ export default function Header() {
   } else if (role == "admin") {
     return (
       <ThemeProvider theme={theme}>
-        <AppBar className="appBar">
+        <AppBar className="appBar" position="sticky">
           <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
 
             {/* insert logo with condition window size */}
@@ -152,13 +152,14 @@ export default function Header() {
             </IconButton>
             <ThemeProvider theme={theme2}>
               {/* display buttons with conditions window size */}
-              <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-                {adminHeaderItems.map((item, i) => (
-                  <Button className="buttonHeader" name={item} href={"/" + item} key={i}>
-                    {item}
-                  </Button>
-
-                ))}
+              <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex' }, justifyContent: 'flex-end', width: '30vw' }}>
+                <Box component='div' sx={{ width: '100%', display: 'flex', justifyContent: 'space-around'}}>
+                  {adminHeaderItems.map((item, i) => (
+                    <Button className="buttonHeader" name={item} href={"/" + item} key={i}>
+                      {item}
+                    </Button>
+                  ))}
+                </Box>
                 <ButtonBase href="/deconnexion">
                   <IconButton name="deconnexion">
                     <LogoutIcon color="secondary" sx={{ mb: 0.4 }}></LogoutIcon>
