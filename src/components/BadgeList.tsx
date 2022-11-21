@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { getBadges } from '../services/badge.service'
 import { Typography } from '@mui/material';
 
+
 export default function BadgeList() {
 
 const [badges, setBadges] = useState<any>([])

@@ -2,6 +2,9 @@ import { Box, Tabs, Tab } from "@mui/material";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import React from "react";
+import Modification from '../components/forms/Modification';
+import {useEffect, useState} from 'react'
+import {getSessions} from '../services/session.service'
 
 function LinkTab(props: any) {
   return (
@@ -16,7 +19,19 @@ function LinkTab(props: any) {
 }
 
 const Home: React.FC = () => {
+  const [session, setSession] = useState([])
 
+  useEffect(() => {
+    const fetchSession = async() => {
+      const data = await getSessions()
+      .then((result: any) => {
+        return result
+      })
+      setSession(data)
+    }
+    fetchSession()
+  })
+  console.log(session);
   // console.log(props.location);
   // console.log(props.match);
   // console.log(props.history);
@@ -32,7 +47,7 @@ const Home: React.FC = () => {
       <Box sx={{ width: '100%' }}>
         
       </Box>
-      <Footer></Footer>
+      
     </div>
   )
 }
