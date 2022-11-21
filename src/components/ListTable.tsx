@@ -34,9 +34,7 @@ export default function ListTable() {
         <TableHead >
           <TableRow>
             <TableCell sx={{color: '#DB1144'}}>Titre Badge</TableCell>
-            <TableCell sx={{color: '#DB1144'}}align="center">Language</TableCell>
-            <TableCell sx={{color: '#DB1144'}}align="center">Obtenu</TableCell>
-            <TableCell sx={{color: '#DB1144'}}align="center">Date</TableCell>
+            <TableCell sx={{color: '#DB1144'}}align="center">Obtenu le </TableCell>
           </TableRow>
         </TableHead>
            
@@ -50,8 +48,6 @@ export default function ListTable() {
                 <img src={elementbadges.image}  width="30px"/>
                 {elementbadges.name}
               </TableCell>
-              <TableCell align="center">{elementbadges.language.name}</TableCell>
-              <TableCell align="center">{elementbadges.all_done}</TableCell>
               <TableCell align="center">{elementbadges.acquisition_date}</TableCell>
 
             </TableRow>
