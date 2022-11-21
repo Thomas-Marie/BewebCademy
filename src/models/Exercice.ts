@@ -1,4 +1,4 @@
-import Badge from "./Badge";
+import Badge from "./badge";
 
 export default interface Exercice{
     "_id": string,

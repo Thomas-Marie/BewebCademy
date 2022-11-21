@@ -1,5 +1,5 @@
 import axios from "axios";
-import User from "../models/User";
+import User from "../models/user";
 import token from "../auth/keycloak_token";
 
 export const getUsers = async (): Promise<User[]> => {

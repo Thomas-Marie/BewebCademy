@@ -1,4 +1,4 @@
-import Language from './Language'
+import Language from './language'
 
 export default interface Badge{
     "name": String,

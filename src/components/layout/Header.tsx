@@ -93,9 +93,9 @@ export default function Header() {
                     </Button>
                   ))}
                 </Box>
-                <ButtonBase href="/deconnexion">
+                <ButtonBase href="/deconnexion" onClick={() => keycloak.logout()}>
                   <IconButton name="deconnexion">
-                    <LogoutIcon color="secondary" sx={{ mb: 0.4 }}  onClick={() => keycloak.logout()} ></LogoutIcon>
+                    <LogoutIcon color="secondary" sx={{ mb: 0.4 }} ></LogoutIcon>
                   </IconButton>
                 </ButtonBase>
               </Box>

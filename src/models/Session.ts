@@ -1,6 +1,6 @@
-import User from "./User"
-import Badge from "./Badge"
-import Exercice from "./Exercice"
+import User from "./user"
+import Badge from "./badge"
+import Exercice from "./exercice"
 
 export default interface Session {
     "_id": string
