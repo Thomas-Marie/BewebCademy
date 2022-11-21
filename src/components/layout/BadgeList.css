@@ -5,3 +5,7 @@
     width: 100px;
     height: 100px;
 }
+
+.widthImg {
+    max-width: 100px;
+}

@@ -1,6 +1,6 @@
 import axios from "axios";
-import User from "../models/User";
-import Session from "../models/Session";
+import User from "../models/user";
+import Session from "../models/session";
 
 const session = axios.create({
     baseURL: "http://localhost:6000/"

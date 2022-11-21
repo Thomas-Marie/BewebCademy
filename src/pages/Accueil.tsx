@@ -4,7 +4,7 @@ import Header from "../components/layout/Header";
 import React, { useEffect, useState } from "react";
 import { useKeycloak } from "@react-keycloak/web";
 import { createSession, getSessionByUserId, getSessions } from "../services/session.service";
-import User from "../models/User";
+import User from "../models/user";
 
 const Accueil = () => {
     
@@ -43,16 +43,16 @@ const Accueil = () => {
 
         localStorage.setItem("user", JSON.stringify(user))
         
-        getSessionByUserId(user.id)
-        .then((session)=> {
-          console.log(session);
+        // getSessionByUserId(user.id)
+        // .then((session)=> {
+        //   console.log(session);
           
-          // if (session !== null){
-          //   console.log("OH RENTRES");
+        //   // if (session !== null){
+        //   //   console.log("OH RENTRES");
             
-          //     createSession(user);
-          //   }
-        })
+        //   //     createSession(user);
+        //   //   }
+        // })
         
     }
 
