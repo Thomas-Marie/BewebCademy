@@ -1,5 +1,5 @@
 import axios from "axios";
-import Exercice from "../models/exercice"
+import Exercice from "../models/Exercice"
 
 const exercice = axios.create({
     baseURL: "http://localhost:4000"

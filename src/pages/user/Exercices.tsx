@@ -6,7 +6,7 @@ import { getExercices } from "../../services/exercice.service";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import "../../theme/_variables_bewebcademy.scss";
-import ex from "../../models/exercice";
+import ex from "../../models/Exercice";
 import { escape } from "querystring";
 import { Button, Grid, Popover, Typography } from "@mui/material";
 
@@ -26,96 +26,7 @@ const Exercice = () => {
     setAnchorEl(null);
   };
 
-  //get exo by badge id
-  const exo: ex[] = [
-    {
-      badges: {
-        name: "badge1",
-        language: [
-          {
-            name: "html",
-            monaco: "html",
-          },
-          {
-            name: "css",
-            monaco: "css",
-          },
-        ],
-        image:
-          "https://www.beweb.fr/wp-content/uploads/2019/03/logo-beweb-1.png",
-        acquisition_date: new Date(),
-        all_done: false,
-      },
-      name: "Exercice 1",
-      done: false,
-      done_date: new Date(),
-      statement: "Creer une page html avec comme titre <Hello World>",
-      result:
-        "<html><body><h1>HelloWorld</h1></body><style></style><script></script></html>",
-      help: "https://www.w3schools.com/html/",
-      saved: null,
-    },
-    {
-      badges: {
-        name: "badge1",
-        language: [
-          {
-            name: "html",
-            monaco: "html",
-          },
-          {
-            name: "css",
-            monaco: "css",
-          },
-        ],
-        image:
-          "https://www.beweb.fr/wp-content/uploads/2019/03/logo-beweb-1.png",
-        acquisition_date: new Date(),
-        all_done: false,
-      },
-      name: "Exercice 1",
-      done: false,
-      done_date: new Date(),
-      statement:
-        "Creer une page html avec comme titre <Hello World> et mettre un style de fond rouge sur le titre",
-      result:
-        "<html><body><h1>HelloWorld</h1></body><style>h1{background-color:red}</style><script></script></html>",
-      help: "https://www.w3schools.com/css/default.asp",
-      saved: null,
-    },
-    {
-      badges: {
-        name: "badge1",
-        language: [
-          {
-            name: "html",
-            monaco: "html",
-          },
-          {
-            name: "css",
-            monaco: "css",
-          },
-          {
-            name: "javascript",
-            monaco: "javascript",
-          },
-        ],
-        image:
-          "https://www.beweb.fr/wp-content/uploads/2019/03/logo-beweb-1.png",
-        acquisition_date: new Date(),
-        all_done: false,
-      },
-      name: "Exercice 1",
-      done: false,
-      done_date: new Date(),
-      statement:
-        "Creer une page html avec comme titre <Hello World> et mettre un style de fond rouge sur le titre et faire console log de <Hello World>",
-      result:
-        "<html><body><h1>HelloWorld</h1></body><style>h1{background-color:red}</style><script>console.log('HelloWorld')</script></html>",
-      help: "https://www.w3schools.com/jsref/met_console_log.asp",
-      saved: null,
-    },
-  ];
+  let exo: ex[];
 
   useEffect(() => {
     const fetchExercices = async () => {
