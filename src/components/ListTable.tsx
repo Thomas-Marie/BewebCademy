@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 // import { Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { getBadges } from '../services/badge.service';
-import Badge from '../models/Badge';
+import Badge from '../models/badge';
 
 
 export default function ListTable() {
@@ -23,7 +23,6 @@ export default function ListTable() {
       const ResulGetBadges = await getBadges().then((result: any) => { return result })
       setBadges(ResulGetBadges)
       // console.log(badges[0].language[0])
-
     }
     fetchBadges().catch(console.error)
   }, [])
