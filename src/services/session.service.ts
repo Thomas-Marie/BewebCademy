@@ -3,12 +3,12 @@ import User from "../models/User";
 import Session from "../models/Session";
 
 const session = axios.create({
-    baseURL: "http://localhost:6000/"
+    baseURL: "http://localhost:2020/"
   }) 
   
   export const getSessionByUserId = async (idUser: string) => {
     try {
-      const data = await session.get("/" + idUser)
+      const data = await session.get("/user/" + idUser)
       
       return data.data
     }
@@ -31,13 +31,12 @@ const session = axios.create({
   }
   };
   
-  export const createSession = async (formData: User) => {
+  export const createSession = async (user: User) => {
     const newSession = await session.post("/", {
         badges: [],
         exercices: [],
-        user: formData
+        user
     })
-    console.log("up");
     console.log(newSession.data);
     
     return newSession.data

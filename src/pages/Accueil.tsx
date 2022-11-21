@@ -14,47 +14,35 @@ const Accueil = () => {
       console.log(keycloak.tokenParsed);
     }
 
-    const [session, setSession] = useState([])
-
-    useEffect(() => {
-      const fetchSession = async() => {
-        const data = await getSessions()
-        .then((result: any) => {
-          return result
-        })
-        setSession(data)
+    const checkSession = async () => {
+      let user : User = {
+        id: keycloak.tokenParsed?.sub || "",
+        username: keycloak.tokenParsed?.preferred_username || "",
+        firstName: keycloak.tokenParsed?.family_name || "",
+        lastName: keycloak.tokenParsed?.given_name || "",
+        email: keycloak.tokenParsed?.email || ""
       }
-      fetchSession()
-    })
-    console.log(session);
-    
-    
-    if (keycloak.authenticated ) {
 
-        console.log("createSession");
+      localStorage.setItem("user", JSON.stringify(user))
 
-        let user : User = {
-            id: keycloak.tokenParsed?.sub || "",
-            username: keycloak.tokenParsed?.preferred_username || "",
-            firstName: keycloak.tokenParsed?.family_name || "",
-            lastName: keycloak.tokenParsed?.given_name || "",
-            email: keycloak.tokenParsed?.email || ""
-        }
-
-        localStorage.setItem("user", JSON.stringify(user))
-        
-        getSessionByUserId(user.id)
-        .then((session)=> {
-          console.log(session);
-          
-          // if (session !== null){
-          //   console.log("OH RENTRES");
-            
-          //     createSession(user);
-          //   }
-        })
-        
+      const session = await getSessionByUserId(user.id);
+      if(session){
+        console.log("Session existante");
+        localStorage.setItem("session", JSON.stringify(session));
+      }else{
+        console.log("Session non existante");
+        const newSession = await createSession(user);
+        localStorage.setItem("session", JSON.stringify(newSession));
+        console.log(newSession);
+      }
     }
+    
+    useEffect(() => {
+      if (initialized) {
+        checkSession();
+      }
+    }, [initialized]);
+
 
   return (
     <div>
