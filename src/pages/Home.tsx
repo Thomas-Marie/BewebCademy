@@ -45,7 +45,7 @@ const Home: React.FC = () => {
       <Header></Header>
       <h1>Welcome</h1>
       <Box sx={{ width: '100%' }}>
-        
+      <Footer></Footer>
       </Box>
       
     </div>

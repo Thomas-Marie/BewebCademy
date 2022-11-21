@@ -26,7 +26,7 @@ export const getBadges = async () => {
 
 export const createBadge = async (formData: Badge) => {
   try {
-    await badge.post("/", formData);
+    await badge.post("/", {formData});
   } catch (error: any) {
     console.log(error.message);
   }
@@ -34,7 +34,7 @@ export const createBadge = async (formData: Badge) => {
 
 export const updateBadge = async (formData: Badge, id: string) => {
   try {
-    await badge.put(`/${id}`, formData);
+    await badge.put(`/${id}`, {formData});
   } catch (error: any) {
     console.log(error.message);
   }

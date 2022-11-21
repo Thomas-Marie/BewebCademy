@@ -33,7 +33,7 @@ export const updateLanguage = async (id: string, formData: Language) => {
 
 export const createLanguage = async(formData : Language) => {
     try{
-        await language.post('/', formData)
+        await language.post('/', {formData})
     }catch(error: any){
         console.log(error.message)
     }
