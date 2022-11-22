@@ -23,7 +23,6 @@ const Exercice = () => {
     setAnchorEl(null);
   };
 
-  console.log(window.location.href.substring(window.location.href.lastIndexOf('/') + 1))
   let exo: ExerciceInterface[];
 
   useEffect(() => {

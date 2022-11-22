@@ -17,9 +17,8 @@ export default function ListTable(props: any): any {
 
   useEffect(() => {
     const fetchBadges = async () => {
-      const resulGetBadges = await getBadges().then((result: any) => { return result })
-      setBadges(resulGetBadges)
-      // console.log(badges[0].language[0])
+      const ResulGetBadges = await getBadges().then((result: any) => { return result })
+      setBadges(ResulGetBadges)
     }
     fetchBadges().catch(console.error)
   }, [])

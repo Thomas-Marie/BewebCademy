@@ -2,8 +2,8 @@ import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import './app.css';
 
-import Exercice from "./pages/user/Exercices";
 import ExerciceList from "./pages/ExerciceList";
+import Exercice from './pages/user/Exercices';
 import Profil from "./pages/Profil";
 import Logout from './pages/Logout';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
@@ -11,6 +11,7 @@ import keycloak from './auth/auth_keycloak';
 import Accueil from './pages/Accueil';
 import DashboardAdmin from './pages/DashboardAdmin';
 import CreateExercice from './pages/user/CreateExercices';
+import UsersList from './pages/UserList'
 
 
 const App = () => {

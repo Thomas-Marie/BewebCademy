@@ -9,7 +9,7 @@ import { Divider, List, ListItem, ListItemButton, ListItemText, IconButton, Typo
 import { useKeycloak } from "@react-keycloak/web";
 
 let role = "user"
-const userHeaderItems = ['home', 'exercices', 'profil'];
+const userHeaderItems = ['exercices', 'profil'];
 const adminHeaderItems = ['utilisateurs', 'badges', 'archives']
 // const url = "http://localhost:3000/"
 
