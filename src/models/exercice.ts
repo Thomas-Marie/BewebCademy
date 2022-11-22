@@ -1,6 +1,6 @@
 import Badge from "./badge";
 
-export default interface ExerciceInterface {
+export default interface Exercice {
     "_id": string,
     "badges": Badge,
     "name": string,

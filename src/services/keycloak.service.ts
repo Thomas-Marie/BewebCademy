@@ -71,7 +71,9 @@ export const getUser = async (id: string): Promise<User> => {
   return user;
 };
 
-const updateUser = async (id: string, user: User) => {
+export const updateUser = async (id: string, user: User) => {
+  console.log(user);
+  
   try {
     const access_token = await token();
     try {

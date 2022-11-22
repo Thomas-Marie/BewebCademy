@@ -3,30 +3,38 @@ import Box from '@mui/material/Box';
 import './layout/BadgeList.css'
 import Grid from '@mui/material/Unstable_Grid2';
 import { useEffect, useState } from 'react';
-import { getBadges } from '../services/badge.service'
 import { Typography } from '@mui/material';
+import User from '../models/user';
+import { getSessionByUserId } from '../services/session.service';
 
 
-const BadgeList = () => {
-  const [badges, setBadges] = useState<any>([])
+export default function BadgeListUser() {
 
+const [userBadges, setUserBadges] = useState<any>([])
+
+const newUser: User = JSON.parse(localStorage.getItem("user") || "")
+  
   useEffect(() => {
-    const fetchBadges = async () => {
-      const data = await getBadges()
-        .then((result: any) => {
-          return result
-        })
-      setBadges(data)
-    }
-    fetchBadges()
-      .catch(console.error)
+    getSessionByUserId(newUser.id)
+    .then((result) => {
+      if(result == undefined){
+        setUserBadges([])
+      } else {
+        console.log(result);
+      
+        setUserBadges(result.badges)
+      }
+      
+    })
+    .catch((error) => console.log(error)
+    )
   }, [])
 
   return (
     <Box>
-      <Typography variant="h3">Badges({badges.length}) </Typography>
+      <Typography variant="h3">Badges({userBadges.length}) </Typography>
       <Grid container columns={{ xs: 2, sm: 6, md: 8 }}>
-        {badges.map((badge: any, index: any) => (
+        {userBadges.map((badge: any, index: any) => (
           <Grid xs={2} sm={2} md={2} key={index}>
                 <Box>
                   <Box className='flex-center'>
@@ -45,5 +53,3 @@ const BadgeList = () => {
     </Box>
   );
 }
-
-export default BadgeList;

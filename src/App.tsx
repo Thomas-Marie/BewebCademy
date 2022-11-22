@@ -1,15 +1,16 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import './app.css';
+
+import Exercice from "./pages/user/Exercices";
 import ExerciceList from "./pages/ExerciceList";
 import Profil from "./pages/Profil";
 import Logout from './pages/Logout';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
 import keycloak from './auth/auth_keycloak';
 import Accueil from './pages/Accueil';
-import CreateExercice from './pages/user/CreateExercices';
-import Exercice from './pages/user/Exercices';
 import DashboardAdmin from './pages/DashboardAdmin';
+import CreateExercice from './pages/user/CreateExercices';
 
 
 const App = () => {

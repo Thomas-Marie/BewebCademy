@@ -3,12 +3,12 @@ import User from "../models/user";
 import Session from "../models/session";
 
 const session = axios.create({
-  baseURL: "http://localhost:6000"
+  baseURL: "http://localhost:2020"
 })
 
 export const getSessionByUserId = async (id: string) => {
   try {
-    const data = await session.get(`/${id}`)
+    const data = await session.get(`/user/${id}`)
 
     return data.data
   }
@@ -16,6 +16,7 @@ export const getSessionByUserId = async (id: string) => {
     console.log(error.message);
   }
 }
+
 
 export const getSessions = async () => {
   try {

@@ -6,5 +6,5 @@ export default interface Badge {
     "language": Language[],
     "image": string,
     "acquisition_date": Date,
-    "all_done": boolean
+    "all_done": Boolean
 }
