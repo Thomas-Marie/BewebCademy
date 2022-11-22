@@ -2,7 +2,7 @@ import BadgeList from "../components/BadgeList";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import NavBar from "../components/layout/NavBar";
-
+import Modification from "../components/forms/Modification";
 import { useState } from 'react';
 import { Box } from "@mui/system";
 
@@ -22,6 +22,7 @@ const Profil: React.FC = () => {
 
                 <Box height='100vh' width='80vw' sx={{ p: 2 }}>
                     <h2>{myComponent}</h2>
+            <Modification></Modification>
 
                 </Box>
             </Box>
