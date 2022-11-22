@@ -2,6 +2,8 @@ import BadgeList from "../components/BadgeList";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import NavBar from "../components/layout/NavBar";
+import Modification from '../components/forms/Modification';
+
 
 const Profil: React.FC = () => {
 
@@ -16,6 +18,8 @@ const Profil: React.FC = () => {
             <br/>
             <br/>
             <BadgeList/>
+            
+            <Modification />
             <Footer />
         </div>
     )
