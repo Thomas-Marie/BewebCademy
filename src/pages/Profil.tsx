@@ -1,33 +1,60 @@
+import BadgeList from "../components/BadgeList";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import NavBar from "../components/layout/NavBar";
+import BadgeListUser from "../components/BadgeListUser";
+import Modification from "../components/forms/Modification"
+
 import { useState } from 'react';
 import { Box } from "@mui/system";
-import BadgeListUser from "../components/BadgeListUser";
 
-const Profil = () => {
+const Profil: React.FC = () => {
 
-    const [myComponent, setMycomponent] = useState('');
-    const handleClickProfil: any = (component: any) => {
-        setMycomponent(component);
-    };
+    function ProfilComponents(onglet: any) {
+        return (
+            <div className="profil">
+                <Header />
+                <Box sx={{ display: 'flex' }}>
+                    <NavBar />
+                    <Box sx={{ width: '20vw', float: 'left' }}></Box>
 
-    return (
-        <div className="profil">
-            <Header />
-            <Box sx={{ display: 'flex' }}>
-                <NavBar handleClickProfil={handleClickProfil} />
-                <Box sx={{ width: '20vw', float: 'left' }}></Box>
-
-                <Box height='100vh' width='80vw' sx={{ p: 2 }}>
-                    <h2>{myComponent}</h2>
-            <BadgeListUser></BadgeListUser>
-
+                    <Box height='100vh' width='80vw' sx={{ p: 2 }}>
+                        {onglet}
+                    </Box>
                 </Box>
-            </Box>
-            <Footer />
-        </div>
-    )
+                <Footer />
+            </div>
+        )
+    }
+
+    switch (window.location.pathname) {
+        case "/profil/gestion":
+            return (
+                ProfilComponents(
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                        <h2 style={{ textAlign: 'center', color: '#DB1144'}}>Gestion du compte</h2>
+                        <Modification />
+                    </div>)
+            )
+        case "/profil/badges":
+            return (
+                ProfilComponents(
+                    <div>
+                        <h2 style={{ textAlign: 'center', color: '#DB1144'}}>Badges obtenus</h2>
+                        <BadgeListUser />
+                    </div>
+                )
+            )
+        default:
+            return (
+                ProfilComponents(
+                    <div>
+                        <h2 style={{ textAlign: 'center', color: '#DB1144'}}>Gestion du compte</h2>
+                        <Modification />
+                    </div>)
+            )
+    }
+
 }
 
 export default Profil;

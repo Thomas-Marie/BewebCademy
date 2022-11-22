@@ -9,9 +9,9 @@ export const getBeforeDrafts = async () => {
   try {
     const data = await beforeDraft.get("/");
 
-    await data.data.map((data: BeforeDraft) => {
-      data._id = data._id.toString()
-    })
+    await data.data.map((data: BeforeDraft) =>{
+        data._id = data._id.toString()
+      } )
     return data.data;
   } catch (error: any) {
     console.log(error.message);
@@ -45,7 +45,7 @@ export const deleteBeforeDraftById = async (id: string) => {
   }
 };
 
-export const UpdateBeforeDraft = async (id: string, formData: BeforeDraft) => {
+export const updateBeforeDraft = async (id: string, formData: BeforeDraft) => {
   try {
     await beforeDraft.put(`/${id}`, { formData });
   } catch (error: any) {

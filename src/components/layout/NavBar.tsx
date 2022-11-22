@@ -1,12 +1,16 @@
-import { Button, Divider, Typography } from "@mui/material";
+import { Button, ButtonBase, Divider, IconButton, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import "./navBar.css";
 import React from 'react';
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider, createTheme, makeStyles } from "@mui/material/styles";
 import Modification from '../forms/Modification';
+import { useKeycloak } from "@react-keycloak/web";
+
 import { useNavigate } from "react-router-dom";
+
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import BadgeList from "../BadgeList";
+import ClassNameGenerator from "@mui/utils/ClassNameGenerator";
 
 
 const menuExerciceList = {
@@ -15,14 +19,14 @@ const menuExerciceList = {
 }
 
 const menuProfilList = {
-    "title": ["Mes badges", "Gestion du compte"],
+    "title": ["Gestion-du-compte", "Mes-badges"],
     "listComponents": [
-        <BadgeList />,
-        <Modification />
+        <Modification />,
+        <BadgeList />
     ]
 }
 
-const TabPanel = (props: any) => {
+function TabPanel(props: any) {
     const { children, value, index, ...other } = props;
     return (
         <div role="tabpanel"
@@ -41,7 +45,7 @@ const TabPanel = (props: any) => {
     );
 }
 
-const tabProps = (index: number) => {
+function tabProps(index: number) {
     return {
         id: `vertical-tab-${index}`,
         'aria-controls': `vertical-tabpanel-${index}`,
@@ -49,16 +53,21 @@ const tabProps = (index: number) => {
     };
 }
 
-const NavBar = (props: any) => {
-    const [value, setValue] = React.useState(0);
-    const handleClickProfil = props.handleClickProfil
+export default function NavBar() {
+
+    const { keycloak, initialized } = useKeycloak();
     const regex = new RegExp('\/exercices\/[a-z]')
     let navigate = useNavigate();
-
     const routeChange = (language: any) => {
         let path = '/exercices/' + language;
         navigate(path);
     }
+    const routeChangeProfil = (onglet: any) => {
+        let path = '/profil/' + onglet;
+        navigate(path);
+    }
+
+    let role = localStorage.getItem("role")
 
     if (window.location.pathname === "/exercices" || window.location.pathname === "/exercices/" || window.location.pathname.match(regex)) {
         return (
@@ -95,34 +104,52 @@ const NavBar = (props: any) => {
                 </nav >
             </ThemeProvider>
         )
+    } else if (role === "formateur") {
+        return (
+            <ThemeProvider theme={theme}>
+                <nav className="leftNavBar">
+                    <Box className="boxItems" sx={{ textAlign: 'center' }}>
+
+                        <Divider />
+                    </Box>
+                </nav>
+            </ThemeProvider>
+        )
     } else {
         return (
-            <nav className="leftNavBar">
-                <Box className="boxItems" sx={{ textAlign: 'center' }}>
-                    <h1>Profil</h1>
-                    {menuProfilList.listComponents.map((tabs: any, i) => (
-                        <>
-                            <Divider />
-                            <Button
-                                name={menuProfilList.title[i]}
-                                onClick={event => handleClickProfil(
-                                    <TabPanel value={value} index={0}>
-                                        {tabs}
-                                    </TabPanel>
-                                )}
-                                fullWidth={true}
-                                sx={{ color: '#FFF', height: '60px', transition: '0.5s', '&:hover': { pl: '25px', color: '#db1144' } }}
-                            >
-                                <Box className="languageButton">
-                                    <ArrowForwardIosIcon sx={{ height: "10px" }} />
-                                    {menuProfilList.title[i]}
-                                </Box>
-                            </Button>
-                        </>
-                    ))}
-                    <Divider />
-                </Box>
-            </nav>
+            <ThemeProvider theme={theme}>
+                <nav className="leftNavBar">
+                    <Box className="boxItems" sx={{ textAlign: 'center' }}>
+                        <h1>Profil</h1>
+
+                        <Divider />
+                        <Button
+                            name="Gestion du compte"
+                            onClick={event => routeChangeProfil("gestion")}
+                            fullWidth={true}
+                            sx={{ color: '#FFF', height: '60px', transition: '0.5s', '&:hover': { pl: '25px', color: '#db1144' } }}
+                        >
+                            <Box className="languageButton">
+                                <ArrowForwardIosIcon sx={{ height: "10px" }} />
+                                Gestion du compte
+                            </Box>
+                        </Button>
+
+                        <Divider />
+                        <Button
+                            name="Gestion du compte"
+                            onClick={event => routeChangeProfil("badges")}
+                            fullWidth={true}
+                            sx={{ color: '#FFF', height: '60px', transition: '0.5s', '&:hover': { pl: '25px', color: '#db1144' } }}
+                        >
+                            <Box className="languageButton">
+                                <ArrowForwardIosIcon sx={{ height: "10px" }} />
+                                Badges
+                            </Box>
+                        </Button>
+                    </Box>
+                </nav>
+            </ThemeProvider>
         )
     }
 }
@@ -161,5 +188,3 @@ const theme = createTheme({
         }
     }
 })
-
-export default NavBar;

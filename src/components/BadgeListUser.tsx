@@ -44,7 +44,7 @@ const newUser: User = JSON.parse(localStorage.getItem("user") || "")
                     <Typography>{badge.name}</Typography>
                   </Box>
                   <Box className='flex-center'>
-                    <Typography>{badge.acquisition_date}</Typography>
+                    <Typography>{badge.acquisition_date.split('T', 1)}</Typography>
                   </Box>
                 </Box>
           </Grid>

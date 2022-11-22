@@ -1,6 +1,8 @@
 import axios from "axios";
 import User from "../models/user";
 import Session from "../models/session";
+import Exercice from "../models/exercice";
+import Badge from "../models/badge";
 
 const session = axios.create({
   baseURL: "http://localhost:2020"
@@ -42,4 +44,12 @@ export const createSession = async (formData: User) => {
   console.log(newSession.data);
 
   return newSession.data
+}
+
+export const updateSession = async (id: string, formData: Session) => {
+  try {
+    await session.put(`/${id}`, { formData });
+  } catch (error: any) {
+    console.log(error.message);
+  }
 }

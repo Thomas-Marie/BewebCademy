@@ -1,3 +1,4 @@
+import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -5,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+// import { Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { getBadges } from '../services/badge.service';
 import Badge from '../models/badge';
@@ -14,6 +16,7 @@ import { Link } from 'react-router-dom';
 export default function ListTable(props: any): any {
 
   const [badges, setBadges] = useState<Badge[]>([])
+  const session = JSON.parse(localStorage.getItem("session") || "")
 
   useEffect(() => {
     const fetchBadges = async () => {
@@ -31,6 +34,13 @@ export default function ListTable(props: any): any {
   let sqlBadges: Badge[] = Array()
 
   badges.map((badge: Badge) => {
+    session.badges.map((sessionBadge: Badge) => {
+      if (badge._id == sessionBadge._id) {
+        badge.acquisition_date = sessionBadge.acquisition_date
+        badge.all_done = sessionBadge.all_done
+        console.log(badge);
+      }
+    })
     badge.language.map((language: Languages) => {
       switch (language.name) {
         case 'php':
@@ -51,7 +61,8 @@ export default function ListTable(props: any): any {
         default:
           console.log("Il ne se passe rien (enfin si peut etre...)")
       }
-    })
+    }
+    )
   })
 
   let languageToDisplay = props.language
@@ -80,14 +91,14 @@ export default function ListTable(props: any): any {
             {badgeName.map((elementBadges: any, index: any) => (
               <TableRow
                 key={elementBadges.name}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell component="th" scope="row" sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                  <img src={elementBadges.image} />
+                sx={{  '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableCell component="th" scope="row" sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', height: '78px' }}>
+                  <img src={elementBadges.image} style={{width: '75px'}}/>
                   <span>{elementBadges.name}</span>
-                  <Link to={`/exercices/${elementBadges._id}`} style={{ marginLeft: "25px" }}> Aller aux exercices</Link>
+                  {!elementBadges.all_done ? <Link to={`/exercices/${elementBadges._id}`} style={{ marginLeft: "25px" }}> Aller aux exercices</Link> : null}
                 </TableCell>
-                <TableCell align="center" sx={{ p: 0 }}>
-                  <ul style={{ padding: 0, height: '50px' }}>
+                <TableCell align="center" sx={{ p:0 }}>
+                  <ul style={{ padding: 0, height: '50px'}}>
                     {elementBadges.language.map((language: Languages) => (
                       <li style={{ listStyleType: 'none' }}>{language.name}</li>
                     ))}

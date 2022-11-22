@@ -3,9 +3,14 @@ import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import NavBar from "../components/layout/NavBar";
 import { useNavigate } from "react-router-dom";
+
+
+
+import { useState } from 'react';
+import e from "express";
 import ListTable from "../components/ListTable";
 
-const ExerciceList = () => {
+const ExerciceList: React.FC = () => {
 
   let navigate = useNavigate();
 

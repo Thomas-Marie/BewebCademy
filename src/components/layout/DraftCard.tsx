@@ -11,6 +11,7 @@ import Switch from "@mui/material/Switch";
 import { alpha, styled } from '@mui/material/styles';
 import { pink } from '@mui/material/colors';
 import EditIcon from '@mui/icons-material/Edit';
+import Modal from '@mui/material/Modal';
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
@@ -28,6 +29,10 @@ export default function DraftCard(props:any) {
   const [loading, setLoading] = React.useState(true);
   const [start, setStart]= useState<string>("")
   const [end, setEnd]= useState<string>("")
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
+  const [updateData, setUpdateData] = useState<string>("")
+
   useEffect(()=>{        
       const startDate = props.draft.start_date.toString().split("T",1)
       const endDate = props.draft.end_date.toString().split("T",1)
@@ -38,6 +43,10 @@ export default function DraftCard(props:any) {
     setLoading(true);
 
   }
+  const handleOpen = (e:any) => {
+    setUpdateData(e.currentTarget.getAttribute("jojo-update"))
+    setOpen(true)  };
+  
 
   return (
     <Box sx={{ maxWidth: 350 }}>
@@ -75,11 +84,19 @@ export default function DraftCard(props:any) {
                 color: pink[600],
               }}/>
             </IconButton>
-            <IconButton>
+            <IconButton  onClick={handleOpen} jojo-update={props.draft._id}>
             <EditIcon fontSize="small" sx={{
               color: pink[600],
             }}></EditIcon>
             </IconButton>
+            {/* <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+            >
+              <ModifDraft handleClose={handleClose} update={updateData}/>
+            </Modal> */}
             </Box>
         </React.Fragment>
       </Card>

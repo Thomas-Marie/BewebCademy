@@ -8,7 +8,6 @@ const badge = axios.create({
 export const getBadgeById = async (id: string) => {
   try {
     const data = await badge.get(`/${id}`);
-    console.log(data);
     return data.data;
   } catch (error: any) {
     console.log(error.message);

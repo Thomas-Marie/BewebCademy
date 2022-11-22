@@ -6,9 +6,14 @@ import Footer from "../../components/layout/Footer";
 import "../../theme/_variables_bewebcademy.scss";
 import ExerciceInterface from "../../models/exercice";
 import { Button, Grid, Popover, Typography } from "@mui/material";
+import { updateSession } from "../../services/session.service";
+import Session from "../../models/session";
+import Badge from "../../models/badge";
+import { getBadgeById } from "../../services/badge.service";
 
 const Exercice = () => {
   const [exercices, setExercices] = useState<ExerciceInterface[]>([]);
+  const [badge, setBadge] = useState<Badge>()
   const [srcDoc, setSrcDoc] = useState("");
   const [html, sethtml] = useState("");
   const [css, setcss] = useState("");
@@ -19,20 +24,37 @@ const Exercice = () => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
+  let session: Session = JSON.parse(localStorage.getItem("session") || "")
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  let exo: ExerciceInterface[];
-
   useEffect(() => {
     const fetchExercices = async (id: string) => {
-      const data = await getExerciceByBadgeId(id).then((result: any) => { return result });
+      const data = await getExerciceByBadgeId(id).then((result: any) => 
+      { 
+        let exerxice: ExerciceInterface[] = []; 
+        let myExercice: ExerciceInterface[] = session.exercices; 
+        result.forEach((element: ExerciceInterface) => {
+            // if exercice is not in myExercice add it
+            if(!myExercice.find((exercice: ExerciceInterface) => exercice._id === element._id)) {
+              exerxice.push(element)
+            }
+        });
+        console.log(exerxice)
+        return exerxice;
+      });
       setExercices(data);
     };
 
+    const getBadge = async (id: string) => {
+      const badge = await getBadgeById(id).then((result: any) => { return result })
+      setBadge(badge)
+    }
+
 
     fetchExercices((window.location.href.substring(window.location.href.lastIndexOf('/') + 1))).catch(console.error);
+    getBadge((window.location.href.substring(window.location.href.lastIndexOf('/') + 1))).catch(console.error);
   }, []);
 
   useEffect(() => {
@@ -64,15 +86,22 @@ const Exercice = () => {
       .replace(/"/g, "'");
   };
 
-  const valider = (event: React.MouseEvent<HTMLButtonElement>) => {
-    let test = encodeURI(srcDoc);
-    console.log(test);
-    console.log(decodeURI(test));
+  const valider = async (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
-
     if (replaceCode(srcDoc) === exercices[index]?.result) {
+      session.exercices.push(exercices[index])
+      localStorage.setItem("session", JSON.stringify(session));
+      sethtml('');
+      setcss('');
+      setjavascript('');
+      await updateSession(session._id, session)
       if (index === exercices.length - 1) {
         setMessage("Bravo vous avez fini le badge");
+        badge!.all_done = true;
+        badge!.acquisition_date = new Date();
+        session.badges.push(badge!)
+        localStorage.setItem("session", JSON.stringify(session));
+        await updateSession(session._id, session)
       } else {
         setMessage("Bravo vous avez fini l'exercice");
         setIndex(index + 1);
