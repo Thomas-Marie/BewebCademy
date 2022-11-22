@@ -18,9 +18,9 @@ export const getExerciceById = async (id: string) => {
 export const getExercices = async () => {
   try {
     const data = await exercice.get("/");
-    await data.data.map((data: Exercice) =>{
-        data._id = data._id.toString()
-      } )
+    await data.data.map((data: Exercice) => {
+      data._id = data._id.toString()
+    })
     return data.data;
   } catch (error: any) {
     console.log(error.message);
@@ -52,14 +52,14 @@ export const updateExercice = async (id: string, formData: Exercice) => {
 };
 
 
-export const getExerciceByBadgeId = async(id: string) => {
+export const getExerciceByBadgeId = async (id: string) => {
   try {
     const data = await exercice.get(`/badge/${id}`)
-    await data.data.map((data: Exercice) =>{
+    await data.data.map((data: Exercice) => {
       data.badges._id = data.badges._id.toString()
-    } )
+    })
     return data.data
-  }catch(error: any) {
+  } catch (error: any) {
     console.log(error.message)
   }
 }

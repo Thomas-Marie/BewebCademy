@@ -1,7 +1,6 @@
 import axios from "axios";
 import Language from "../models/language";
 import BeforeDraft from "../models/beforeDraft";
-import User from "../models/user";
 import Session from "../models/session";
 
 const archive = axios.create({
@@ -31,45 +30,44 @@ export const getLanguageById = async (id: string) => {
 /*____BeforeDraft____ */
 
 export const getBeforeDraft = async () => {
-    const beforeDraft = await archive.get("/beforedraft");
-  
-    await beforeDraft.data.map((beforeDraft: BeforeDraft) => {
-      beforeDraft._id = beforeDraft._id.toString();
-    });
-    return beforeDraft.data;
-  };
-  
-  export const getBeforeDraftById = async (id: string) => {
-    try {
-      const data = await archive.get(`/beforedraft/${id}`);
-      console.log(data);
-      return data.data;
-    } catch (error: any) {
-      console.log(error.message);
-    }
-  };
+  const beforeDraft = await archive.get("/beforedraft");
+
+  await beforeDraft.data.map((beforeDraft: BeforeDraft) => {
+    beforeDraft._id = beforeDraft._id.toString();
+  });
+  return beforeDraft.data;
+};
+
+export const getBeforeDraftById = async (id: string) => {
+  try {
+    const data = await archive.get(`/beforedraft/${id}`);
+    console.log(data);
+    return data.data;
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
 /*____Session______ */
 
 export const getSessionById = async (id: string) => {
-    try {
-      const data = await archive.get(`/session/${id}`);
-      console.log(data);
-      return data.data;
-    } catch (error: any) {
-      console.log(error.message);
-    }
-  };
-  
-  export const getSessions = async () => {
-    const Sessions = await archive.get("/session");
-  
-    await Sessions.data.map((session: Session) => {
-      session._id = session._id.toString();
-    });
-    return Sessions.data;
-  };
+  try {
+    const data = await archive.get(`/session/${id}`);
+    console.log(data);
+    return data.data;
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
+
+export const getSessions = async () => {
+  const Sessions = await archive.get("/session");
+
+  await Sessions.data.map((session: Session) => {
+    session._id = session._id.toString();
+  });
+  return Sessions.data;
+};
 
 
-  /*____USER______ */
+/*____USER______ */
 
-  

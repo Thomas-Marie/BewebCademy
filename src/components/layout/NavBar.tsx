@@ -1,16 +1,11 @@
-import { Button, ButtonBase, Divider, IconButton, ListItemIcon, ListItemText, MenuItem, MenuList, Typography } from "@mui/material";
+import { Button, Divider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import "./navBar.css";
 import React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Modification from '../forms/Modification';
-
 import { useNavigate } from "react-router-dom";
-
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ListTable from "../ListTable";
 import BadgeList from "../BadgeList";
 
 
@@ -27,7 +22,7 @@ const menuProfilList = {
     ]
 }
 
-function TabPanel(props: any) {
+const TabPanel = (props: any) => {
     const { children, value, index, ...other } = props;
     return (
         <div role="tabpanel"
@@ -46,7 +41,7 @@ function TabPanel(props: any) {
     );
 }
 
-function tabProps(index: number) {
+const tabProps = (index: number) => {
     return {
         id: `vertical-tab-${index}`,
         'aria-controls': `vertical-tabpanel-${index}`,
@@ -54,20 +49,16 @@ function tabProps(index: number) {
     };
 }
 
-export default function NavBar(props: any) {
-  
+const NavBar = (props: any) => {
     const [value, setValue] = React.useState(0);
-
     const handleClickProfil = props.handleClickProfil
-
     const regex = new RegExp('\/exercices\/[a-z]')
-
     let navigate = useNavigate();
 
     const routeChange = (language: any) => {
-        let path = '/exercices/'+language;
+        let path = '/exercices/' + language;
         navigate(path);
-      }
+    }
 
     if (window.location.pathname === "/exercices" || window.location.pathname === "/exercices/" || window.location.pathname.match(regex)) {
         return (
@@ -170,3 +161,5 @@ const theme = createTheme({
         }
     }
 })
+
+export default NavBar;

@@ -17,13 +17,13 @@ export const getUsers = async (): Promise<User[]> => {
       };
 
       axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        users = response.data;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          users = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -55,13 +55,13 @@ export const getUser = async (id: string): Promise<User> => {
       };
 
       axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        user = response.data;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          user = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     } catch (error) {
       console.log(error);
     }

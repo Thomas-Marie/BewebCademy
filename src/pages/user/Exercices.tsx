@@ -1,17 +1,14 @@
-import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Editor from "../../components/layout/MonacoEditor";
-import Statement from "../../components/layout/Statement";
-import { getExerciceByBadgeId, getExercices } from "../../services/exercice.service";
+import { getExerciceByBadgeId } from "../../services/exercice.service";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import "../../theme/_variables_bewebcademy.scss";
-import ex from "../../models/exercice";
-import { escape } from "querystring";
+import ExerciceInterface from "../../models/exercice";
 import { Button, Grid, Popover, Typography } from "@mui/material";
 
 const Exercice = () => {
-  const [exercices, setExercices] = useState<ex[]>([]);
+  const [exercices, setExercices] = useState<ExerciceInterface[]>([]);
   const [srcDoc, setSrcDoc] = useState("");
   const [html, sethtml] = useState("");
   const [css, setcss] = useState("");
@@ -26,15 +23,15 @@ const Exercice = () => {
     setAnchorEl(null);
   };
 
- console.log(window.location.href.substring(window.location.href.lastIndexOf('/') + 1))
-  let exo: ex[];
+  console.log(window.location.href.substring(window.location.href.lastIndexOf('/') + 1))
+  let exo: ExerciceInterface[];
 
   useEffect(() => {
-    const fetchExercices = async (id:string) => {
-      const data = await getExerciceByBadgeId(id).then((result: any) => {return result});
+    const fetchExercices = async (id: string) => {
+      const data = await getExerciceByBadgeId(id).then((result: any) => { return result });
       setExercices(data);
     };
-   
+
 
     fetchExercices((window.location.href.substring(window.location.href.lastIndexOf('/') + 1))).catch(console.error);
   }, []);
@@ -82,12 +79,12 @@ const Exercice = () => {
         setIndex(index + 1);
       }
     } else {
-        setMessage("Dommage vous n'avez pas fini l'exercice");
+      setMessage("Dommage vous n'avez pas fini l'exercice");
     }
     setTimeout(() => {
-        handleClose();
-        }
-    , 2000);
+      handleClose();
+    }
+      , 2000);
   };
 
   return (
@@ -96,40 +93,40 @@ const Exercice = () => {
         <Header />
       </Grid>
       <Grid item xs={2}>
-      <Grid container spacing={2} m={"0.1vh"}>
-            <Grid item xs={12}>
-                <p>Exercice : {exercices[index] === undefined ? '' : exercices[index].name}</p>
-            </Grid>
-            <Grid item xs={12}>
-                <p>Badge : {exercices[index] === undefined ? '' : exercices[index].badges.name}</p>
-            </Grid>
-            <Grid item xs={12}>
-                <p>Exercice {exercices[index] === undefined ? '' : index + 1} / {exercices.length}</p>
-            </Grid>
-            <Grid item xs={12}>
-                <p>Statement : {exercices[index] === undefined ? '' : exercices[index].statement}</p>
-            </Grid>
-            <Grid item xs={12}> 
-                <Button aria-describedby={id} variant="contained" onClick={valider} sx={{bgcolor: '#db1144', '&:hover': {bgcolor: '#1d1d1b'}, alignSelf: "end"}}>  Valider </Button> 
-                <Popover 
-                    id={id}
-                    open={open}
-                    anchorEl={anchorEl}
-                    onClose={handleClose}
-                    anchorOrigin={{
-                        vertical: 'center',
-                        horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                        vertical: 'center',
-                        horizontal: 'left',
-                    }}
-                    >
-                    <Typography sx={{ p: 2, backgroundColor: '#1d1d1b', color:"#ffffff"}}>{message}</Typography>
-                </Popover>
+        <Grid container spacing={2} m={"0.1vh"}>
+          <Grid item xs={12}>
+            <p>Exercice : {exercices[index] === undefined ? '' : exercices[index].name}</p>
+          </Grid>
+          <Grid item xs={12}>
+            <p>Badge : {exercices[index] === undefined ? '' : exercices[index].badges.name}</p>
+          </Grid>
+          <Grid item xs={12}>
+            <p>Exercice {exercices[index] === undefined ? '' : index + 1} / {exercices.length}</p>
+          </Grid>
+          <Grid item xs={12}>
+            <p>Statement : {exercices[index] === undefined ? '' : exercices[index].statement}</p>
+          </Grid>
+          <Grid item xs={12}>
+            <Button aria-describedby={id} variant="contained" onClick={valider} sx={{ bgcolor: '#db1144', '&:hover': { bgcolor: '#1d1d1b' }, alignSelf: "end" }}>  Valider </Button>
+            <Popover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'center',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'center',
+                horizontal: 'left',
+              }}
+            >
+              <Typography sx={{ p: 2, backgroundColor: '#1d1d1b', color: "#ffffff" }}>{message}</Typography>
+            </Popover>
 
-            </Grid>        
-        </Grid>                
+          </Grid>
+        </Grid>
       </Grid>
       <Grid item xs>
         <Grid container rowSpacing={0}>

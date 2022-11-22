@@ -1,5 +1,4 @@
-
-export default function Child(props: any) {
+const Child = (props: any) => {
     const handleClick = props.handleClick
     return (
         <div>
@@ -8,3 +7,4 @@ export default function Child(props: any) {
     )
 }
 
+export default Child;

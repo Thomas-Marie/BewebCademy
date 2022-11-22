@@ -1,4 +1,4 @@
-export default interface Languages{
+export default interface Languages {
     "_id": string,
     "name": string,
     "monaco": string

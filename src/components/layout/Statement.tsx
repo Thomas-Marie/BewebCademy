@@ -4,7 +4,7 @@ const Statement = (props: any) => {
     const { statement } = props;
 
     return(
-        <Box sx={{            
+        <Box sx={{
             width:"20vw",
             border: "5px solid black",
             height: "100%",

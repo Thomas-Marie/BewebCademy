@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
-import { Checkbox, Button, Box } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { createBadge } from "../../services/badge.service";
 import { useEffect, useState } from "react";
 import Language from "../../models/language";
-import { getLanguage, getLanguages } from "../../services/language.service";
+import { getLanguages } from "../../services/language.service";
 import Autocomplete from "@mui/material/Autocomplete";
 
 const style = {
@@ -46,7 +46,7 @@ const CreateBadgeForm = () => {
       <fieldset style={{ borderRadius: "15px", margin: "25px", width: "40vw" }}>
         <legend style={{ marginLeft: "25px" }}>Creation de badge</legend>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Box sx={{display:"flex", flexDirection:"row", justifyContent:"center" }}>
+          <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
             <TextField
               sx={style}
               {...register("name", { required: true })}

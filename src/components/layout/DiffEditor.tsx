@@ -1,14 +1,11 @@
 import { DiffEditor as MonacoDiffEditor } from '@monaco-editor/react';
-import { Modal } from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 
 const DiffEditor = (props: any) => {
     const [diffEditor, setDiffEditor] = useState<any>()
 
-
     useEffect(() => {
-
         setDiffEditor(<MonacoDiffEditor
             height="75vh"
             width="75vw"
@@ -16,7 +13,6 @@ const DiffEditor = (props: any) => {
             modified={props.editorValue}
             language={props.language}
             theme="vs-dark"
-            
         />
         )
 
@@ -27,9 +23,6 @@ const DiffEditor = (props: any) => {
             {diffEditor}
         </Box>
     )
-
-
-
 }
 
 export default DiffEditor

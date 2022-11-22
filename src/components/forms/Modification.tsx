@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -10,21 +9,19 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
-
 const theme = createTheme();
 
-export default function SignUp() {
+const SignUp = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      
+
       email: data.get('email'),
       password: data.get('password'),
     });
   };
 
-  
 
   return (
     <ThemeProvider theme={theme}>
@@ -38,7 +35,7 @@ export default function SignUp() {
             alignItems: 'center',
           }}
         >
-          
+
           <Typography component="h1" variant="h5">
             Modification
           </Typography>
@@ -73,7 +70,7 @@ export default function SignUp() {
                   label="Adresse mail"
                   name="email"
                   autoComplete="email"
-                />                
+                />
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -87,7 +84,7 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-              <TextField
+                <TextField
                   required
                   fullWidth
                   name="password"
@@ -97,19 +94,21 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-            </Grid>            
-            <Button              
+            </Grid>
+            <Button
               type="submit"
               fullWidth
               variant="contained"
-              style={{background:"#db1144"}}
+              style={{ background: "#db1144" }}
               sx={{ mt: 3, mb: 2 }}
             >
               Valider
-            </Button>            
+            </Button>
           </Box>
-        </Box>        
+        </Box>
       </Container>
     </ThemeProvider>
   );
 }
+
+export default SignUp;

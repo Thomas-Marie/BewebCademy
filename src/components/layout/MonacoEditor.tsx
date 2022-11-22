@@ -2,11 +2,10 @@ import Editor from "@monaco-editor/react";
 import { Box } from "@mui/system";
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { IconButton } from "@mui/material";
-import { useState } from "react";
 
-export default function EditorMo(props: any) {
+const EditorMo = (props: any) => {
   const { language, displayName, value, onChange, help } = props;
-    
+
   const openInNewTab = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
@@ -46,3 +45,5 @@ export default function EditorMo(props: any) {
     </Box>
   );
 }
+
+export default EditorMo;

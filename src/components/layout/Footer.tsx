@@ -1,7 +1,5 @@
 import { Button, Link, Typography } from "@mui/material"
-import { blue } from "@mui/material/colors"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
-import { textAlign } from "@mui/system"
 import { useRef, useState } from "react"
 
 import "./footer.css"
@@ -9,19 +7,19 @@ import "./footer.css"
 const regex = new RegExp('\/exercice\/[a-z0-9]')
 
 
-export default function Footer() {
+const Footer = () => {
 
   const refButtonNextExercice: any = useRef(null)
   const [enabledButton, setEnabledButton]: any = useState("disabled")
 
 
-// ================================================
+  // ================================================
   // FONTION A INTEGRER A LA FIN D'UN EXERCICE (change la couleur du btn et l'active)
   const handleButton = () => {
     setEnabledButton('contained')
     refButtonNextExercice.current.disabled = false
   }
-// ================================================
+  // ================================================
 
   if (window.location.pathname.match(regex)) {
     return (
@@ -44,7 +42,7 @@ export default function Footer() {
           >
             <Button variant='outlined' color="secondary" onClick={handleButton} sx={{ p: 0.7, fontSize: '1vh', color: 'text.primary', height: '3vh', width: '40%' }}>Precedent</Button>
             3/11  {/* INTEGRER LES VARIABLES DU NOMBRES DE PAGES ICI */}
-            <Button variant={enabledButton} ref={refButtonNextExercice} color='secondary' sx={{ p: 0.7, fontSize: '1vh', color: 'text.primary', height: '3vh',  width: '40%', '&:disabled': { bgColor: theme.palette.secondary.main, color: 'white' } }}>Suivant</Button>
+            <Button variant={enabledButton} ref={refButtonNextExercice} color='secondary' sx={{ p: 0.7, fontSize: '1vh', color: 'text.primary', height: '3vh', width: '40%', '&:disabled': { bgColor: theme.palette.secondary.main, color: 'white' } }}>Suivant</Button>
           </Typography>
         </footer>
       </ThemeProvider>
@@ -100,3 +98,5 @@ const theme: any = createTheme({
     }
   }
 })
+
+export default Footer;

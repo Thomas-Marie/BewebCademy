@@ -1,10 +1,7 @@
 import "./header.css";
-
 import React from "react";
-
 import logo from "../../assets/logo_bewebcademy_whitetext.svg";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, Drawer, Toolbar, Box } from "@mui/material";
@@ -16,9 +13,9 @@ const userHeaderItems = ['home', 'exercices', 'profil'];
 const adminHeaderItems = ['utilisateurs', 'badges', 'archives']
 // const url = "http://localhost:3000/"
 
-export default function Header() {
+const Header = () => {
 
-  const { keycloak, initialized } = useKeycloak();
+  const { keycloak } = useKeycloak();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const container = window !== undefined ? () => document.body : undefined;
 
@@ -264,3 +261,4 @@ declare module '@mui/material/styles' {
   }
 }
 
+export default Header;

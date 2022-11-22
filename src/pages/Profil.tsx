@@ -1,4 +1,3 @@
-import BadgeList from "../components/BadgeList";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import NavBar from "../components/layout/NavBar";
@@ -6,7 +5,7 @@ import NavBar from "../components/layout/NavBar";
 import { useState } from 'react';
 import { Box } from "@mui/system";
 
-const Profil: React.FC = () => {
+const Profil = () => {
 
     const [myComponent, setMycomponent] = useState('');
     const handleClickProfil: any = (component: any) => {

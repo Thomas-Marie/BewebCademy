@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,7 +5,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-// import { Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { getBadges } from '../services/badge.service';
 import Badge from '../models/badge';
@@ -89,8 +87,8 @@ export default function ListTable(props: any): any {
                   <span>{elementBadges.name}</span>
                   <Link to={`/exercices/${elementBadges._id}`} style={{ marginLeft: "25px" }}> Aller aux exercices</Link>
                 </TableCell>
-                <TableCell align="center" sx={{ p:0 }}>
-                  <ul style={{ padding: 0, height: '50px'}}>
+                <TableCell align="center" sx={{ p: 0 }}>
+                  <ul style={{ padding: 0, height: '50px' }}>
                     {elementBadges.language.map((language: Languages) => (
                       <li style={{ listStyleType: 'none' }}>{language.name}</li>
                     ))}

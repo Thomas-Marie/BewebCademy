@@ -8,9 +8,9 @@ const language = axios.create({
 export const getLanguage = async (id: string) => {
   try {
     const data = await language.get(`/${id}`);
-    await data.data.map((data: Language) =>{
-        data._id = data._id.toString()
-      } )
+    await data.data.map((data: Language) => {
+      data._id = data._id.toString()
+    })
     return data.data;
   } catch (error: any) {
     console.log(error.message);
@@ -31,18 +31,18 @@ export const updateLanguage = async (id: string, formData: Language) => {
   }
 };
 
-export const createLanguage = async(formData : Language) => {
-    try{
-        await language.post('/', {formData})
-    }catch(error: any){
-        console.log(error.message)
-    }
+export const createLanguage = async (formData: Language) => {
+  try {
+    await language.post('/', { formData })
+  } catch (error: any) {
+    console.log(error.message)
+  }
 }
 
 export const deleteLanguageById = async (id: string) => {
-    try {
-      await language.delete(`/${id}`);
-    } catch (error: any) {
-      console.log(error.message);
-    }
-  };
+  try {
+    await language.delete(`/${id}`);
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};

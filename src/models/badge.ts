@@ -1,6 +1,6 @@
 import Language from './language';
 
-export default interface Badge{
+export default interface Badge {
     "_id": string,
     "name": string,
     "language": Language[],
