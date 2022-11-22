@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
+import './layout/BadgeList.css'
 import Grid from '@mui/material/Unstable_Grid2';
 import { useEffect, useState } from 'react';
 import { getBadges } from '../services/badge.service'
@@ -24,7 +25,7 @@ const [badges, setBadges] = useState<any>([])
   }, [])
 
   return (
-    <Box sx={{ flexGrow: 1, ml:6 }}>
+    <Box>
       <Typography variant="h3">Badges({badges.length}) </Typography>
       <Grid container columns={{ xs: 2, sm: 6, md: 8 }}>
         {badges.map((badge: any, index: any) => (
@@ -33,10 +34,10 @@ const [badges, setBadges] = useState<any>([])
                   <Box display="flex" justifyContent="center" alignItems="center">
                     <img src={badge.image} style={{maxWidth: "100px" , margin: "50px"}} alt={badge.name} />
                   </Box>
-                  <Box display="flex" justifyContent="center" alignItems="center">
+                  <Box className='flex-center'>
                     <Typography>{badge.name}</Typography>
                   </Box>
-                  <Box display="flex" justifyContent="center" alignItems="center">
+                  <Box className='flex-center'>
                     <Typography>{badge.acquisition_date}</Typography>
                   </Box>
                 </Box>

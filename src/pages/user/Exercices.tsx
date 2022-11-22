@@ -9,7 +9,6 @@ import "../../theme/_variables_bewebcademy.scss";
 import ex from "../../models/exercice";
 import { escape } from "querystring";
 import { Button, Grid, Popover, Typography } from "@mui/material";
-import Exercices from "../../models/exercice";
 
 const Exercice = () => {
   const [exercices, setExercices] = useState<ex[]>([]);
@@ -28,6 +27,8 @@ const Exercice = () => {
   };
 
  console.log(window.location.href.substring(window.location.href.lastIndexOf('/') + 1))
+  let exo: ex[];
+
   useEffect(() => {
     const fetchExercices = async (id:string) => {
       const data = await getExerciceByBadgeId(id).then((result: any) => {return result});

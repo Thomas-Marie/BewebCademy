@@ -15,3 +15,10 @@
 //       fetchBadges().catch(console.error)
 //     }, [])
 // }
+export default function UserList(props: any) : any
+{
+    return (
+        <>
+        </>
+    )
+}

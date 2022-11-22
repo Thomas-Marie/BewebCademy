@@ -9,7 +9,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, Drawer, Toolbar, Box } from "@mui/material";
 import { Divider, List, ListItem, ListItemButton, ListItemText, IconButton, Typography, Button, ButtonBase } from "@mui/material";
-
+import { useKeycloak } from "@react-keycloak/web";
 
 let role = "user"
 const userHeaderItems = ['home', 'exercices', 'profil'];
@@ -18,6 +18,7 @@ const adminHeaderItems = ['utilisateurs', 'badges', 'archives']
 
 export default function Header() {
 
+  const { keycloak, initialized } = useKeycloak();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const container = window !== undefined ? () => document.body : undefined;
 
@@ -32,7 +33,7 @@ export default function Header() {
   const drawerBurger = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        <img src={logo} alt="beweb-academy" />
+        <img className="img-logo" src={logo} alt="beweb-academy" />
       </Typography>
       <List component="nav">
         {userHeaderItems.map((item, i) => (
@@ -47,7 +48,7 @@ export default function Header() {
         <Divider />
 
         <ListItem >
-          <ListItemButton href="/logout" sx={{ textAlign: 'center', maxHeight: '100%' }}>
+          <ListItemButton href="/" onClick={() => keycloak.logout()} sx={{ textAlign: 'center', maxHeight: '100%' }}>
             <ListItemText primary="Deconnexion" sx={{ ml: 3 }} />
             <ListItemText primary={<LogoutIcon sx={{ mt: 0.6, ml: -5 }}></LogoutIcon>} />
           </ListItemButton>
@@ -91,9 +92,9 @@ export default function Header() {
                     </Button>
                   ))}
                 </Box>
-                <ButtonBase href="/deconnexion">
+                <ButtonBase href="/" onClick={() => keycloak.logout()}>
                   <IconButton name="deconnexion">
-                    <LogoutIcon color="secondary" sx={{ mb: 0.4 }}></LogoutIcon>
+                    <LogoutIcon color="secondary" sx={{ mb: 0.4 }} ></LogoutIcon>
                   </IconButton>
                 </ButtonBase>
               </Box>
@@ -160,7 +161,7 @@ export default function Header() {
                     </Button>
                   ))}
                 </Box>
-                <ButtonBase href="/deconnexion">
+                <ButtonBase href="/" onClick={() => keycloak.logout()}>
                   <IconButton name="deconnexion">
                     <LogoutIcon color="secondary" sx={{ mb: 0.4 }}></LogoutIcon>
                   </IconButton>

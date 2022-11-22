@@ -1,4 +1,4 @@
-import Language from './language'
+import Language from './language';
 
 export default interface Badge{
     "_id": string,

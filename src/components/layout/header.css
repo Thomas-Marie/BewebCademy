@@ -1,4 +1,4 @@
-img {
+.img-logo {
     max-height: 100%;
     height: 50px;
 }
@@ -7,8 +7,8 @@ img {
     color: #DB1144;
 }
 
-.buttonHeader{
-}
+/* .buttonHeader{
+} */
 
 .buttonHeader:active {
     /* color: #FFF; */
