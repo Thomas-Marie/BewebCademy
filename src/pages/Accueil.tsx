@@ -21,7 +21,7 @@ const Accueil: React.FC = () => {
 
   const checkSession = async () => {
     if (keycloak.authenticated) {
-      let user : User = {
+      let user: User = {
         id: keycloak.tokenParsed?.sub || "",
         username: keycloak.tokenParsed?.preferred_username || "",
         firstName: keycloak.tokenParsed?.family_name || "",
@@ -30,25 +30,31 @@ const Accueil: React.FC = () => {
       }
 
       localStorage.setItem("user", JSON.stringify(user))
+      if (keycloak.hasRealmRole("formateur")) {
+        localStorage.setItem("role", "formateur")
+      } else {
+        localStorage.setItem("role", "user")
+      }
 
       const session = await getSessionByUserId(user.id);
-      if(session){
+      if (session) {
         console.log("Session existante");
         localStorage.setItem("session", JSON.stringify(session));
-      }else{
+        window.location.href = 'profil';
+      } else {
         console.log("Session non existante");
         const newSession = await createSession(user);
         localStorage.setItem("session", JSON.stringify(newSession));
         console.log(newSession);
+        window.location.href = 'profil';
       }
     }
-    window.location.href = 'profil';
   }
 
   const login = () => {
     keycloak.login();
   }
-  
+
   useEffect(() => {
     if (initialized) {
       checkSession();
@@ -56,42 +62,42 @@ const Accueil: React.FC = () => {
   }, [initialized]);
 
 
-return (
-  <div>
+  return (
+    <div>
       <Box sx={{ width: '100%', typography: 'body1', height: '97vh' }}>
-        {!draftOpen 
-        ? 
-        (
-          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} height="100%">
-            <Grid item xs={6} display="flex" justifyContent="center" alignItems="center"> 
-              <img src="https://i.ibb.co/7ND1qzz/gcm-Rp-J7-400x400-removebg-preview.png" />
-            </Grid>
-            <Grid item xs={6} display="flex" justifyContent="center" alignItems="center">
-              <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid>
-                  <h1 style={{margin: "50px"}}>Une période de préparation pour une draft est en cours. Vous pouvez participer pour avoir une chance d'être sélectionné. Il vous faut juste réaliser les exercices et obtenir des badges.</h1>
-                </Grid>
-                <Grid>
-                  <Button style={{margin: "50px"}} onClick={login} variant="contained" sx={{bgcolor: '#db1144', '&:hover': {bgcolor: '#1d1d1b'}}}>  Participez a la draft. </Button> 
+        {!draftOpen
+          ?
+          (
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} height="100%">
+              <Grid item xs={6} display="flex" justifyContent="center" alignItems="center">
+                <img src="https://i.ibb.co/7ND1qzz/gcm-Rp-J7-400x400-removebg-preview.png" />
+              </Grid>
+              <Grid item xs={6} display="flex" justifyContent="center" alignItems="center">
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                  <Grid>
+                    <h1 style={{ margin: "50px" }}>Une période de préparation pour une draft est en cours. Vous pouvez participer pour avoir une chance d'être sélectionné. Il vous faut juste réaliser les exercices et obtenir des badges.</h1>
+                  </Grid>
+                  <Grid>
+                    <Button style={{ margin: "50px" }} onClick={login} variant="contained" sx={{ bgcolor: '#db1144', '&:hover': { bgcolor: '#1d1d1b' } }}>  Participez a la draft. </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        ) : 
-        (
-          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} height="100%">
-            <Grid item xs={6} display="flex" justifyContent="center" alignItems="center"> 
-              <img src="https://i.ibb.co/7ND1qzz/gcm-Rp-J7-400x400-removebg-preview.png" />
+          ) :
+          (
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} height="100%">
+              <Grid item xs={6} display="flex" justifyContent="center" alignItems="center">
+                <img src="https://i.ibb.co/7ND1qzz/gcm-Rp-J7-400x400-removebg-preview.png" />
+              </Grid>
+              <Grid item xs={6} display="flex" justifyContent="center" alignItems="center">
+                <h1 style={{ margin: "100px" }}>Il n'y a pas de période de draft en cours, revenez plus tard.</h1>
+              </Grid>
             </Grid>
-            <Grid item xs={6} display="flex" justifyContent="center" alignItems="center">
-              <h1 style={{margin: "100px"}}>Il n'y a pas de période de draft en cours, revenez plus tard.</h1>
-            </Grid>
-          </Grid>
-        )}
+          )}
       </Box>
-    <Footer />
-  </div>
-);
+      <Footer />
+    </div>
+  );
 }
 
 export default Accueil;

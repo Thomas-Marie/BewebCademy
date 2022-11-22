@@ -82,9 +82,9 @@ export default function ListTable(props: any): any {
             {badgeName.map((elementBadges: any, index: any) => (
               <TableRow
                 key={elementBadges.name}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell component="th" scope="row" sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                  <img src={elementBadges.image} />
+                sx={{  '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableCell component="th" scope="row" sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', height: '52px' }}>
+                  <img src={elementBadges.image} style={{width: '50px'}}/>
                   <span>{elementBadges.name}</span>
                   <Link to={`/exercices/${elementBadges._id}`} style={{ marginLeft: "25px" }}> Aller aux exercices</Link>
                 </TableCell>
