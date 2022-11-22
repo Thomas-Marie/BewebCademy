@@ -4,7 +4,7 @@ import Header from "../components/layout/Header";
 import React, { useEffect, useState } from "react";
 import { useKeycloak } from "@react-keycloak/web";
 import { createSession, getSessionByUserId, getSessions } from "../services/session.service";
-import User from "../models/User";
+import User from "../models/user";
 import { checkDreaftOpen } from "../services/draft.service";
 
 const Accueil: React.FC = () => {

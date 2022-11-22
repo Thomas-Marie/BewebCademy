@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { getBadges } from '../services/badge.service'
 import { Typography } from '@mui/material';
 
+
 export default function BadgeList() {
 
 const [badges, setBadges] = useState<any>([])
@@ -30,8 +31,8 @@ const [badges, setBadges] = useState<any>([])
         {badges.map((badge: any, index: any) => (
           <Grid xs={2} sm={2} md={2} key={index}>
                 <Box>
-                  <Box className='flex-center'>
-                    <img className='widthImg' src={badge.image} alt={badge.name} />
+                  <Box display="flex" justifyContent="center" alignItems="center">
+                    <img src={badge.image} style={{maxWidth: "100px" , margin: "50px"}} alt={badge.name} />
                   </Box>
                   <Box className='flex-center'>
                     <Typography>{badge.name}</Typography>

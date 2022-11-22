@@ -1,14 +1,14 @@
 import axios from "axios";
-import Session from "../models/Session";
-import User from "../models/User";
+import User from "../models/user";
+import Session from "../models/session";
 
 const session = axios.create({
-    baseURL: "http://localhost:2020/"
+    baseURL: "http://localhost:6000"
   }) 
   
-  export const getSessionByUserId = async (idUser: string) => {
+  export const getSessionByUserId = async (id: string) => {
     try {
-      const data = await session.get("/user/" + idUser)
+      const data = await session.get(`/${id}`)
       
       return data.data
     }
@@ -27,16 +27,17 @@ const session = axios.create({
     return sessions.data;
   }
   catch(error: any){
-    console.log(error.message);
+    console.log(error);
   }
   };
   
-  export const createSession = async (user: User) => {
+  export const createSession = async (formData: User) => {
     const newSession = await session.post("/", {
         badges: [],
         exercices: [],
-        user
+        user: formData
     })
+    console.log("up");
     console.log(newSession.data);
     
     return newSession.data

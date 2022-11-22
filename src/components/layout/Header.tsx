@@ -11,9 +11,8 @@ import { AppBar, Drawer, Toolbar, Box } from "@mui/material";
 import { Divider, List, ListItem, ListItemButton, ListItemText, IconButton, Typography, Button, ButtonBase } from "@mui/material";
 import { useKeycloak } from "@react-keycloak/web";
 
-
 let role = "user"
-const userHeaderItems = ['exercices', 'profil'];
+const userHeaderItems = ['home', 'exercices', 'profil'];
 const adminHeaderItems = ['utilisateurs', 'badges', 'archives']
 // const url = "http://localhost:3000/"
 
@@ -49,7 +48,7 @@ export default function Header() {
         <Divider />
 
         <ListItem >
-          <ListItemButton href="/logout" sx={{ textAlign: 'center', maxHeight: '100%' }}>
+          <ListItemButton href="/" onClick={() => keycloak.logout()} sx={{ textAlign: 'center', maxHeight: '100%' }}>
             <ListItemText primary="Deconnexion" sx={{ ml: 3 }} />
             <ListItemText primary={<LogoutIcon sx={{ mt: 0.6, ml: -5 }}></LogoutIcon>} />
           </ListItemButton>
@@ -93,7 +92,7 @@ export default function Header() {
                     </Button>
                   ))}
                 </Box>
-                <ButtonBase href="/deconnexion" onClick={() => keycloak.logout()}>
+                <ButtonBase href="/" onClick={() => keycloak.logout()}>
                   <IconButton name="deconnexion">
                     <LogoutIcon color="secondary" sx={{ mb: 0.4 }} ></LogoutIcon>
                   </IconButton>
@@ -131,7 +130,7 @@ export default function Header() {
   } else if (role == "admin") {
     return (
       <ThemeProvider theme={theme}>
-        <AppBar className="appBar">
+        <AppBar className="appBar" position="sticky">
           <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
 
             {/* insert logo with condition window size */}
@@ -154,14 +153,15 @@ export default function Header() {
             </IconButton>
             <ThemeProvider theme={theme2}>
               {/* display buttons with conditions window size */}
-              <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
-                {adminHeaderItems.map((item, i) => (
-                  <Button className="buttonHeader" name={item} href={"/" + item} key={i}>
-                    {item}
-                  </Button>
-
-                ))}
-                <ButtonBase href="/deconnexion">
+              <Box sx={{ display: { xs: 'none', sm: 'none', md: 'flex' }, justifyContent: 'flex-end', width: '30vw' }}>
+                <Box component='div' sx={{ width: '100%', display: 'flex', justifyContent: 'space-around'}}>
+                  {adminHeaderItems.map((item, i) => (
+                    <Button className="buttonHeader" name={item} href={"/" + item} key={i}>
+                      {item}
+                    </Button>
+                  ))}
+                </Box>
+                <ButtonBase href="/" onClick={() => keycloak.logout()}>
                   <IconButton name="deconnexion">
                     <LogoutIcon color="secondary" sx={{ mb: 0.4 }}></LogoutIcon>
                   </IconButton>
