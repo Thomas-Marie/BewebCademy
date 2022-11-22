@@ -1,7 +1,7 @@
 import User from "./user"
 
 export default interface BeforeDraft{
-    _id: string,
+    "_id": string,
     "name": string,
     "start_date": Date,
     "end_date" : Date,
