@@ -11,7 +11,6 @@ import keycloak from './auth/auth_keycloak';
 import Accueil from './pages/Accueil';
 import DashboardAdmin from './pages/DashboardAdmin';
 import CreateExercice from './pages/user/CreateExercices';
-import UsersList from './pages/UserList'
 
 
 const App = () => {
