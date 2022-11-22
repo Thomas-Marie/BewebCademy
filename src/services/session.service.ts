@@ -8,7 +8,7 @@ const session = axios.create({
   
   export const getSessionByUserId = async (id: string) => {
     try {
-      const data = await session.get(`/${id}`)
+      const data = await session.get(`/user/${id}`)
       
       return data.data
     }

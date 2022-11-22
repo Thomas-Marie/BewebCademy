@@ -2,21 +2,20 @@ import * as React from 'react';
 
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import User from '../../models/user';
 import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import User from '../../models/user';
 import { updateUser } from "../../services/keycloak.service"
-import Input from '@mui/material/Input';
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function FormUpdate() {
 
   const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
 
@@ -37,27 +36,33 @@ export default function SignUp() {
 
   const style = {
     height: "4vh",
-    border: "2px solid #1d1d1b",
+    border: "2px solid #808080",
     borderRadius: "5px",
     outline: "none",
-    fontSize: "1rem",
+    fontSize: "1rem"
   };
 
   const onSubmit = async (data: any) => {
+
     let updatedUser: User = data ;
     updatedUser.id = newUser.id
     updateUser(newUser.id, updatedUser) 
-     localStorage.setItem("user", JSON.stringify(updatedUser))
+    localStorage.setItem("user", JSON.stringify(updatedUser))
     handleModal()
   }
 
   return (
 
+    
     <ThemeProvider theme={theme}>
+      <p>{newUser.username}</p>
+      <p>{newUser.firstName}</p>
+      <p>{newUser.lastName}</p>
+      <p>{newUser.email}</p>
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
 
-        <Button onClick={handleModal}>Modification</Button>
+        <Button onClick={handleModal}>Modifier mes informations</Button>
         <Modal
           open={open}
           onClose={handleModal}
@@ -81,15 +86,6 @@ export default function SignUp() {
               p: 4,
             }}
           >
-
-            {/* <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1 },
-      }}
-      noValidate
-      autoComplete="off"
-    > */}
 
             <Typography component="h1" variant="h5" mb={3}> 
               Modification

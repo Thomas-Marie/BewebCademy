@@ -64,16 +64,7 @@ export default function Header() {
       <ThemeProvider theme={theme}>
         <AppBar className="appBar" position="sticky">
           <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-
-            {/* insert logo with condition window size */}
-            <Box
-              component="div"
-              sx={{ mt: 0.5 }}
-            >
-              <img src={logo} alt="beweb-academy" />
-            </Box>
-
-            {/* insert icon menu burger with condition window size */}
+              <img src={logo} className="img-logo" alt="beweb-academy" />
             <IconButton
               color="inherit"
               aria-label="open drawer"

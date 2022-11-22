@@ -14,7 +14,6 @@ const root = ReactDOM.createRoot(
 root.render(
     <BrowserRouter>
       <App />
-      <Footer></Footer>
     </BrowserRouter>
 );
 
