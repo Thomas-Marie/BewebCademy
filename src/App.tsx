@@ -12,6 +12,7 @@ import keycloak from './auth/auth_keycloak';
 import Accueil from './pages/Accueil';
 import CreateExercice from './pages/user/CreateExercices';
 import Exercice from './pages/user/Exercices';
+import DashboardAdmin from './pages/DashboardAdmin';
 
 
 
@@ -37,6 +38,7 @@ function App() {
         <Route path='/sql' element={<Exercice />}></Route>
         <Route path='/exercice/html' element={<Exercice />}></Route>
         <Route path='/deconnexion' element={<Logout />}></Route>
+        <Route path='/admin' element={<DashboardAdmin />}></Route>
 
       </Routes>
       </React.StrictMode>

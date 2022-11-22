@@ -2,7 +2,7 @@ import axios from "axios";
 import BeforeDraft from "../models/beforeDraft"
 
 const beforeDraft = axios.create({
-  baseURL: "http://localhost:4000", // a modifié (actuellement il est sur 3000 (le meme que react))
+  baseURL: "http://localhost:1010", // a modifié (actuellement il est sur 3000 (le meme que react))
 });
 
 export const getBeforeDrafts = async () => {
