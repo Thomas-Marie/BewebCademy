@@ -45,7 +45,7 @@ export const deleteBeforeDraftById = async (id: string) => {
   }
 };
 
-export const UpdateBeforeDraft = async (id: string, formData: BeforeDraft) => {
+export const updateBeforeDraft = async (id: string, formData: BeforeDraft) => {
   try {
     await beforeDraft.put(`/${id}`, { formData });
   } catch (error: any) {
