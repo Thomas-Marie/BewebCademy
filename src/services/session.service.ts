@@ -5,7 +5,7 @@ import Exercice from "../models/exercice";
 import Badge from "../models/badge";
 
 const session = axios.create({
-  baseURL: "http://localhost:2020"
+  baseURL: "http://api.bewebcademy.my/session"
 })
 
 export const getSessionByUserId = async (id: string) => {

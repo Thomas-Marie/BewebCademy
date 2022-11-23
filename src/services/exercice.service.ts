@@ -2,7 +2,7 @@ import axios from "axios";
 import Exercice from "../models/exercice";
 
 const exercice = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: "http://api.bewebcademy.my/exercice",
 });
 
 

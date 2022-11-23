@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const draft = axios.create({
-  baseURL: "http://localhost:1010/",
+  baseURL: "http://api.bewebcademy.my/before-draft",
 });
 
 
@@ -10,4 +10,3 @@ export const checkDreaftOpen = async () => {
   const res = await draft.get("/draft/check");
   return res.data;
 }
-

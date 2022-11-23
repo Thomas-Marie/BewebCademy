@@ -2,7 +2,7 @@ import axios from "axios";
 import Language from "../models/language";
 
 const language = axios.create({
-  baseURL: "http://localhost:9000/",
+  baseURL: "http://api.bewebcademy.my/language",
 });
 
 export const getLanguage = async (id: string) => {

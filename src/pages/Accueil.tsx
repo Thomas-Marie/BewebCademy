@@ -29,6 +29,15 @@ const Accueil = () => {
       }
 
       localStorage.setItem("user", JSON.stringify(user))
+
+      if (keycloak.hasRealmRole("formateur")) {
+        localStorage.setItem("role", "formateur")
+        window.location.href = "/admin";
+      } else {
+        localStorage.setItem("role", "user")
+        window.location.href = "/profil";
+      }
+      
       const session = await getSessionByUserId(user.id);
       if (session) {
         console.log("Session existante");
@@ -38,14 +47,6 @@ const Accueil = () => {
         const newSession = await createSession(user);
         localStorage.setItem("session", JSON.stringify(newSession));
         console.log(newSession);
-      }
-
-      if (keycloak.hasRealmRole("formateur")) {
-        localStorage.setItem("role", "formateur")
-        window.location.href = "/admin";
-      } else {
-        localStorage.setItem("role", "user")
-        window.location.href = "/profil";
       }
     }
   }

@@ -1,5 +1,5 @@
 import { useKeycloak } from "@react-keycloak/web";
-
+import Error from '../pages/Error';
 /**
  * @param roles 
  * @param children

@@ -4,7 +4,7 @@ import BeforeDraft from "../models/beforeDraft";
 import Session from "../models/session";
 
 const archive = axios.create({
-  baseURL: "http://localhost:9000/",
+  baseURL: "http://api.bewebcademy.my/archive",
 });
 
 /*_____LANGUAGE______ */
