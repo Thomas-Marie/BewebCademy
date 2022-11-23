@@ -6,31 +6,33 @@ export const getUsers = async (): Promise<User[]> => {
   var users: User[] = [];
   try {
     const access_token = await token();
-    try {
-      var config = {
-        method: "get",
-        url: "https://51.83.69.138:8443/admin/realms/Bewebcademy/users/",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token}`,
-        },
-      };
+    var config = {
+      method: "get",
+      url: "https://51.83.69.138:8443/admin/realms/Bewebcademy/users/",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access_token}`,
+      },
+    };
 
-      axios(config)
-        .then(function (response) {
-          console.log(JSON.stringify(response.data));
-          users = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    //return user list from keycloak
+    const response = await axios(config);
+    const data = response.data;
+    data.forEach((user: any) => {
+      console.log(user);
+      users.push({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName
+      });
+    });
+    return users;
   } catch (error) {
     console.log(error);
+    return users;
   }
-  return users;
 };
 
 export const getUser = async (id: string): Promise<User> => {
@@ -44,31 +46,32 @@ export const getUser = async (id: string): Promise<User> => {
 
   try {
     const access_token = await token();
-    try {
-      var config = {
-        method: "get",
-        url: "https://51.83.69.138:8443/admin/realms/Bewebcademy/users/" + id,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token}`,
-        },
-      };
+    var config = {
+      method: "get",
+      url: "https://51.83.69.138:8443/admin/realms/Bewebcademy/users/",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access_token}`,
+      },
+    };
 
-      axios(config)
-        .then(function (response) {
-          console.log(JSON.stringify(response.data));
-          user = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    //return user list from keycloak
+    const response = await axios(config);
+    const data = response.data;
+    data.forEach((user: any) => {
+      user = ({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName
+      });
+    });
+    return user;
   } catch (error) {
     console.log(error);
+    return user;
   }
-  return user;
 };
 
 export const updateUser = async (id: string, user: User) => {

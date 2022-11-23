@@ -12,8 +12,6 @@ const ListBadgesAdmin = () => {
           <BadgeList />
         </div>
       </div>
-
-
       <Footer></Footer>
     </div>
   );

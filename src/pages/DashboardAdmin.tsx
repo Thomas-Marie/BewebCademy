@@ -2,7 +2,7 @@ import CreateBadgeForm from "../components/forms/CreateBadge"
 import CreateLanguageForm from "../components/forms/CreateLanguage";
 import Header from "../components/layout/Header";
 import NavBar from "../components/layout/NavBar";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import Footer from "../components/layout/Footer";
 import { Link } from "react-router-dom";
 
@@ -11,14 +11,17 @@ const dashBoardAdmin = () => {
   return (
     <div>
       <Header />
-        <Box sx={{ display: 'flex', width: '100vw' }}>
-          <Box height="90vh" width="80vw" sx={{ p: 2, display: 'flex', flexDirection: 'column', margin: 'auto' }}>
-          <Button variant="contained" sx={{ bgcolor: '#db1144', width: "200px", '&:hover': { bgcolor: '#1d1d1b' } }}> <Link to={`/admin/creation`} style={{ textDecoration: "none", color: "white" }}>Création d'exercice</Link></Button>
-
+        <Grid container height={"90vh"} width={"100vw"}>
+          <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
             <CreateLanguageForm />
+          </Grid>
+          <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
             <CreateBadgeForm />
-          </Box>
-        </Box>
+          </Grid>
+          <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
+            <Button variant="contained" sx={{ bgcolor: '#db1144', width: "200px", '&:hover': { bgcolor: '#1d1d1b' } }}> <Link to={`/admin/creation`} style={{ textDecoration: "none", color: "white" }}>Création d'exercice</Link></Button>
+          </Grid>
+        </Grid>
       <Footer></Footer>
     </div>
   );

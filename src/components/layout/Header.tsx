@@ -12,7 +12,7 @@ import { Divider, List, ListItem, ListItemButton, ListItemText, IconButton, Typo
 
 
 const userHeaderItems = ['exercices', 'profil'];
-const adminHeaderItems = ['dashboard', 'utilisateurs', 'badges', 'archives']
+const adminHeaderItems = ['dashboard', 'utilisateurs', 'languages', 'badges', 'creation', 'archives']
 
 export default function Header() {
 

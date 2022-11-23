@@ -15,6 +15,7 @@ import DashboardAdmin from './pages/DashboardAdmin';
 import PrivateRoute from './helpers/PrivateRoute';
 import BadgeList from './components/BadgeList';
 import ListBadgesAdmin from './pages/ ListBadgesAdmin';
+import LanguageList from './pages/LanguageList';
 
 
 
@@ -82,6 +83,11 @@ function App() {
             <Route path='/admin/utilisateurs' element={
               <PrivateRoute roles="formateur">
                 <UsersList />
+              </PrivateRoute>
+            }></Route>
+            <Route path='/admin/languages' element={
+              <PrivateRoute roles="formateur">
+                <LanguageList />
               </PrivateRoute>
             }></Route>
             <Route path='/admin/badges' element={
