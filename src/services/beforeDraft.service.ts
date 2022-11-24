@@ -3,8 +3,7 @@ import BeforeDraft from "../models/beforeDraft"
 import User from "../models/user";
 
 const beforeDraft = axios.create({
-  //baseURL: "http://api.bewebcademy.my/before-draft",
-  baseURL: "http://localhost:1010/before-draft",
+  baseURL: "http://api.bewebcademy.my/before-draft",
 });
 
 export const getBeforeDrafts = async () => {
