@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useKeycloak } from "@react-keycloak/web";
 import { createSession, getSessionByUserId } from "../services/session.service";
 import User from "../models/user";
-import { checkDreaftOpen } from "../services/draft.service";
+import { checkDreaftOpen } from "../services/beforeDraft.service";
 
 const Accueil = () => {
 
@@ -12,7 +12,10 @@ const Accueil = () => {
   const [draftOpen, setDraftOpen] = useState(false);
 
   checkDreaftOpen().then((res) => {
-    setDraftOpen(res);
+    if (res.tatus === 201) {
+      localStorage.setItem("draft", JSON.stringify(res))
+      setDraftOpen(true);
+    }
     console.log("draftOpen", draftOpen);
   });
 
@@ -29,24 +32,30 @@ const Accueil = () => {
       }
 
       localStorage.setItem("user", JSON.stringify(user))
-
-      if (keycloak.hasRealmRole("formateur")) {
-        localStorage.setItem("role", "formateur")
-        window.location.href = "/admin";
-      } else {
-        localStorage.setItem("role", "user")
-        window.location.href = "/profil";
-      }
       
       const session = await getSessionByUserId(user.id);
       if (session) {
         console.log("Session existante");
         localStorage.setItem("session", JSON.stringify(session));
+        if (keycloak.hasRealmRole("formateur")) {
+          localStorage.setItem("role", "formateur")
+          window.location.href = "/admin";
+        } else {
+          localStorage.setItem("role", "user")
+          window.location.href = "/profil";
+        }
       } else {
         console.log("Session non existante");
         const newSession = await createSession(user);
         localStorage.setItem("session", JSON.stringify(newSession));
         console.log(newSession);
+        if (keycloak.hasRealmRole("formateur")) {
+          localStorage.setItem("role", "formateur")
+          window.location.href = "/admin";
+        } else {
+          localStorage.setItem("role", "user")
+          window.location.href = "/profil";
+        }
       }
     }
   }

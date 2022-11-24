@@ -5,6 +5,7 @@ import { useState, useEffect} from "react"
 import { getBeforeDrafts } from "../../services/beforeDraft.service"
 
 
+
 const ListDraft = () => {
     const [drafts, setDraft] = useState<BeforeDraft[]>([])
     

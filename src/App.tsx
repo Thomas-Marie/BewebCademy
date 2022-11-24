@@ -16,6 +16,8 @@ import PrivateRoute from './helpers/PrivateRoute';
 import BadgeList from './components/BadgeList';
 import ListBadgesAdmin from './pages/ ListBadgesAdmin';
 import LanguageList from './pages/LanguageList';
+import PreselectUser from './pages/PreselectUser';
+import SelectUser from './pages/SelectUser';
 
 
 
@@ -93,6 +95,16 @@ function App() {
             <Route path='/admin/badges' element={
               <PrivateRoute roles="formateur">
                 <ListBadgesAdmin />
+              </PrivateRoute>
+            }></Route>
+            <Route path='/admin/preselect-user/:draft' element={
+              <PrivateRoute roles="formateur">
+                <PreselectUser />
+              </PrivateRoute>
+            }></Route>
+            <Route path='/admin/select-user/:draft' element={
+              <PrivateRoute roles="formateur">
+                <SelectUser />
               </PrivateRoute>
             }></Route>
             <Route path='/admin/archives' element={

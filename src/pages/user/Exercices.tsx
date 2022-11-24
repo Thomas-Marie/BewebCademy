@@ -9,11 +9,14 @@ import { Button, Grid, Popover, Typography } from "@mui/material";
 import { updateSession } from "../../services/session.service";
 import Session from "../../models/session";
 import Badge from "../../models/badge";
-import { getBadgeById } from "../../services/badge.service";
+import { getBadgeById, getBadges } from "../../services/badge.service";
+import { addUsersToPreselect } from "../../services/beforeDraft.service";
+import BeforeDraft from "../../models/beforeDraft";
 
 const Exercice = () => {
   const [exercices, setExercices] = useState<ExerciceInterface[]>([]);
   const [badge, setBadge] = useState<Badge>()
+  const [allBadges, setAllBadges] = useState<Badge[]>([])
   const [srcDoc, setSrcDoc] = useState("");
   const [html, sethtml] = useState("");
   const [css, setcss] = useState("");
@@ -25,6 +28,7 @@ const Exercice = () => {
   const id = open ? 'simple-popover' : undefined;
 
   let session: Session = JSON.parse(localStorage.getItem("session") || "")
+  let draft: BeforeDraft = JSON.parse(localStorage.getItem("draft") || "")
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -46,6 +50,10 @@ const Exercice = () => {
       });
       setExercices(data);
     };
+    const getAllBadges = async () => {
+      const data = await getBadges().then((result: any) => result);
+      setAllBadges(data);
+    };
 
     const getBadge = async (id: string) => {
       const badge = await getBadgeById(id).then((result: any) => { return result })
@@ -55,6 +63,7 @@ const Exercice = () => {
 
     fetchExercices((window.location.href.substring(window.location.href.lastIndexOf('/') + 1))).catch(console.error);
     getBadge((window.location.href.substring(window.location.href.lastIndexOf('/') + 1))).catch(console.error);
+    getAllBadges().catch(console.error);
   }, []);
 
   useEffect(() => {
@@ -102,6 +111,10 @@ const Exercice = () => {
         session.badges.push(badge!)
         localStorage.setItem("session", JSON.stringify(session));
         await updateSession(session._id, session)
+        window.location.href = "/exercices";
+        if (session.badges.length === allBadges.length) {
+          await addUsersToPreselect(draft._id , session.user)
+        }
       } else {
         setMessage("Bravo vous avez fini l'exercice");
         setIndex(index + 1);

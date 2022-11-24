@@ -12,7 +12,7 @@ import { Divider, List, ListItem, ListItemButton, ListItemText, IconButton, Typo
 
 
 const userHeaderItems = ['exercices', 'profil'];
-const adminHeaderItems = ['dashboard', 'utilisateurs', 'languages', 'badges', 'creation', 'archives']
+const adminHeaderItems = ['dashboard', 'utilisateurs', 'languages', 'badges', 'creation']
 
 export default function Header() {
 
@@ -84,7 +84,7 @@ export default function Header() {
                 <Box component='div' sx={{ width: '100vw', display: 'flex', justifyContent: 'space-around' }}>
                   {adminHeaderItems.map((item, i) => (
                     <Button className="buttonHeader" name={item} href={"/admin/" + item} key={i}>
-                      {item}
+                      {item === "creation" ? "exercice" : item}
                     </Button>
                   ))}
                 </Box>

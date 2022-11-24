@@ -23,7 +23,6 @@ export default function UserList(props: any): any {
       }
       )
     }, [])
-    console.log(users)
     
 return(
   <div>
@@ -45,10 +44,4 @@ return(
     </Grid>
   </div>
 )
-// users.map((user: any) => {
-//   console.log(user.id)    
-
-// })
-    // console.log(JSON.parse(users))
-
 }

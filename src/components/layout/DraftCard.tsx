@@ -11,7 +11,12 @@ import Switch from "@mui/material/Switch";
 import { alpha, styled } from '@mui/material/styles';
 import { pink } from '@mui/material/colors';
 import EditIcon from '@mui/icons-material/Edit';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import GroupIcon from '@mui/icons-material/Group';
 import Modal from '@mui/material/Modal';
+import { deleteBeforeDraftById } from "../../services/beforeDraft.service";
+import ModifDraft from "../forms/ModifDraft";
+// import ModifDraft from '../forms/ModifDraft';
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
@@ -46,6 +51,14 @@ export default function DraftCard(props:any) {
   const handleOpen = (e:any) => {
     setUpdateData(e.currentTarget.getAttribute("jojo-update"))
     setOpen(true)  };
+
+  const deleteDraft = async (id: string) => {
+    await deleteBeforeDraftById(id).then((result: any) => {
+    }
+    ).catch((err: any) => {
+    }
+    );
+  };
   
 
   return (
@@ -79,7 +92,17 @@ export default function DraftCard(props:any) {
             </Typography>
           </CardContent>
             <Box display="flex" justifyContent="flex-end" width="100%">
-            <IconButton aria-label="delete" size="small">
+            <IconButton aria-label="delete" size="small" href={`/admin/preselect-user/${props.draft._id}`}>
+              <GroupAddIcon fontSize="small" sx={{
+                color: pink[600],
+              }}/>
+            </IconButton>
+            <IconButton aria-label="delete" size="small" href={`/admin/select-user/${props.draft._id}`}>
+              <GroupIcon fontSize="small" sx={{
+                color: pink[600],
+              }}/>
+            </IconButton>
+            <IconButton aria-label="delete" size="small" onClick={(() => deleteDraft(props.draft._id))}>
               <DeleteIcon fontSize="small" sx={{
                 color: pink[600],
               }}/>
@@ -89,14 +112,14 @@ export default function DraftCard(props:any) {
               color: pink[600],
             }}></EditIcon>
             </IconButton>
-            {/* <Modal
+            <Modal
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
             >
-              <ModifDraft handleClose={handleClose} update={updateData}/>
-            </Modal> */}
+              <ModifDraft handleClose={handleClose} draft={props.draft}/>
+            </Modal>
             </Box>
         </React.Fragment>
       </Card>
