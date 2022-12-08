@@ -111,10 +111,10 @@ const Exercice = () => {
         session.badges.push(badge!)
         localStorage.setItem("session", JSON.stringify(session));
         await updateSession(session._id, session)
-        window.location.href = "/exercices";
         if (session.badges.length === allBadges.length) {
           await addUsersToPreselect(draft._id , session.user)
         }
+        window.location.href = "/exercices";
       } else {
         setMessage("Bravo vous avez fini l'exercice");
         setIndex(index + 1);
